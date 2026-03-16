@@ -1,0 +1,2947 @@
+
+<!doctype html>
+<html lang="ar" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Translation and documentation of programming tools">
+      
+      
+      
+        <link rel="canonical" href="https://tareksamerr-cmd.github.io/Docs/Dart/Flutter/Networks/Dio/">
+      
+      
+        <link rel="prev" href="../../../..">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.5">
+    
+    
+      
+        <title>ديو (Dio): حزمة الشبكات الأسطورية لـ Dart/Flutter - Developer Documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="rtl" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dio-dartflutter" class="md-skip">
+          انتقل إلى المحتوى
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="عنوان العارضة">
+    <a href="../../../.." title="Developer Documentation" class="md-header__button md-logo" aria-label="Developer Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Developer Documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              ديو (Dio): حزمة الشبكات الأسطورية لـ Dart/Flutter
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="التبديل إلى الوضع الليلي"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="التبديل إلى الوضع الليلي" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="teal" data-md-color-accent="amber"  aria-label="التبديل إلى الوضع الفاتح"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="التبديل إلى الوضع الفاتح" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="بحث" placeholder="بحث" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="إبحث">
+        
+        <button type="reset" class="md-search__icon md-icon" title="مسح كلي" aria-label="مسح كلي" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            بدء البحث
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="نوافذ" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
+          
+  
+  
+  Dart
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="تصفح" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Developer Documentation" class="md-nav__button md-logo" aria-label="Developer Documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Developer Documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dart
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Dart
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1" id="__nav_2_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Flutter
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Flutter
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_1_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_1_1" id="__nav_2_1_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Networks
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_1_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_1_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Networks
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ديو (Dio): حزمة الشبكات الأسطورية لـ Dart/Flutter
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    ديو (Dio): حزمة الشبكات الأسطورية لـ Dart/Flutter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="جدول المحتويات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      جدول المحتويات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مقدمة: سيمفونية الاتصال بالشبكة مع Dio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        البداية: خطوتك الأولى نحو العظمة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="البداية: خطوتك الأولى نحو العظمة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dio_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        التثبيت: إطلاق العنان لقوة Dio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dio_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        سهولة فائقة في الاستخدام: سحر Dio في بضعة أسطر
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dio_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        عالم Dio المذهل: كنوز تنتظرك
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="عالم Dio المذهل: كنوز تنتظرك">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugins-dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الإضافات (Plugins): توسيع آفاق Dio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dio_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        أمثلة: رحلة عبر قدرات Dio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="أمثلة: رحلة عبر قدرات Dio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إجراء طلب GET: استكشاف البيانات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إجراء طلب POST: إرسال البيانات إلى المجهول
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إجراء طلبات متعددة متزامنة: قوة التوازي
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        تنزيل ملف: جلب الكنوز الرقمية
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الحصول على تدفق الاستجابة (Response Stream): تدفق البيانات بلا حدود
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الحصول على الاستجابة بالبايتات (Bytes): الغوص في أعماق البيانات الخام
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إرسال FormData: بناء الجسور للبيانات المعقدة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formdata_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        رفع ملفات متعددة عبر FormData: إطلاق العنان لفيض البيانات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الاستماع لتقدم الرفع: مراقبة رحلة البيانات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إرسال بيانات ثنائية عبر Stream: تدفق البايتات ببراعة
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dio-dio-apis-dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        واجهات برمجة تطبيقات Dio (Dio APIs): قلب Dio النابض
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="واجهات برمجة تطبيقات Dio (Dio APIs): قلب Dio النابض">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إنشاء مثيل وضبط التكوينات الافتراضية: صياغة أداتك
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خيارات الطلب (Request Options): توجيه سفينتك
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الاستجابة (Response): حصاد رحلتك
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interceptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        المراقبون (Interceptors): حراس البوابة الأوفياء
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="المراقبون (Interceptors): حراس البوابة الأوفياء">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolve-and-reject-the-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        حل ورفض الطلب (Resolve and reject the request): التحكم المطلق
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queuedinterceptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        المراقب المجدول (QueuedInterceptor): التنفيذ المتسلسل بذكاء
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="المراقب المجدول (QueuedInterceptor): التنفيذ المتسلسل بذكاء">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#csrf-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مثال: حماية بياناتك بـ CSRF Token
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loginterceptor-dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مراقب السجلات (LogInterceptor): عيون Dio الساهرة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dart-dart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dart: تسجيل السجلات في بيئة Dart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flutter-flutter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flutter: تسجيل السجلات في بيئة Flutter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-interceptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مراقب مخصص (Custom Interceptor): إبداعك بلا حدود
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handling-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        التعامل مع الأخطاء (Handling Errors): فن إدارة التحديات
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="التعامل مع الأخطاء (Handling Errors): فن إدارة التحديات">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dioexception-dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DioException: استثناءات Dio المخصصة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dioexceptiontype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        أنواع استثناءات ديو (DioExceptionType): مفتاح الفهم
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applicationx-www-form-urlencoded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        استخدام تنسيق application/x-www-form-urlencoded: البيانات التقليدية بأسلوب حديث
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formdata_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إرسال FormData: قوة النماذج المتعددة الأجزاء
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="إرسال FormData: قوة النماذج المتعددة الأجزاء">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiple-files-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        رفع ملفات متعددة (Multiple files upload): إطلاق العنان لفيض البيانات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formdata-multipartfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إعادة استخدام FormData و MultipartFile: حكمة الاستخدام الأمثل
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        المحول (Transformer): سحرة البيانات
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="المحول (Transformer): سحرة البيانات">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transformer-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مثال على المحول (Transformer example): تخصيص التحويل
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-httpclientadapter-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        محول عميل HTTP (HttpClientAdapter): الجسر إلى عالم HTTP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="محول عميل HTTP (HttpClientAdapter): الجسر إلى عالم HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        استخدام البروكسي (Proxy): نافذتك إلى الشبكة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="استخدام البروكسي (Proxy): نافذتك إلى الشبكة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#certificate-authority-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        التحقق من سلطة الشهادة (Certificate Authority Verification)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        دعم HTTP/2: سرعة وكفاءة الجيل الجديد
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cancellation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الإلغاء (Cancellation): التحكم في تدفق الطلبات
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dio-extends-dio-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        توسيع فئة Dio (Extends Dio class): بناء عميلك الخاص
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مشاركة الموارد عبر الأصول على الويب (CORS): حل تحديات المتصفح
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="جدول المحتويات">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      جدول المحتويات
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مقدمة: سيمفونية الاتصال بالشبكة مع Dio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        البداية: خطوتك الأولى نحو العظمة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="البداية: خطوتك الأولى نحو العظمة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dio_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        التثبيت: إطلاق العنان لقوة Dio
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dio_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        سهولة فائقة في الاستخدام: سحر Dio في بضعة أسطر
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dio_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        عالم Dio المذهل: كنوز تنتظرك
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="عالم Dio المذهل: كنوز تنتظرك">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#plugins-dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الإضافات (Plugins): توسيع آفاق Dio
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dio_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        أمثلة: رحلة عبر قدرات Dio
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="أمثلة: رحلة عبر قدرات Dio">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إجراء طلب GET: استكشاف البيانات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#post" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إجراء طلب POST: إرسال البيانات إلى المجهول
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إجراء طلبات متعددة متزامنة: قوة التوازي
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        تنزيل ملف: جلب الكنوز الرقمية
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response-stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الحصول على تدفق الاستجابة (Response Stream): تدفق البيانات بلا حدود
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bytes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الحصول على الاستجابة بالبايتات (Bytes): الغوص في أعماق البيانات الخام
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إرسال FormData: بناء الجسور للبيانات المعقدة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formdata_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        رفع ملفات متعددة عبر FormData: إطلاق العنان لفيض البيانات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الاستماع لتقدم الرفع: مراقبة رحلة البيانات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stream" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إرسال بيانات ثنائية عبر Stream: تدفق البايتات ببراعة
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dio-dio-apis-dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        واجهات برمجة تطبيقات Dio (Dio APIs): قلب Dio النابض
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="واجهات برمجة تطبيقات Dio (Dio APIs): قلب Dio النابض">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إنشاء مثيل وضبط التكوينات الافتراضية: صياغة أداتك
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#request-options" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        خيارات الطلب (Request Options): توجيه سفينتك
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#response" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الاستجابة (Response): حصاد رحلتك
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#interceptors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        المراقبون (Interceptors): حراس البوابة الأوفياء
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="المراقبون (Interceptors): حراس البوابة الأوفياء">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resolve-and-reject-the-request" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        حل ورفض الطلب (Resolve and reject the request): التحكم المطلق
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#queuedinterceptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        المراقب المجدول (QueuedInterceptor): التنفيذ المتسلسل بذكاء
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="المراقب المجدول (QueuedInterceptor): التنفيذ المتسلسل بذكاء">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#csrf-token" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مثال: حماية بياناتك بـ CSRF Token
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#loginterceptor-dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مراقب السجلات (LogInterceptor): عيون Dio الساهرة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dart-dart" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dart: تسجيل السجلات في بيئة Dart
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flutter-flutter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Flutter: تسجيل السجلات في بيئة Flutter
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-interceptor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مراقب مخصص (Custom Interceptor): إبداعك بلا حدود
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#handling-errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        التعامل مع الأخطاء (Handling Errors): فن إدارة التحديات
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="التعامل مع الأخطاء (Handling Errors): فن إدارة التحديات">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dioexception-dio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        DioException: استثناءات Dio المخصصة
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#dioexceptiontype" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        أنواع استثناءات ديو (DioExceptionType): مفتاح الفهم
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#applicationx-www-form-urlencoded" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        استخدام تنسيق application/x-www-form-urlencoded: البيانات التقليدية بأسلوب حديث
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#formdata_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إرسال FormData: قوة النماذج المتعددة الأجزاء
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="إرسال FormData: قوة النماذج المتعددة الأجزاء">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multiple-files-upload" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        رفع ملفات متعددة (Multiple files upload): إطلاق العنان لفيض البيانات
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#formdata-multipartfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        إعادة استخدام FormData و MultipartFile: حكمة الاستخدام الأمثل
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#transformer" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        المحول (Transformer): سحرة البيانات
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="المحول (Transformer): سحرة البيانات">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#transformer-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مثال على المحول (Transformer example): تخصيص التحويل
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http-httpclientadapter-http" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        محول عميل HTTP (HttpClientAdapter): الجسر إلى عالم HTTP
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="محول عميل HTTP (HttpClientAdapter): الجسر إلى عالم HTTP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        استخدام البروكسي (Proxy): نافذتك إلى الشبكة
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="استخدام البروكسي (Proxy): نافذتك إلى الشبكة">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#certificate-authority-verification" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        التحقق من سلطة الشهادة (Certificate Authority Verification)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#http2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        دعم HTTP/2: سرعة وكفاءة الجيل الجديد
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cancellation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        الإلغاء (Cancellation): التحكم في تدفق الطلبات
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dio-extends-dio-class" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        توسيع فئة Dio (Extends Dio class): بناء عميلك الخاص
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cors" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        مشاركة الموارد عبر الأصول على الويب (CORS): حل تحديات المتصفح
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="dio-dartflutter">ديو (Dio): حزمة الشبكات الأسطورية لـ Dart/Flutter</h1>
+<p><a href="https://pub.dev/packages/dio"><img alt="Pub" src="https://img.shields.io/pub/v/dio.svg" /></a>
+<a href="https://pub.dev/packages/dio"><img alt="Dev" src="https://img.shields.io/pub/v/dio.svg?label=dev&amp;include_prereleases" /></a></p>
+<p><strong>اللغة:</strong> الإنجليزية | <a href="README-ZH.md">简体中文</a></p>
+<h2 id="dio">مقدمة: سيمفونية الاتصال بالشبكة مع Dio</h2>
+<p>في عالم تطوير تطبيقات Dart و Flutter، حيث تتشابك الخيوط الرقمية لتنسج تجارب المستخدمين، تبرز حزمة <strong>Dio</strong> كقوة لا يستهان بها في مجال الشبكات. إنها ليست مجرد مكتبة HTTP، بل هي أوركسترا متكاملة تُعزف فيها سيمفونية الاتصال بالشبكة بسلاسة واحترافية. صُممت Dio لتكون رفيقك الأمين في رحلة بناء تطبيقات تتطلب تفاعلاً قوياً وموثوقاً مع الخوادم، مقدمةً مجموعة واسعة من الميزات التي تجعل التعامل مع طلبات HTTP متعة حقيقية.</p>
+<p>تُقدم Dio دعماً لا مثيل له لمجموعة من الميزات الأساسية والمتقدمة، والتي تشمل على سبيل المثال لا الحصر:</p>
+<ul>
+<li><strong>التكوين العالمي (Global Configuration):</strong> القدرة على ضبط إعدادات عامة لجميع طلبات HTTP، مثل الروابط الأساسية (Base URLs)، والمهل الزمنية (Timeouts)، والعناوين (Headers)، مما يوفر اتساقاً ويسهل إدارة الإعدادات.</li>
+<li><strong>المراقبون (Interceptors):</strong> آلية قوية لاعتراض وتعديل الطلبات والاستجابات والأخطاء قبل معالجتها. تخيل وجود حراس بوابة يمكنهم فحص، تعديل، أو حتى منع مرور البيانات بناءً على قواعد محددة.</li>
+<li><strong>بيانات النماذج (FormData):</strong> دعم سلس لإرسال البيانات المعقدة، بما في ذلك الملفات، عبر طلبات <code>multipart/form-data</code>، وهو أمر حيوي لعمليات رفع الملفات والصور.</li>
+<li><strong>إلغاء الطلبات (Request Cancellation):</strong> القدرة على إلغاء الطلبات الجارية، مما يمنع استهلاك الموارد غير الضروري ويحسن من استجابة التطبيق، خاصة في سيناريوهات البحث أو التحديث المتكرر.</li>
+<li><strong>رفع وتنزيل الملفات (File Uploading/Downloading):</strong> وظائف مدمجة وفعالة للتعامل مع عمليات نقل الملفات الكبيرة والصغيرة، مع إمكانية تتبع التقدم.</li>
+<li><strong>المهل الزمنية (Timeout):</strong> التحكم الدقيق في المدة التي يجب أن ينتظرها الطلب للاستجابة، مما يمنع تعليق التطبيق بسبب خوادم بطيئة أو غير مستجيبة.</li>
+<li><strong>المحولات المخصصة (Custom Adapters):</strong> المرونة في استخدام محولات HTTP مخصصة، مما يتيح التكامل مع مكتبات HTTP أخرى أو التعامل مع بيئات شبكة فريدة.</li>
+<li><strong>المحولون (Transformers):</strong> أدوات لتحويل بيانات الطلب والاستجابة، مثل تحويل JSON إلى كائنات Dart والعكس، مما يبسط عملية التعامل مع البيانات.</li>
+</ul>
+<blockquote>
+<p><strong>نداء إلى الأبطال!</strong> لا تنسَ إضافة الوسم <code>#dio</code> إلى حزمك المنشورة المتعلقة بـ Dio على <a href="https://pub.dev/packages?q=topic%3Adio">pub.dev</a>! دع العالم يعرف إبداعاتك التي تستخدم هذه الحزمة الأسطورية. لمزيد من التفاصيل حول المواضيع في <code>pubspec.yaml</code>، راجع <a href="https://dart.dev/tools/pub/pubspec#topics">وثائق Dart الرسمية</a>.</p>
+</blockquote>
+<details>
+  <summary>جدول المحتويات: خريطتك إلى عالم Dio</summary>
+
+<!-- TOC -->
+* [ديو (Dio): حزمة الشبكات الأسطورية لـ Dart/Flutter](#ديو-dio-حزمة-الشبكات-الأسطورية-لـ-dartflutter)
+  * [مقدمة: سيمفونية الاتصال بالشبكة مع Dio](#مقدمة-سيمفونية-الاتصال-بالشبكة-مع-dio)
+  * [البداية: خطوتك الأولى نحو العظمة](#البداية-خطوتك-الأولى-نحو-العظمة)
+    * [التثبيت: إطلاق العنان لقوة Dio](#التثبيت-إطلاق-العنان-لقوة-dio)
+    * [سهولة فائقة في الاستخدام: سحر Dio في بضعة أسطر](#سهولة-فائقة-في-الاستخدام-سحر-dio-في-بضعة-أسطر)
+  * [عالم Dio المذهل: كنوز تنتظرك](#عالم-dio-المذهل-كنوز-تنتظرك)
+    * [الإضافات (Plugins): توسيع آفاق Dio](#الإضافات-plugins-توسيع-آفاق-dio)
+  * [أمثلة: رحلة عبر قدرات Dio](#أمثلة-رحلة-عبر-قدرات-dio)
+    * [إجراء طلب `GET`: استكشاف البيانات](#إجراء-طلب-get-استكشاف-البيانات)
+    * [إجراء طلب `POST`: إرسال البيانات إلى المجهول](#إجراء-طلب-post-إرسال-البيانات-إلى-المجهول)
+    * [إجراء طلبات متعددة متزامنة: قوة التوازي](#إجراء-طلبات-متعددة-متزامنة-قوة-التوازي)
+    * [تنزيل ملف: جلب الكنوز الرقمية](#تنزيل-ملف-جلب-الكنوز-الرقمية)
+    * [الحصول على تدفق الاستجابة (Response Stream): تدفق البيانات بلا حدود](#الحصول-على-تدفق-الاستجابة-response-stream-تدفق-البيانات-بلا-حدود)
+    * [الحصول على الاستجابة بالبايتات (Bytes): الغوص في أعماق البيانات الخام](#الحصول-على-الاستجابة-بالبايتات-bytes-الغوص-في-أعماق-البيانات-الخام)
+    * [إرسال `FormData`: بناء الجسور للبيانات المعقدة](#إرسال-formdata-بناء-الجسور-للبيانات-المعقدة)
+    * [رفع ملفات متعددة عبر FormData: إطلاق العنان لفيض البيانات](#رفع-ملفات-متعددة-عبر-formdata-إطلاق-العنان-لفيض-البيانات)
+    * [الاستماع لتقدم الرفع: مراقبة رحلة البيانات](#الاستماع-لتقدم-الرفع-مراقبة-رحلة-البيانات)
+    * [إرسال بيانات ثنائية عبر Stream: تدفق البايتات ببراعة](#إرسال-بيانات-ثنائية-عبر-stream-تدفق-البايتات-ببراعة)
+  * [واجهات برمجة تطبيقات Dio (Dio APIs): قلب Dio النابض](#واجهات-برمجة-تطبيقات-dio-dio-apis-قلب-dio-النابض)
+    * [إنشاء مثيل وضبط التكوينات الافتراضية: صياغة أداتك](#إنشاء-مثيل-وضبط-التكوينات-الافتراضية-صياغة-أداتك)
+    * [خيارات الطلب (Request Options): توجيه سفينتك](#خيارات-الطلب-request-options-توجيه-سفينتك)
+    * [الاستجابة (Response): حصاد رحلتك](#الاستجابة-response-حصاد-رحلتك)
+    * [المراقبون (Interceptors): حراس البوابة الأوفياء](#المراقبون-interceptors-حراس-البوابة-الأوفياء)
+      * [حل ورفض الطلب (Resolve and reject the request): التحكم المطلق](#حل-ورفض-الطلب-resolve-and-reject-the-request-التحكم-المطلق)
+      * [المراقب المجدول (QueuedInterceptor): التنفيذ المتسلسل بذكاء](#المراقب-المجدول-queuedinterceptor-التنفيذ-المتسلسل-بذكاء)
+        * [مثال: حماية بياناتك بـ CSRF Token](#مثال-حماية-بياناتك-بـ-csrf-token)
+      * [مراقب السجلات (LogInterceptor): عيون Dio الساهرة](#مراقب-السجلات-loginterceptor-عيون-dio-الساهرة)
+      * [Dart: تسجيل السجلات في بيئة Dart](#dart-تسجيل-السجلات-في-بيئة-dart)
+      * [Flutter: تسجيل السجلات في بيئة Flutter](#flutter-تسجيل-السجلات-في-بيئة-flutter)
+      * [مراقب مخصص (Custom Interceptor): إبداعك بلا حدود](#مراقب-مخصص-custom-interceptor-إبداعك-بلا-حدود)
+  * [التعامل مع الأخطاء (Handling Errors): فن إدارة التحديات](#التعامل-مع-الأخطاء-handling-errors-فن-إدارة-التحديات)
+    * [DioException: استثناءات Dio المخصصة](#dioexception-استثناءات-dio-المخصصة)
+    * [DioExceptionType: أنواع الأخطاء، مفتاح الفهم](#dioexceptiontype-أنواع-الأخطاء-مفتاح-الفهم)
+  * [استخدام تنسيق application/x-www-form-urlencoded: البيانات التقليدية بأسلوب حديث](#استخدام-تنسيق-applicationx-www-form-urlencoded-البيانات-التقليدية-بأسلوب-حديث)
+  * [إرسال FormData: قوة النماذج المتعددة الأجزاء](#إرسال-formdata-قوة-النماذج-المتعددة-الأجزاء)
+    * [رفع ملفات متعددة (Multiple files upload): إطلاق العنان لفيض البيانات](#رفع-ملفات-متعددة-multiple-files-upload-إطلاق-العنان-لفيض-البيانات)
+    * [إعادة استخدام `FormData` و `MultipartFile`: حكمة الاستخدام الأمثل](#إعادة-استخدام-formdata-و-multipartfile-حكمة-الاستخدام-الأمثل)
+  * [المحول (Transformer): سحرة البيانات](#المحول-transformer-سحرة-البيانات)
+    * [مثال على المحول (Transformer example): تخصيص التحويل](#مثال-على-المحول-transformer-example-تخصيص-التحويل)
+  * [محول عميل HTTP (HttpClientAdapter): الجسر إلى عالم HTTP](#محول-عميل-http-httpclientadapter-الجسر-إلى-عالم-http)
+    * [استخدام البروكسي (Proxy): نافذتك إلى الشبكة](#استخدام-البروكسي-proxy-نافذتك-إلى-الشبكة)
+    * [التحقق من شهادة HTTPS (HTTPS certificate verification): درع الأمان](#التحقق-من-شهادة-https-https-certificate-verification-درع-الأمان)
+  * [دعم HTTP/2: سرعة وكفاءة المستقبل](#دعم-http2-سرعة-وكفاءة-المستقبل)
+  * [الإلغاء (Cancellation): فن التراجع بذكاء](#الإلغاء-cancellation-فن-التراجع-بذكاء)
+  * [توسيع فئة Dio (Extends Dio class): بناء إمبراطوريتك الخاصة](#توسيع-فئة-dio-extends-dio-class-بناء-إمبراطوريتك-الخاصة)
+  * [مشاركة الموارد عبر الأصول على الويب (CORS): عبور الحدود الرقمية](#مشاركة-الموارد-عبر-الأصول-على-الويب-cors-عبور-الحدود-الرقمية)
+<!-- TOC -->
+</details>
+
+<h2 id="_1">البداية: خطوتك الأولى نحو العظمة</h2>
+<p>لكل رحلة عظيمة بداية، وبدايتك مع Dio تبدأ بخطوات بسيطة لكنها حاسمة. لننطلق معاً في هذه الرحلة المذهلة.</p>
+<h3 id="dio_1">التثبيت: إطلاق العنان لقوة Dio</h3>
+<p>لإطلاق العنان لقوة Dio في مشروعك، ما عليك سوى إضافة الحزمة إلى ملف <code>pubspec.yaml</code> الخاص بك. هذا الملف هو بمثابة دستور مشروعك، حيث تُعلن فيه عن جميع التبعيات التي يحتاجها تطبيقك.</p>
+<p>افتح ملف <code>pubspec.yaml</code> وأضف <code>dio</code> ضمن قسم <code>dependencies</code>:</p>
+<pre><code class="language-yaml">dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.4.0 # تأكد من استخدام أحدث إصدار متاح
+</code></pre>
+<p>بعد إضافة التبعية، قم بتشغيل الأمر التالي في طرفية مشروعك لجلب الحزمة:</p>
+<pre><code class="language-bash">flutter pub get
+# أو
+dart pub get
+</code></pre>
+<p>بهذه الخطوة البسيطة، تكون قد جهزت مشروعك لاستقبال قوة Dio.</p>
+<p><strong>تنبيه قبل الترقية: قد تحدث تغييرات جذرية (Breaking changes) في الإصدارات الرئيسية والفرعية للحزم.</strong></p>
+<p>تذكر دائمًا أن عالم البرمجيات يتطور باستمرار. قد تُقدم الإصدارات الجديدة من الحزم تغييرات جذرية (Breaking Changes) تتطلب تعديلات في الكود الخاص بك. لتجنب المفاجآت غير السارة، يُنصح بشدة بمراجعة <a href="https://pub.dev/documentation/dio/latest/topics/Migration%20Guide-topic.html">دليل الهجرة (Migration Guide)</a> الخاص بـ Dio قبل ترقية الإصدار. هذا الدليل هو بوصلتك لتجاوز أي تحديات قد تواجهها أثناء الترقية، ويحتوي على القائمة الكاملة للتغييرات التي قد تؤثر على مشروعك.</p>
+<h3 id="dio_2">سهولة فائقة في الاستخدام: سحر Dio في بضعة أسطر</h3>
+<p>ما يميز Dio حقًا هو بساطتها وقوتها في آن واحد. يمكنك البدء في إجراء طلبات HTTP ببضعة أسطر من الكود، وكأنك تُلقي تعويذة سحرية لجلب البيانات من عوالم الشبكة.</p>
+<p>لنلقِ نظرة على مثال يوضح مدى سهولة استخدام Dio لإجراء طلب <code>GET</code> بسيط:</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart'; // استيراد حزمة Dio
+
+// إنشاء مثيل واحد (Singleton) من Dio. يُنصح بذلك لإدارة التكوينات بشكل متسق.
+final dio = Dio();
+
+// دالة غير متزامنة (async) لإجراء طلب HTTP
+void getHttp() async {
+  try {
+    // إجراء طلب GET إلى الرابط المحدد وانتظار الاستجابة
+    final response = await dio.get('https://dart.dev');
+    // طباعة الاستجابة الكاملة إلى وحدة التحكم (console)
+    print(response);
+  } on DioException catch (e) {
+    // التعامل مع أي أخطاء قد تحدث أثناء الطلب
+    print('حدث خطأ: $e');
+  }
+}
+
+// يمكنك استدعاء الدالة في نقطة دخول تطبيقك، مثلاً في دالة main أو عند حدث معين
+void main() {
+  getHttp();
+}
+</code></pre>
+<p>في هذا المثال:</p>
+<ol>
+<li>نقوم باستيراد حزمة <code>dio</code>.</li>
+<li>نُنشئ مثيلاً من <code>Dio</code>، والذي سيكون نقطة الدخول لجميع طلبات الشبكة.</li>
+<li>نُعرف دالة <code>getHttp</code> غير المتزامنة (async) لإجراء الطلب.</li>
+<li>باستخدام <code>await dio.get('https://dart.dev')</code>، نُرسل طلب <code>GET</code> إلى الموقع المحدد وننتظر حتى تصل الاستجابة.</li>
+<li>نطبع الاستجابة التي تحتوي على البيانات، العناوين، وحالة الطلب.</li>
+<li>نضيف كتلة <code>try-catch</code> للتعامل مع أي <code>DioException</code> قد تحدث، مما يجعل تطبيقك أكثر قوة.</li>
+</ol>
+<p>بهذه البساطة، تكون قد أجريت أول طلب HTTP لك باستخدام Dio! هذا هو جوهر القوة والسهولة التي تقدمها هذه الحزمة.</p>
+<h2 id="dio_3">عالم Dio المذهل: كنوز تنتظرك</h2>
+<p>Dio ليست مجرد أداة لإجراء الطلبات الأساسية، بل هي عالم واسع من الإمكانيات التي تنتظر من يكتشفها. إنها تقدم مجموعة من الميزات التي تجعلها الخيار الأمثل للمطورين الذين يبحثون عن حلول شبكات قوية ومرنة.</p>
+<p>🎉 <strong>قائمة منسقة من الأشياء الرائعة المتعلقة بـ Dio.</strong></p>
+<p>هذا القسم هو بمثابة دليل لأفضل الممارسات والموارد المتعلقة بـ Dio، حيث ستجد كنوزًا من الإضافات والأدوات التي تُثري تجربتك مع هذه الحزمة.</p>
+<h3 id="plugins-dio">الإضافات (Plugins): توسيع آفاق Dio</h3>
+<p>تُعد الإضافات (Plugins) بمثابة امتدادات سحرية تُضيف قدرات جديدة إلى Dio، مما يسمح لك بتخصيص سلوك الشبكة ليناسب احتياجات تطبيقك الفريدة. هذه الإضافات يمكن أن تُقدم وظائف مثل التخزين المؤقت (Caching)، أو إعادة المحاولة التلقائية (Automatic Retries)، أو حتى دمج Dio مع خدمات أخرى.</p>
+<p>يمكنك استكشاف مجموعة واسعة من الإضافات الرسمية والمجتمعية على <a href="https://pub.dev/documentation/dio/latest/topics/Plugins-topic.html">صفحة الإضافات في وثائق Dio</a>.</p>
+<p><strong>دعوة للمساهمة:</strong> هل قمت بإنشاء إضافة رائعة لـ Dio؟ هل لديك مكتبة تستفيد من قدراتها؟ نرحب بك لتقديم إضافاتك ومكتباتك ذات الصلة من أطراف ثالثة <a href="https://github.com/cfug/dio/issues/347">هنا</a>. شارك إبداعاتك مع المجتمع وكن جزءًا من هذا العالم المذهل!</p>
+<h2 id="dio_4">أمثلة: رحلة عبر قدرات Dio</h2>
+<p>الآن، دعنا نغوص في أعماق الأمثلة العملية لنرى كيف يمكن لـ Dio أن تُنجز المهام الأكثر تعقيدًا بسهولة ويسر. هذه الأمثلة ستكون بمثابة دروس عملية تُظهر لك قوة ومرونة Dio في سيناريوهات مختلفة.</p>
+<h3 id="get">إجراء طلب <code>GET</code>: استكشاف البيانات</h3>
+<p>طلب <code>GET</code> هو الطلب الأساسي لجلب البيانات من الخادم. مع Dio، يمكنك إجراء هذا الطلب بطرق متعددة، سواء بتمرير المعلمات مباشرة في الرابط أو باستخدام كائن <code>queryParameters</code>.</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+
+final dio = Dio();
+
+void request() async {
+  Response response;
+
+  // الطريقة الأولى: تمرير المعلمات مباشرة في الرابط (URL)
+  response = await dio.get('/test?id=12&amp;name=dio');
+  print('الاستجابة الأولى: ${response.data.toString()}');
+
+  // الطريقة الثانية: استخدام كائن queryParameters، وهي الطريقة المفضلة والأكثر تنظيمًا
+  // هذا الطلب هو نفسه الطلب أعلاه، لكنه أكثر وضوحًا وقابلية للصيانة.
+  response = await dio.get(
+    '/test',
+    queryParameters: {'id': 12, 'name': 'dio'},
+  );
+  print('الاستجابة الثانية: ${response.data.toString()}');
+}
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>dio.get('/test?id=12&amp;name=dio')</code>:</strong> هنا، يتم بناء الرابط يدوياً مع تضمين معلمات الاستعلام (Query Parameters) مباشرة. هذه الطريقة تعمل، ولكنها قد تصبح معقدة وصعبة القراءة عندما يكون هناك العديد من المعلمات أو عندما تحتاج إلى التعامل مع ترميز URL (URL Encoding).</li>
+<li><strong><code>dio.get('/test', queryParameters: {'id': 12, 'name': 'dio'})</code>:</strong> هذه هي الطريقة الموصى بها. تقوم Dio تلقائيًا بمعالجة كائن <code>queryParameters</code> وتحويله إلى سلسلة استعلام (Query String) صحيحة ومُرمزة (Encoded)، مما يضمن التعامل السليم مع المسافات والأحرف الخاصة. هذا يجعل الكود أكثر نظافة، ووضوحًا، وأقل عرضة للأخطاء.</li>
+</ul>
+<h3 id="post">إجراء طلب <code>POST</code>: إرسال البيانات إلى المجهول</h3>
+<p>طلب <code>POST</code> يُستخدم لإرسال البيانات إلى الخادم، عادةً لإنشاء مورد جديد أو تحديث مورد موجود. مع Dio، يمكنك إرسال البيانات بسهولة باستخدام المعلمة <code>data</code>.</p>
+<pre><code class="language-dart">// مثال على إرسال بيانات JSON في طلب POST
+response = await dio.post('/test', data: {'id': 12, 'name': 'dio'});
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>dio.post('/test', data: {'id': 12, 'name': 'dio'})</code>:</strong> هنا، يتم إرسال كائن <code>Map</code> كـ <code>data</code>. ستقوم Dio تلقائيًا بتحويل هذا الكائن إلى سلسلة JSON (JSON string) وتعيين <code>Content-Type</code> المناسب (عادةً <code>application/json</code>) في العناوين، مما يبسط عملية إرسال البيانات المنظمة إلى الخادم.</li>
+</ul>
+<h3 id="_2">إجراء طلبات متعددة متزامنة: قوة التوازي</h3>
+<p>في بعض الأحيان، قد تحتاج إلى إجراء عدة طلبات HTTP في نفس الوقت لتحسين الأداء أو لجمع بيانات من مصادر مختلفة. توفر Dart و Dio طريقة أنيقة للتعامل مع هذا السيناريو باستخدام <code>Future.wait</code>.</p>
+<pre><code class="language-dart">// إجراء طلبين (POST و GET) في نفس الوقت والانتظار حتى يكتمل كلاهما
+List&lt;Response&gt; responses = await Future.wait([
+  dio.post('/info'), // الطلب الأول
+  dio.get('/token')  // الطلب الثاني
+]);
+
+// يمكنك الآن الوصول إلى استجابة كل طلب على حدة
+print('استجابة طلب POST: ${responses[0].data}');
+print('استجابة طلب GET: ${responses[1].data}');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>Future.wait([...])</code>:</strong> هذه الدالة من مكتبة <code>dart:async</code> تأخذ قائمة من الكائنات <code>Future</code> وتنتظر حتى تكتمل جميعها. بمجرد اكتمال جميع الـ <code>Future</code>، تُرجع <code>Future.wait</code> قائمة تحتوي على نتائج كل <code>Future</code> بالترتيب الذي تم تمريرها به.</li>
+<li><strong>الكفاءة:</strong> بدلاً من إجراء الطلبات بشكل متسلسل (واحد تلو الآخر)، يسمح <code>Future.wait</code> بتنفيذها بالتوازي، مما يقلل بشكل كبير من الوقت الإجمالي اللازم لجلب جميع البيانات.</li>
+</ul>
+<h3 id="_3">تنزيل ملف: جلب الكنوز الرقمية</h3>
+<p>تُعد عملية تنزيل الملفات من المهام الشائعة في التطبيقات الحديثة. يوفر Dio دالة <code>download</code> مخصصة تجعل هذه العملية سهلة وفعالة، مع إمكانية تحديد مسار حفظ الملف.</p>
+<pre><code class="language-dart">import 'package:path_provider/path_provider.dart'; // حزمة للحصول على مسارات الدليل المؤقت
+
+// ... داخل دالة async ...
+response = await dio.download(
+  'https://pub.dev/', // الرابط الذي سيتم تنزيل الملف منه
+  (await getTemporaryDirectory()).path + 'pub.html', // المسار الكامل لحفظ الملف
+);
+print('تم تنزيل الملف بنجاح إلى: ${response.requestOptions.path}');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>dio.download(url, savePath)</code>:</strong> هذه الدالة تقوم بتنزيل المحتوى من <code>url</code> وحفظه مباشرة في <code>savePath</code>. المعلمة <code>savePath</code> يمكن أن تكون مسارًا مطلقًا للملف على الجهاز.</li>
+<li><strong><code>getTemporaryDirectory()</code>:</strong> هذه الدالة (من حزمة <code>path_provider</code>) تُرجع <code>Directory</code> يشير إلى دليل مؤقت على نظام الملفات، وهو مكان مثالي لحفظ الملفات التي لا تحتاج إلى البقاء بشكل دائم.</li>
+<li><strong>التقدم:</strong> يمكن لـ Dio أيضًا تتبع تقدم التنزيل، وهو أمر بالغ الأهمية للملفات الكبيرة، وسنتطرق إلى ذلك لاحقًا.</li>
+</ul>
+<h3 id="response-stream">الحصول على تدفق الاستجابة (Response Stream): تدفق البيانات بلا حدود</h3>
+<p>في بعض الحالات، قد لا ترغب في تحميل الاستجابة بأكملها في الذاكرة دفعة واحدة، خاصة عند التعامل مع ملفات كبيرة أو تدفقات بيانات مستمرة. يوفر Dio خيار الحصول على الاستجابة كـ <code>Stream</code>، مما يتيح لك معالجة البيانات قطعة قطعة.</p>
+<pre><code class="language-dart">final rs = await dio.get(
+  url,
+  options: Options(responseType: ResponseType.stream), // ضبط نوع الاستجابة إلى `stream`.
+);
+print(rs.data.stream); // تدفق الاستجابة (Stream) الذي يمكنك الاستماع إليه.
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>options: Options(responseType: ResponseType.stream)</code>:</strong> هذا الخيار يخبر Dio بأننا نريد الاستجابة كـ <code>Stream</code>. بدلاً من الحصول على البيانات الكاملة في <code>response.data</code>، سنحصل على كائن <code>ResponseBody</code> الذي يحتوي على <code>stream</code>.</li>
+<li><strong><code>rs.data.stream</code>:</strong> هذا هو الـ <code>Stream&lt;List&lt;int&gt;&gt;</code> الذي يمكنك الاستماع إليه لمعالجة البايتات الواردة من الخادم بشكل تدريجي. هذا النمط مفيد جداً لتطبيقات البث المباشر أو معالجة الملفات الكبيرة دون استهلاك ذاكرة مفرط.</li>
+</ul>
+<h3 id="bytes">الحصول على الاستجابة بالبايتات (Bytes): الغوص في أعماق البيانات الخام</h3>
+<p>إذا كنت بحاجة إلى التعامل مع البيانات الخام للاستجابة كقائمة من البايتات (List<int>)، يوفر Dio خيارًا مباشرًا لذلك. هذا مفيد لسيناريوهات مثل معالجة الصور أو الملفات الثنائية الأخرى.</p>
+<pre><code class="language-dart">final rs = await Dio().get&lt;List&lt;int&gt;&gt;(
+  url,
+  options: Options(responseType: ResponseType.bytes), // ضبط نوع الاستجابة إلى `bytes`.
+);
+print(rs.data); // النوع: List&lt;int&gt;، يحتوي على جميع بايتات الاستجابة.
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>options: Options(responseType: ResponseType.bytes)</code>:</strong> يوجه هذا الخيار Dio لتحميل الاستجابة بأكملها كقائمة من البايتات. سيكون <code>rs.data</code> من النوع <code>List&lt;int&gt;</code>، مما يمنحك وصولاً مباشراً إلى البيانات الثنائية الخام.</li>
+</ul>
+<h3 id="formdata">إرسال <code>FormData</code>: بناء الجسور للبيانات المعقدة</h3>
+<p>عندما تحتاج إلى إرسال بيانات معقدة إلى الخادم، مثل مزيج من النصوص والملفات، فإن <code>FormData</code> هو الحل الأمثل. يستخدم هذا التنسيق <code>multipart/form-data</code>، وهو المعيار لرفع الملفات عبر HTTP.</p>
+<pre><code class="language-dart">final formData = FormData.fromMap({
+  'name': 'dio', // حقل نصي عادي
+  'date': DateTime.now().toIso8601String(), // حقل نصي آخر (تاريخ ووقت)
+  // يمكنك إضافة ملفات هنا أيضاً، كما سنرى في المثال التالي
+});
+final response = await dio.post('/info', data: formData);
+print('تم إرسال FormData بنجاح: ${response.data}');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>FormData.fromMap({...})</code>:</strong> هذه الدالة تُنشئ كائن <code>FormData</code> من <code>Map</code> عادي. المفاتيح هي أسماء الحقول، والقيم هي البيانات المراد إرسالها. ستقوم Dio تلقائيًا بتهيئة هذه البيانات لتنسيق <code>multipart/form-data</code>.</li>
+<li><strong><code>dio.post('/info', data: formData)</code>:</strong> يتم تمرير كائن <code>formData</code> مباشرة إلى المعلمة <code>data</code> في طلب <code>POST</code>. ستقوم Dio بضبط <code>Content-Type</code> المناسب تلقائيًا.</li>
+</ul>
+<h3 id="formdata_1">رفع ملفات متعددة عبر FormData: إطلاق العنان لفيض البيانات</h3>
+<p>تُعد القدرة على رفع ملفات متعددة في طلب واحد ميزة قوية. يسهل Dio هذه العملية بشكل كبير، مما يتيح لك إرسال عدة ملفات مع بيانات نصية أخرى في نفس طلب <code>FormData</code>.</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+import 'dart:io'; // لاستخدام File
+
+// ... داخل دالة async ...
+final formData = FormData.fromMap({
+  'name': 'dio',
+  'date': DateTime.now().toIso8601String(),
+  // رفع ملف واحد
+  'file': await MultipartFile.fromFile('./text.txt', filename: 'upload.txt'),
+  // رفع ملفات متعددة كقائمة
+  'files': [
+    await MultipartFile.fromFile('./text1.txt', filename: 'text1.txt'),
+    await MultipartFile.fromFile('./text2.txt', filename: 'text2.txt'),
+  ]
+});
+final response = await dio.post('/info', data: formData);
+print('تم رفع الملفات بنجاح: ${response.data}');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>MultipartFile.fromFile(filePath, filename: fileName)</code>:</strong> هذه الدالة تُنشئ كائن <code>MultipartFile</code> من ملف موجود على نظام الملفات. <code>filePath</code> هو المسار إلى الملف، و <code>filename</code> هو الاسم الذي سيظهر به الملف على الخادم.</li>
+<li><strong>قائمة الملفات:</strong> يمكنك تمرير قائمة من كائنات <code>MultipartFile</code> إلى مفتاح واحد في <code>FormData</code> (مثل <code>files</code> في المثال)، وستقوم Dio بمعالجتها كملفات متعددة.</li>
+</ul>
+<h3 id="_4">الاستماع لتقدم الرفع: مراقبة رحلة البيانات</h3>
+<p>عند رفع ملفات كبيرة، من الضروري تزويد المستخدم بتغذية راجعة حول تقدم العملية. يوفر Dio وظيفة <code>onSendProgress</code> التي تسمح لك بمراقبة البايتات المرسلة من إجمالي البايتات.</p>
+<pre><code class="language-dart">final response = await dio.post(
+  'https://www.dtworkroom.com/doris/1/2.0.0/test',
+  data: {'aa': 'bb' * 22}, // بيانات عشوائية لتمثيل حمولة كبيرة
+  onSendProgress: (int sent, int total) {
+    // يتم استدعاء هذه الدالة بشكل متكرر أثناء عملية الرفع
+    final progress = (sent / total * 100).toStringAsFixed(2); // حساب النسبة المئوية
+    print('تقدم الرفع: $sent بايت من $total بايت ($progress%)');
+  },
+);
+print('تم الرفع بنجاح: ${response.data}');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>onSendProgress: (int sent, int total) { ... }</code>:</strong> هذه هي دالة رد الاتصال (Callback Function) التي يتم استدعاؤها كلما تم إرسال جزء من البيانات. تُمرر لها قيمتان: <code>sent</code> (عدد البايتات المرسلة حتى الآن) و <code>total</code> (الحجم الكلي للبيانات المراد إرسالها).</li>
+<li>يمكنك استخدام هذه القيم لتحديث شريط التقدم (Progress Bar) في واجهة المستخدم أو لعرض معلومات حول حالة الرفع.</li>
+</ul>
+<h3 id="stream">إرسال بيانات ثنائية عبر Stream: تدفق البايتات ببراعة</h3>
+<p>في بعض السيناريوهات المتقدمة، قد تحتاج إلى إرسال بيانات ثنائية (Binary Data) مباشرة كـ <code>Stream</code>. يتيح لك Dio القيام بذلك، مما يوفر مرونة كبيرة في التعامل مع أنواع البيانات المختلفة.</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+import 'dart:async'; // لاستخدام Stream
+
+// ... داخل دالة async ...
+// بيانات ثنائية بسيطة (قائمة من الأعداد الصحيحة)
+final postData = &lt;int&gt;[0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+
+await dio.post(
+  url,
+  // تحويل قائمة البيانات إلى Stream&lt;List&lt;int&gt;&gt;
+  data: Stream.fromIterable(postData.map((e) =&gt; [e])), 
+  options: Options(
+    headers: {
+      // من الضروري ضبط 'content-length' عند إرسال Stream لمراقبة التقدم
+      Headers.contentLengthHeader: postData.length, 
+    },
+  ),
+);
+print('تم إرسال البيانات الثنائية عبر Stream بنجاح.');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>data: Stream.fromIterable(postData.map((e) =&gt; [e]))</code>:</strong> هنا، يتم تحويل قائمة <code>postData</code> إلى <code>Stream</code> من <code>List&lt;int&gt;</code>. كل عنصر في الـ <code>Stream</code> هو قائمة تحتوي على بايت واحد.</li>
+<li><strong><code>Headers.contentLengthHeader: postData.length</code>:</strong> <strong>ملاحظة هامة:</strong> عند إرسال البيانات كـ <code>Stream</code>، يجب عليك ضبط عنوان <code>Content-Length</code> يدوياً في <code>headers</code> إذا كنت ترغب في تتبع تقدم الإرسال باستخدام <code>onSendProgress</code>. هذا يخبر الخادم (و Dio) بالحجم الكلي للبيانات المتوقعة.</li>
+</ul>
+<p>شاهد جميع أكواد الأمثلة <a href="example">هنا</a> في المستودع الأصلي للحصول على فهم أعمق وتطبيقات أكثر تنوعًا.</p>
+<h2 id="dio-dio-apis-dio">واجهات برمجة تطبيقات Dio (Dio APIs): قلب Dio النابض</h2>
+<p>الآن بعد أن استعرضنا بعض الأمثلة العملية، حان الوقت للغوص في قلب Dio النابض: واجهات برمجة التطبيقات (APIs) الخاصة بها. هذه الواجهات هي الأدوات الأساسية التي ستستخدمها لبناء طلبات HTTP قوية ومرنة.</p>
+<h3 id="_5">إنشاء مثيل وضبط التكوينات الافتراضية: صياغة أداتك</h3>
+<p>يُعد إنشاء مثيل (Instance) من <code>Dio</code> هو الخطوة الأولى في أي تفاعل شبكي. يمكنك إنشاء مثيل بسيط، أو تخصيصه باستخدام كائن <code>BaseOptions</code> لضبط التكوينات الافتراضية التي ستُطبق على جميع الطلبات الصادرة من هذا المثيل.</p>
+<blockquote>
+<p><strong>نصيحة ذهبية:</strong> يُنصح بشدة باستخدام نمط <strong>المثيل الوحيد (Singleton)</strong> لـ <code>Dio</code> في مشاريعك. هذا النمط يضمن أن يكون لديك مثيل واحد فقط من <code>Dio</code> في جميع أنحاء تطبيقك، مما يتيح لك إدارة التكوينات مثل العناوين (headers)، والروابط الأساسية (base URLs)، والمهل الزمنية (timeouts) بشكل متسق ومركزي. هذا يقلل من التعقيد ويمنع التضارب في الإعدادات. إليك <a href="../example_flutter_app">مثال</a> يوضح كيفية استخدام Singleton في Flutter.</p>
+</blockquote>
+<p>يمكنك إنشاء مثيل من Dio مع كائن <code>BaseOptions</code> اختياري:</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+
+// إنشاء مثيل Dio باستخدام الخيارات الافتراضية تمامًا.
+final dio = Dio(); 
+
+void configureDio() {
+  // 1. ضبط التكوينات الافتراضية مباشرة على مثيل Dio الحالي
+  // هذه الإعدادات ستُطبق على جميع الطلبات التي تتم عبر هذا المثيل.
+  dio.options.baseUrl = 'https://api.pub.dev'; // الرابط الأساسي لجميع الطلبات
+  dio.options.connectTimeout = Duration(seconds: 5); // مهلة الاتصال بالخادم (5 ثوانٍ)
+  dio.options.receiveTimeout = Duration(seconds: 3); // مهلة استقبال البيانات (3 ثوانٍ)
+
+  // 2. أو إنشاء مثيل `Dio` جديد تمامًا مع كائن `BaseOptions` مخصص
+  // هذه الطريقة مفيدة إذا كنت بحاجة إلى مثيلات Dio متعددة بتكوينات مختلفة.
+  final options = BaseOptions(
+    baseUrl: 'https://api.pub.dev',
+    connectTimeout: Duration(seconds: 5),
+    receiveTimeout: Duration(seconds: 3),
+    // يمكنك إضافة المزيد من الخيارات هنا مثل headers, contentType, إلخ.
+  );
+  final anotherDio = Dio(options);
+
+  // 3. أو استنساخ (Clone) مثيل `Dio` موجود مع جميع حقوله
+  // هذا مفيد إذا كنت تريد إنشاء مثيل جديد بناءً على تكوينات مثيل موجود، ثم تعديل بعضها.
+  final clonedDio = dio.clone();
+  // يمكنك الآن تعديل خصائص clonedDio دون التأثير على dio الأصلي
+  clonedDio.options.baseUrl = 'https://another.api.com';
+}
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>final dio = Dio();</code>:</strong> هذا يُنشئ مثيلاً بسيطاً من <code>Dio</code> باستخدام الإعدادات الافتراضية. يمكنك لاحقاً تعديل هذه الإعدادات عبر <code>dio.options</code>.</li>
+<li><strong><code>dio.options.baseUrl = '...'</code>:</strong> يحدد هذا الرابط الأساسي الذي سيتم إلحاق المسارات النسبية (Relative Paths) به. على سبيل المثال، إذا كان <code>baseUrl</code> هو <code>https://api.pub.dev</code> وقمت بطلب <code>dio.get('/packages')</code>، فسيكون الرابط الكامل هو <code>https://api.pub.dev/packages</code>.</li>
+<li><strong><code>connectTimeout</code>:</strong> هي المدة القصوى التي يجب أن ينتظرها Dio لإنشاء اتصال بالخادم. إذا تجاوزت هذه المدة، سيتم إطلاق <code>DioExceptionType.connectTimeout</code>.</li>
+<li><strong><code>receiveTimeout</code>:</strong> هي المدة القصوى التي يجب أن ينتظرها Dio لاستقبال البيانات بعد إنشاء الاتصال. هذا لا يشمل وقت الاتصال، بل وقت استقبال البيانات فقط. إذا تجاوزت هذه المدة، سيتم إطلاق <code>DioExceptionType.receiveTimeout</code>.</li>
+<li><strong><code>Dio(options)</code>:</strong> يسمح لك بتمرير كائن <code>BaseOptions</code> مخصص عند إنشاء المثيل، مما يمنحك تحكماً كاملاً في التكوينات الأولية.</li>
+<li><strong><code>dio.clone()</code>:</strong> يُنشئ نسخة طبق الأصل من مثيل <code>Dio</code> الحالي، بما في ذلك جميع خياراته ومراقبيه. هذا مفيد عندما تحتاج إلى مثيل <code>Dio</code> جديد بنفس الإعدادات ولكن مع بعض التعديلات الطفيفة دون التأثير على المثيل الأصلي.</li>
+</ul>
+<p>الواجهة الأساسية في مثيل Dio، والتي تُعد العمود الفقري لجميع طلبات HTTP، هي دالة <code>request</code>:</p>
+<pre><code class="language-dart">Future&lt;Response&lt;T&gt;&gt; request&lt;T&gt;(
+  String path, { // المسار النسبي أو المطلق للطلب
+  Object? data, // البيانات المراد إرسالها مع الطلب (لـ POST, PUT, PATCH)
+  Map&lt;String, dynamic&gt;? queryParameters, // معلمات الاستعلام (Query Parameters) لـ GET
+  CancelToken? cancelToken, // رمز الإلغاء لإلغاء الطلب لاحقًا
+  Options? options, // خيارات الطلب المحددة لهذا الطلب فقط
+  ProgressCallback? onSendProgress, // دالة رد اتصال لتتبع تقدم الإرسال
+  ProgressCallback? onReceiveProgress, // دالة رد اتصال لتتبع تقدم الاستقبال
+});
+</code></pre>
+<p>هذه الدالة هي الأكثر مرونة وقوة، حيث تسمح لك بتحديد جميع جوانب الطلب. يمكنك استخدامها لإجراء أي نوع من طلبات HTTP (GET, POST, PUT, DELETE, إلخ) عن طريق تحديد <code>method</code> في كائن <code>Options</code>.</p>
+<p>مثال على استخدام دالة <code>request</code>:</p>
+<pre><code class="language-dart">final response = await dio.request(
+  '/test',
+  data: {'id': 12, 'name': 'dio'},
+  options: Options(method: 'GET'), // تحديد طريقة الطلب كـ GET
+);
+print('استجابة طلب request: ${response.data}');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>dio.request('/test', ...)</code>:</strong> هذه هي الدالة العامة لإجراء الطلبات. يمكنك تحديد المسار، البيانات، ومعلمات الاستعلام، بالإضافة إلى خيارات محددة للطلب.</li>
+<li><strong><code>options: Options(method: 'GET')</code>:</strong> هنا، نُحدد أن طريقة الطلب هي <code>GET</code>، على الرغم من أننا نستخدم <code>data</code>. هذا يوضح مرونة دالة <code>request</code> في التعامل مع سيناريوهات مختلفة.</li>
+</ul>
+<h3 id="request-options">خيارات الطلب (Request Options): توجيه سفينتك</h3>
+<p>في مكتبة Dio، هناك مفهومان أساسيان لخيارات الطلب يمنحانك تحكماً دقيقاً في كيفية إرسال الطلبات واستقبال الاستجابات:</p>
+<ol>
+<li><strong><code>BaseOptions</code>:</strong> هذه هي الإعدادات الأساسية التي تُطبق على مثيل <code>Dio()</code> بأكمله. إنها بمثابة الدفة الرئيسية لسفينتك، حيث تحدد الاتجاه العام لجميع الرحلات (الطلبات) التي تقوم بها.</li>
+<li><strong><code>Options</code>:</strong> هذه هي الإعدادات المحددة لطلب واحد فقط. إنها بمثابة التعديلات الدقيقة التي تُجريها على مسار سفينتك لرحلة معينة، دون التأثير على الاتجاه العام. سيتم دمج هذه الخيارات مع <code>BaseOptions</code> عند إجراء الطلب، حيث تُعطى الأولوية لـ <code>Options</code> المحددة للطلب الفردي.</li>
+</ol>
+<p>إعلان <code>Options</code> يكون كما يلي، وهو يكشف عن ثراء الخيارات المتاحة لتخصيص كل طلب:</p>
+<pre><code class="language-dart">/// طريقة طلب HTTP (Method).
+/// تحدد نوع العملية التي سيتم إجراؤها على المورد (GET, POST, PUT, DELETE, إلخ).
+String method;
+
+/// المهلة الزمنية عند إرسال البيانات (Send Timeout).
+///
+/// هذه المدة تحدد أقصى وقت مسموح به لإرسال بيانات الطلب بالكامل إلى الخادم.
+/// إذا تجاوزت عملية الإرسال هذه المدة، سيتم إطلاق [DioException] من نوع
+/// [DioExceptionType.sendTimeout].
+///
+/// القيمة `null` أو `Duration.zero` تعني عدم وجود حد للمهلة، مما قد يؤدي إلى تعليق التطبيق في حال وجود مشاكل في الشبكة أو الخادم.
+Duration? sendTimeout;
+
+/// المهلة الزمنية عند استقبال البيانات (Receive Timeout).
+///
+/// هذه المدة تمثل:
+///  - مهلة قبل إنشاء الاتصال واستقبال أول بايتات الاستجابة.
+///  - المدة أثناء نقل البيانات لكل حدث بايت، وليس المدة الإجمالية للاستقبال.
+///
+/// بعبارة أخرى، إذا توقف تدفق البيانات لأكثر من هذه المدة بين أي بايتين متتاليين، فسيتم اعتبار ذلك مهلة.
+/// إذا تجاوزت هذه المدة، سيتم إطلاق [DioException] من نوع
+/// [DioExceptionType.receiveTimeout].
+///
+/// القيمة `null` أو `Duration.zero` تعني عدم وجود حد للمهلة.
+Duration? receiveTimeout;
+
+/// حقل مخصص (Extra) يمكنك استعادته لاحقًا.
+///
+/// هذا الحقل يسمح لك بتخزين أي بيانات إضافية تحتاجها للتعامل مع الطلب في المراحل المختلفة،
+/// مثل داخل [Interceptor]، أو [Transformer]، أو حتى في كائن [Response.requestOptions].
+/// إنه بمثابة حقيبة سفر صغيرة يمكنك وضع فيها ملاحظاتك الخاصة بالرحلة.
+Map&lt;String, dynamic&gt;? extra;
+
+/// عناوين طلب HTTP (Headers).
+///
+/// هذه هي المعلومات الإضافية التي تُرسل مع الطلب، مثل نوع المحتوى (Content-Type)،
+/// أو رمز المصادقة (Authorization Token)، أو وكيل المستخدم (User-Agent).
+///
+/// مفاتيح العناوين غير حساسة لحالة الأحرف،
+/// مثال: `content-type` و `Content-Type` سيتم عاملهما كالمفتاح نفسه.
+Map&lt;String, dynamic&gt;? headers;
+
+/// ما إذا كان يجب الحفاظ على حالة أحرف مفاتيح العناوين (preserveHeaderCase).
+///
+/// القيمة الافتراضية هي `false`.
+///
+/// هذا الخيار **لن يعمل** في هذه الحالات:
+/// - XHR ([HttpRequest]) لا يدعم التعامل مع هذا صراحة في بيئات المتصفح.
+/// - معيار HTTP/2 يدعم فقط مفاتيح العناوين الصغيرة (lowercase)، لذا سيتم تحويلها تلقائيًا.
+bool? preserveHeaderCase;
+
+/// نوع البيانات التي يتعامل معها [Dio] مع الخيارات (ResponseType).
+///
+/// يحدد هذا الخيار كيفية تفسير Dio لجسم الاستجابة الوارد من الخادم.
+///
+/// القيمة الافتراضية هي [ResponseType.json].
+/// سيقوم [Dio] بتحليل سلسلة الاستجابة إلى كائن JSON تلقائيًا
+/// عندما يكون نوع المحتوى (content-type) للاستجابة هو [Headers.jsonContentType].
+///
+/// انظر أيضًا:
+///  - `plain` إذا كنت تريد استقبال البيانات كـ `String` (نص عادي).
+///  - `bytes` إذا كنت تريد استقبال البيانات كبايتات كاملة (`List&lt;int&gt;`)، وهو مفيد للملفات الثنائية.
+///  - `stream` إذا كنت تريد استقبال البيانات كـ `Stream` لمعالجتها بشكل تدريجي.
+String? contentType;
+
+/// يحدد ما إذا كان الطلب يعتبر ناجحًا بناءً على رمز الحالة (Status Code).
+///
+/// هذه الدالة تسمح لك بتحديد منطق مخصص لتحديد ما إذا كانت الاستجابة ناجحة أم لا.
+/// سيتم التعامل مع الطلب على أنه ناجح إذا أعادت دالة رد الاتصال (callback) القيمة `true`.
+ValidateStatus? validateStatus;
+
+/// ما إذا كان يجب استرداد البيانات عندما يشير رمز الحالة إلى طلب فاشل (receiveDataWhenStatusError).
+///
+/// القيمة الافتراضية هي `true`.
+/// حتى لو كان رمز الحالة يشير إلى خطأ (مثل 404 أو 500)، فإن Dio سيحاول استرداد جسم الاستجابة.
+/// إذا قمت بتعيينها إلى `false`، فلن يتم استرداد جسم الاستجابة في حالة الأخطاء.
+bool? receiveDataWhenStatusError;
+
+/// يتبع إعادة التوجيه (followRedirects).
+///
+/// يحدد ما إذا كان Dio يجب أن يتبع تلقائيًا عمليات إعادة التوجيه التي يرسلها الخادم.
+///
+/// القيمة الافتراضية هي `true`.
+bool? followRedirects;
+
+/// الحد الأقصى لعدد عمليات إعادة التوجيه (maxRedirects).
+///
+/// إذا كانت `followRedirects` هي `true`، فإن هذا يحدد الحد الأقصى لعدد مرات إعادة التوجيه المسموح بها.
+/// سيتم إطلاق [RedirectException] إذا تجاوزت عمليات إعادة التوجيه هذا الحد.
+///
+/// القيمة الافتراضية هي `5`.
+int? maxRedirects;
+
+/// اتصال دائم (persistentConnection).
+///
+/// يحدد ما إذا كان الاتصال بالخادم يجب أن يظل مفتوحًا لإعادة استخدامها في الطلبات اللاحقة.
+///
+/// القيمة الافتراضية هي `true`.
+bool? persistentConnection;
+
+/// مُرمز الطلب (RequestEncoder).
+///
+/// المرمز الافتراضي للطلب هو [Utf8Encoder]. يمكنك تعيين مُرمز مخصص
+/// باستخدام هذا الخيار لتحويل بيانات الطلب إلى بايتات قبل الإرسال.
+RequestEncoder? requestEncoder;
+
+/// مُفكك ترميز الاستجابة (ResponseDecoder).
+///
+/// مُفكك الترميز الافتراضي للاستجابة هو [Utf8Decoder]. يمكنك تعيين مُفكك ترميز مخصص
+/// باستخدام هذا الخيار، وسيتم استخدامه في [Transformer] لتحويل بايتات الاستجابة إلى بيانات قابلة للقراءة.
+ResponseDecoder? responseDecoder;
+
+/// يحدد تنسيق بيانات المجموعة (Collection Data) في معلمات استعلام الطلب (Query Parameters)
+/// وبيانات جسم `x-www-url-encoded`.
+///
+/// القيمة الافتراضية هي [ListFormat.multi].
+ListFormat? listFormat;
+</code></pre>
+<p>هناك مثال كامل يوضح كيفية استخدام هذه الخيارات المتنوعة <a href="../example_dart/lib/options.dart">هنا</a> في المستودع الأصلي. استكشفه لتفهم كيف يمكنك توجيه سفينتك (طلباتك) بدقة في بحر الشبكة.</p>
+<p>هناك مثال كامل يوضح كيفية استخدام هذه الخيارات المتنوعة <a href="../example_dart/lib/options.dart">هنا</a> في المستودع الأصلي. استكشفه لتفهم كيف يمكنك توجيه سفينتك (طلباتك) بدقة في بحر الشبكة.</p>
+<h3 id="response">الاستجابة (Response): حصاد رحلتك</h3>
+<p>بعد أن تُرسل طلبك إلى الخادم، ستتلقى استجابة (Response) تحمل في طياتها نتيجة هذه الرحلة. كائن الاستجابة في Dio هو بمثابة كنز من المعلومات، حيث يحتوي على كل ما تحتاج لمعرفته حول ما عاد به الخادم إليك. إليك تفصيل لمكونات هذا الكائن:</p>
+<pre><code class="language-dart">/// جسم الاستجابة (Response body).
+/// هذا هو المحتوى الفعلي الذي أرسله الخادم، وقد يكون قد تم تحويله بالفعل بواسطة Dio
+/// بناءً على [ResponseType] الذي حددته (مثل JSON، نص عادي، أو بايتات).
+T? data;
+
+/// معلومات الطلب المقابل (RequestOptions).
+/// هذا الكائن يحتوي على جميع الخيارات التي تم استخدامها لإجراء الطلب الأصلي.
+/// إنه مفيد جداً لتتبع سياق الطلب الذي أدى إلى هذه الاستجابة.
+RequestOptions requestOptions;
+
+/// رمز حالة HTTP (HTTP Status Code).
+/// رقم يشير إلى نتيجة الطلب (مثال: 200 للنجاح، 404 للمورد غير موجود، 500 لخطأ في الخادم).
+int? statusCode;
+
+/// رسالة السبب (Status Message) المرتبطة برمز الحالة.
+/// نص وصفي موجز لرمز الحالة (مثال: &quot;OK&quot; لـ 200، &quot;Not Found&quot; لـ 404).
+/// يجب ضبط رسالة السبب قبل كتابة جسم الاستجابة.
+String? statusMessage;
+
+/// ما إذا كانت هذه الاستجابة عبارة عن إعادة توجيه (isRedirect).
+/// قيمة منطقية (true/false) تشير إلى ما إذا كان الخادم قد طلب إعادة توجيه الطلب إلى عنوان URL آخر.
+/// ** تنبيه **: توفر هذا الحقل يعتمد على ما إذا كان تنفيذ المحول (adapter) يدعمه أم لا.
+bool isRedirect;
+
+/// سلسلة عمليات إعادة التوجيه (Redirect Records).
+/// قائمة بسجلات إعادة التوجيه التي مر بها هذا الاتصال. ستكون القائمة فارغة إذا لم يتم اتباع أي عمليات إعادة توجيه.
+/// يتم تحديث [redirects] في كل من حالات إعادة التوجيه التلقائية واليدوية.
+///
+/// ** تنبيه **: توفر هذا الحقل يعتمد على ما إذا كان تنفيذ المحول (adapter) يدعمه أم لا.
+List&lt;RedirectRecord&gt; redirects;
+
+/// حقول مخصصة (Extra) فقط للاستجابة [Response].
+/// هذا الحقل يسمح لك بتخزين أي بيانات إضافية خاصة بالاستجابة،
+/// والتي قد تكون مفيدة للمعالجة اللاحقة.
+Map&lt;String, dynamic&gt; extra;
+
+/// عناوين الاستجابة (Response Headers).
+/// هذه هي المعلومات الإضافية التي أرسلها الخادم مع الاستجابة،
+/// مثل نوع المحتوى (Content-Type)، طول المحتوى (Content-Length)، أو الكوكيز (Cookies).
+Headers headers;
+</code></pre>
+<p>عندما يكلل طلبك بالنجاح، ستتلقى الاستجابة التي تحمل البيانات التي طلبتها. إليك كيف يمكنك الوصول إلى هذه المعلومات:</p>
+<pre><code class="language-dart">final response = await dio.get(&quot;https://pub.dev&quot;);
+print(&quot;البيانات المستلمة: ${response.data}&quot;); // جسم الاستجابة الفعلي
+print(&quot;عناوين الاستجابة: ${response.headers}&quot;); // عناوين HTTP التي أرسلها الخادم
+print(&quot;خيارات الطلب المستخدمة: ${response.requestOptions}&quot;); // الخيارات التي تم بها الطلب
+print(&quot;رمز حالة HTTP: ${response.statusCode}&quot;); // رمز الحالة (مثال: 200 OK)
+</code></pre>
+<p><strong>نقطة هامة يجب الانتباه إليها:</strong> <code>Response.extra</code> يختلف تمامًا عن <code>RequestOptions.extra</code>. على الرغم من تشابه الاسم، إلا أنهما حقلان منفصلان تمامًا وغير مرتبطين ببعضهما البعض. <code>RequestOptions.extra</code> يُستخدم لتخزين بيانات إضافية للطلب قبل إرساله، بينما <code>Response.extra</code> يُستخدم لتخزين بيانات إضافية خاصة بالاستجابة بعد استلامها.</p>
+<h3 id="interceptors">المراقبون (Interceptors): حراس البوابة الأوفياء</h3>
+<p>تُعد المراقبون (Interceptors) من أقوى الميزات في Dio، فهي تمنحك القدرة على التدخل في دورة حياة طلب HTTP بأكملها. تخيل أن لديك حراس بوابة يقفون عند كل نقطة عبور (إرسال الطلب، استقبال الاستجابة، حدوث خطأ)، ويمكنهم فحص، تعديل، أو حتى منع مرور البيانات. هذا يسمح لك بتطبيق منطق عام (Global Logic) على جميع الطلبات دون الحاجة إلى تكرار الكود في كل مكان.</p>
+<p>لكل مثيل من Dio، يمكنك إضافة واحد أو أكثر من المراقبين. من خلالهم، يمكننا اعتراض الطلبات، والاستجابات، والأخطاء قبل أن يتم التعامل معها بواسطة <code>then</code> (للنجاح) أو <code>catchError</code> (للأخطاء).</p>
+<pre><code class="language-dart">dio.interceptors.add(
+  InterceptorsWrapper(
+    // دالة تُستدعى قبل إرسال الطلب
+    onRequest: (RequestOptions options, RequestInterceptorHandler handler) {
+      // هنا يمكنك فحص أو تعديل الـ `options` قبل إرسال الطلب.
+      // على سبيل المثال، إضافة رمز مصادقة (Authorization Token) إلى العناوين.
+      print(&quot;-&gt; [${options.method}] ${options.uri}&quot;);
+      // إذا أردت حل الطلب ببيانات مخصصة (دون إرساله فعليًا)،
+      // يمكنك استدعاء `handler.resolve(response)`.
+      // إذا أردت رفض الطلب برسالة خطأ (منعه من الإرسال)،
+      // يمكنك استدعاء `handler.reject(dioError)`.
+      return handler.next(options); // استمر في معالجة الطلب
+    },
+    // دالة تُستدعى بعد استقبال الاستجابة بنجاح
+    onResponse: (Response response, ResponseInterceptorHandler handler) {
+      // هنا يمكنك فحص أو تعديل الـ `response` قبل أن تصل إلى الكود الخاص بك.
+      // على سبيل المثال، فك تشفير البيانات أو معالجة الأخطاء الشائعة.
+      print(&quot;&lt;- [${response.statusCode}] ${response.requestOptions.uri}&quot;);
+      // إذا أردت رفض الاستجابة برسالة خطأ،
+      // يمكنك استدعاء `handler.reject(dioError)`.
+      return handler.next(response); // استمر في معالجة الاستجابة
+    },
+    // دالة تُستدعى عند حدوث خطأ في الطلب أو الاستجابة
+    onError: (DioException error, ErrorInterceptorHandler handler) {
+      // هنا يمكنك التعامل مع الأخطاء بشكل مركزي.
+      // على سبيل المثال، تحديث رمز المصادقة (Refresh Token) أو إعادة محاولة الطلب.
+      print(&quot;!! [${error.response?.statusCode}] ${error.requestOptions.uri}&quot;);
+      // إذا أردت حل الطلب ببعض البيانات المخصصة (بعد حدوث الخطأ)،
+      // يمكنك استدعاء `handler.resolve(response)`.
+      return handler.next(error); // استمر في معالجة الخطأ
+    },
+  ),
+);
+</code></pre>
+<p><strong>مثال بسيط لمراقب مخصص:</strong></p>
+<p>يمكنك إنشاء مراقب مخصص عن طريق توسيع الفئة <code>Interceptor</code>، مما يمنحك تحكماً أكبر في كيفية تسجيل الأحداث أو معالجتها.</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+
+class CustomInterceptors extends Interceptor {
+  @override
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+    // طباعة معلومات الطلب قبل إرساله
+    print('REQUEST[${options.method}] =&gt; PATH: ${options.path}');
+    super.onRequest(options, handler); // استدعاء التنفيذ الأصلي للمراقب
+  }
+
+  @override
+  void onResponse(Response response, ResponseInterceptorHandler handler) {
+    // طباعة معلومات الاستجابة بعد استلامها بنجاح
+    print('RESPONSE[${response.statusCode}] =&gt; PATH: ${response.requestOptions.path}');
+    super.onResponse(response, handler); // استدعاء التنفيذ الأصلي للمراقب
+  }
+
+  @override
+  Future onError(DioException err, ErrorInterceptorHandler handler) async {
+    // طباعة معلومات الخطأ عند حدوثه
+    print('ERROR[${err.response?.statusCode}] =&gt; PATH: ${err.requestOptions.path}');
+    super.onError(err, handler); // استدعاء التنفيذ الأصلي للمراقب
+  }
+}
+</code></pre>
+<h4 id="resolve-and-reject-the-request">حل ورفض الطلب (Resolve and reject the request): التحكم المطلق</h4>
+<p>في قلب كل مراقب، تكمن القدرة على التحكم المطلق في تدفق الطلب أو الاستجابة. يمكنك التدخل في مسار التنفيذ وتغيير النتيجة بشكل جذري:</p>
+<ul>
+<li><strong><code>handler.resolve(Response)</code>:</strong> إذا كنت تريد حل الطلب أو الاستجابة ببيانات مخصصة (دون إرسال الطلب فعليًا إلى الخادم أو تمرير الاستجابة الفعلية إلى الكود الخاص بك)، يمكنك استدعاء هذه الدالة. هذا مفيد لسيناريوهات التخزين المؤقت (Caching) حيث يمكنك إرجاع بيانات مخزنة محليًا بدلاً من إجراء طلب شبكة.</li>
+<li><strong><code>handler.reject(dioError)</code>:</strong> إذا كنت تريد رفض الطلب أو الاستجابة برسالة خطأ، يمكنك استدعاء هذه الدالة. هذا يسمح لك بإيقاف معالجة الطلب أو الاستجابة وإطلاق استثناء مخصص، وهو مفيد للتحقق من الصحة (Validation) أو التعامل مع الأخطاء الأمنية.</li>
+</ul>
+<p>مثال يوضح كيفية حل طلب ببيانات وهمية (Fake Data) مباشرة من المراقب:</p>
+<pre><code class="language-dart">dio.interceptors.add(
+  InterceptorsWrapper(
+    onRequest: (options, handler) {
+      // بدلاً من إرسال الطلب فعليًا، نقوم بحله ببيانات وهمية
+      return handler.resolve(
+        Response(requestOptions: options, data: 'fake data'),
+      );
+    },
+  ),
+);
+final response = await dio.get('/test');
+print(response.data); // سيتم طباعة 'fake data' بدلاً من بيانات الخادم
+</code></pre>
+<h4 id="queuedinterceptor">المراقب المجدول (QueuedInterceptor): التنفيذ المتسلسل بذكاء</h4>
+<p>بشكل افتراضي، يمكن تنفيذ المراقبين (Interceptors) بشكل متزامن، مما يعني أن جميع الطلبات قد تدخل المراقب في وقت واحد، بدلاً من التنفيذ المتسلسل. ومع ذلك، في بعض الحالات، قد تحتاج إلى أن تدخل الطلبات المراقب بالتتابع (خطوة بخطوة) لضمان معالجة صحيحة ومنظمة، مثلما هو موضح في المشكلة رقم <a href="https://github.com/cfug/dio/issues/590">#590</a>. هنا يأتي دور <code>QueuedInterceptor</code> ليحل هذه المشكلة، حيث يضمن الوصول المتسلسل (step by step) إلى المراقبين.</p>
+<h5 id="csrf-token">مثال: حماية بياناتك بـ CSRF Token</h5>
+<p>لنفترض أنك تعمل على تطبيق يتطلب حماية قوية ضد هجمات تزوير الطلبات عبر المواقع (CSRF). لأسباب أمنية، تحتاج جميع الطلبات إلى تعيين <code>csrfToken</code> في العنوان (Header). إذا لم يكن <code>csrfToken</code> موجودًا، فإنك تحتاج إلى طلب <code>csrfToken</code> أولاً، ثم إجراء طلب الشبكة الأصلي. نظرًا لأن عملية طلب <code>csrfToken</code> غير متزامنة، فإنك تحتاج إلى تنفيذ هذا الطلب غير المتزامن داخل مراقب الطلب.</p>
+<p><code>QueuedInterceptor</code> يضمن أن يتم الحصول على <code>csrfToken</code> مرة واحدة فقط، وأن جميع الطلبات اللاحقة تنتظر حتى يتم الحصول عليه وتعيينه في العناوين قبل المتابعة. هذا يمنع حدوث "حالة سباق" (Race Condition) ويضمن أن جميع الطلبات محمية بشكل صحيح.</p>
+<p>للكود الكامل الذي يوضح هذا السيناريو، انظر <a href="../example_dart/lib/queued_interceptor_crsftoken.dart">هنا</a>.</p>
+<h4 id="loginterceptor-dio">مراقب السجلات (LogInterceptor): عيون Dio الساهرة</h4>
+<p><code>LogInterceptor</code> هو مراقب جاهز للاستخدام يوفر لك رؤية عميقة لما يحدث داخل Dio. يمكنك تطبيقه لتسجيل تفاصيل الطلبات والاستجابات والأخطاء تلقائيًا في السجلات (Logs)، مما يجعله أداة لا غنى عنها لتصحيح الأخطاء (Debugging) ومراقبة سلوك الشبكة.</p>
+<p><strong>ملاحظة هامة:</strong> يجب أن يكون <code>LogInterceptor</code> دائمًا هو <strong>آخر مراقب يتم إضافته</strong> إلى قائمة المراقبين. السبب في ذلك هو أنه إذا تم إضافة مراقبين آخرين بعده، فإن أي تعديلات يقومون بها على الطلب أو الاستجابة لن يتم تسجيلها بواسطة <code>LogInterceptor</code>، مما قد يؤدي إلى معلومات غير دقيقة في السجلات.</p>
+<h4 id="dart-dart">Dart: تسجيل السجلات في بيئة Dart</h4>
+<p>في بيئة Dart النقية (بدون Flutter)، يمكنك استخدام <code>LogInterceptor</code> لتسجيل السجلات في وحدة التحكم (Console).</p>
+<pre><code class="language-dart">dio.interceptors.add(LogInterceptor(responseBody: false)); // عدم إخراج جسم الاستجابة في السجلات.
+</code></pre>
+<p><strong>ملاحظة:</strong> عند استخدام دالة <code>logPrint</code> الافتراضية، سيتم طباعة السجلات فقط في وضع التصحيح (DEBUG mode) (عند تمكين <code>assert</code>). هذا يعني أن هذه السجلات لن تظهر في إصدارات الإنتاج (Release Builds) من تطبيقك، مما يحافظ على نظافة السجلات وأداء التطبيق.</p>
+<p>بدلاً من ذلك، يمكن استخدام دالة <code>log</code> من مكتبة <code>dart:developer</code> لتسجيل الرسائل، وهي متاحة في Flutter أيضًا وتوفر ميزات أكثر تقدمًا لتسجيل السجلات.</p>
+<h4 id="flutter-flutter">Flutter: تسجيل السجلات في بيئة Flutter</h4>
+<p>عند العمل في بيئة Flutter، يُنصح بشدة باستخدام دالة <code>debugPrint</code> الخاصة بـ Flutter لتسجيل السجلات.</p>
+<p>هذا يضمن أن رسائل التصحيح (Debug Messages) ستكون متاحة أيضًا عبر أمر <code>flutter logs</code>، مما يسهل عملية تصحيح الأخطاء في التطبيقات التي تعمل على الأجهزة الفعلية أو المحاكيات.</p>
+<p><strong>ملاحظة هامة:</strong> <code>debugPrint</code> <strong>لا تعني طباعة السجلات فقط في وضع DEBUG</strong>. إنها دالة مُحسّنة (throttled function) تساعد في طباعة السجلات الكاملة دون اقتطاع، حتى لو كانت طويلة جدًا. <strong>لا تستخدمها في أي بيئة إنتاج (Production Environment) إلا إذا كنت تقصد ذلك تمامًا</strong>، حيث أن طباعة السجلات بكثرة في الإنتاج قد تؤثر على الأداء وتكشف عن معلومات حساسة.</p>
+<pre><code class="language-dart">dio.interceptors.add(
+  LogInterceptor(
+    logPrint: (o) =&gt; debugPrint(o.toString()), // استخدام debugPrint لطباعة السجلات
+  ),
+);
+</code></pre>
+<h4 id="custom-interceptor">مراقب مخصص (Custom Interceptor): إبداعك بلا حدود</h4>
+<p>إذا كانت المراقبون الجاهزون لا تلبي احتياجاتك الفريدة، يمكنك دائمًا إنشاء مراقب مخصص خاص بك عن طريق توسيع الفئة <code>Interceptor</code> أو <code>QueuedInterceptor</code>. هذا يفتح لك الأبواب لإمكانيات لا حصر لها لتخصيص سلوك الشبكة.</p>
+<p>هناك مثال يوضح كيفية تنفيذ سياسة تخزين مؤقت بسيطة باستخدام مراقب مخصص: <a href="../example_dart/lib/custom_cache_interceptor.dart">مراقب التخزين المؤقت المخصص</a>. هذا المثال يُظهر كيف يمكنك التحكم في تدفق البيانات وتخزينها محليًا لتحسين الأداء وتقليل الاعتماد على الشبكة.</p>
+<h2 id="handling-errors">التعامل مع الأخطاء (Handling Errors): فن إدارة التحديات</h2>
+<p>في عالم الشبكات، الأخطاء حتمية. ولكن بدلاً من أن تكون عائقًا، يمكن أن تكون فرصة لتعزيز قوة تطبيقك ومرونته. Dio تُحول الأخطاء إلى فرص للتعلم والتحسين من خلال كائن <code>DioException</code> المخصص. عندما يحدث خطأ أثناء طلب HTTP، يقوم Dio بتغليف <code>Error/Exception</code> الأصلي في كائن <code>DioException</code>، مما يوفر لك معلومات غنية ومفصلة حول طبيعة الخطأ.</p>
+<pre><code class="language-dart">try {
+  // محاولة إجراء طلب إلى مورد غير موجود (سيؤدي إلى خطأ 404)
+  await dio.get('https://api.pub.dev/not-exist');
+} on DioException catch (e) {
+  // هنا يتم اعتراض أي DioException يحدث
+  // التحقق مما إذا كانت الاستجابة موجودة (أي أن الخادم استجاب ولكن برمز خطأ)
+  if (e.response != null) {
+    print('خطأ في الاستجابة من الخادم:');
+    print('البيانات: ${e.response.data}'); // بيانات الخطأ التي أرسلها الخادم
+    print('العناوين: ${e.response.headers}'); // عناوين الاستجابة التي تحمل الخطأ
+    print('خيارات الطلب: ${e.response.requestOptions}'); // خيارات الطلب الذي أدى إلى الخطأ
+  } else {
+    // حدث شيء ما في إعداد أو إرسال الطلب لم يصل إلى الخادم
+    // (مثال: مشكلة في الاتصال بالإنترنت، خطأ DNS، مهلة اتصال)
+    print('خطأ في إعداد أو إرسال الطلب:');
+    print('خيارات الطلب: ${e.requestOptions}'); // خيارات الطلب الذي فشل
+    print('الرسالة: ${e.message}'); // رسالة الخطأ العامة
+  }
+}
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>on DioException catch (e)</code>:</strong> هذا هو النمط القياسي لالتقاط الأخطاء الخاصة بـ Dio. يسمح لك بالتعامل مع جميع الأخطاء المتعلقة بالشبكة بطريقة موحدة.</li>
+<li><strong><code>e.response != null</code>:</strong> هذا الشرط مهم جداً. إذا كانت <code>e.response</code> غير <code>null</code>، فهذا يعني أن الطلب قد وصل إلى الخادم، والخادم قد استجاب، ولكن برمز حالة يشير إلى خطأ (مثل 400، 401، 403، 404، 500، إلخ). في هذه الحالة، يمكنك الوصول إلى <code>data</code> و <code>headers</code> و <code>requestOptions</code> من كائن الاستجابة لمعرفة تفاصيل الخطأ من جانب الخادم.</li>
+<li><strong><code>e.response == null</code>:</strong> إذا كانت <code>e.response</code> هي <code>null</code>، فهذا يعني أن الطلب لم يتمكن حتى من الوصول إلى الخادم. قد يكون السبب مشكلة في الاتصال بالإنترنت، أو خطأ في اسم النطاق (DNS)، أو مهلة اتصال (Connection Timeout)، أو أي مشكلة أخرى تمنع الطلب من إكمال رحلته. في هذه الحالة، يمكنك الاعتماد على <code>e.requestOptions</code> و <code>e.message</code> للحصول على معلومات حول الخطأ.</li>
+</ul>
+<h3 id="dioexception-dio">DioException: استثناءات Dio المخصصة</h3>
+<p>كائن <code>DioException</code> هو قلب نظام معالجة الأخطاء في Dio. إنه يوفر معلومات غنية ومفصلة حول الخطأ الذي حدث، مما يساعدك على تشخيص المشكلة بدقة واتخاذ الإجراءات المناسبة. إليك مكوناته الرئيسية:</p>
+<pre><code class="language-dart">/// معلومات الطلب (RequestOptions) الذي ألقى الاستثناء.
+/// هذا يمنحك سياقًا كاملاً للطلب الذي فشل.
+RequestOptions requestOptions;
+
+/// معلومات الاستجابة (Response) التي أدت إلى الخطأ.
+/// قد تكون `null` إذا لم يتمكن الطلب من الوصول إلى خادم HTTP،
+/// على سبيل المثال، عند حدوث خطأ في DNS، أو عدم توفر الشبكة.
+Response? response;
+
+/// نوع [DioException] الحالي.
+/// هذا الحقل يحدد الفئة العامة للخطأ (مثال: مهلة اتصال، خطأ في الاستجابة، إلخ).
+DioExceptionType type;
+
+/// كائن الخطأ/الاستثناء الأصلي (Original Error/Exception).
+/// عادةً ما يكون غير `null` عندما يكون `type` هو [DioExceptionType.unknown].
+/// هذا يمثل الخطأ الأساسي الذي تسبب في `DioException`.
+Object? error;
+
+/// تتبع المكدس (Stacktrace) لكائن الخطأ/الاستثناء الأصلي.
+/// عادةً ما يكون غير `null` عندما يكون `type` هو [DioExceptionType.unknown].
+/// يوفر هذا معلومات مفصلة عن تسلسل استدعاءات الدوال التي أدت إلى الخطأ.
+StackTrace? stackTrace;
+
+/// رسالة الخطأ (Error Message) التي ألقاها [DioException].
+/// رسالة وصفية موجزة للخطأ.
+String? message;
+</code></pre>
+<h3 id="dioexceptiontype">أنواع استثناءات ديو (DioExceptionType): مفتاح الفهم</h3>
+<p>لفهم أعمق لطبيعة الأخطاء التي قد تواجهها، يوفر Dio أنواعًا محددة من <code>DioExceptionType</code>. هذه الأنواع تساعدك على التمييز بين الأخطاء المختلفة وتطبيق منطق معالجة خاص لكل نوع. يمكنك مراجعة <a href="lib/src/dio_exception.dart">كود المصدر</a> للحصول على القائمة الكاملة والوصف الدقيق لكل نوع.</p>
+<p>بعض الأنواع الشائعة تشمل:</p>
+<ul>
+<li><strong><code>DioExceptionType.connectionTimeout</code>:</strong> يحدث عندما لا يتمكن Dio من إنشاء اتصال بالخادم خلال المدة المحددة في <code>connectTimeout</code>.</li>
+<li><strong><code>DioExceptionType.sendTimeout</code>:</strong> يحدث عندما لا يتمكن Dio من إرسال بيانات الطلب بالكامل إلى الخادم خلال المدة المحددة في <code>sendTimeout</code>.</li>
+<li><strong><code>DioExceptionType.receiveTimeout</code>:</strong> يحدث عندما لا يتمكن Dio من استقبال البيانات من الخادم خلال المدة المحددة في <code>receiveTimeout</code>.</li>
+<li><strong><code>DioExceptionType.badResponse</code>:</strong> يحدث عندما يستجيب الخادم برمز حالة يشير إلى خطأ (مثل 4xx أو 5xx).</li>
+<li><strong><code>DioExceptionType.cancel</code>:</strong> يحدث عندما يتم إلغاء الطلب يدويًا باستخدام <code>CancelToken</code>.</li>
+<li><strong><code>DioExceptionType.unknown</code>:</strong> يحدث لأي خطأ آخر غير مصنف، وقد يحتوي على <code>error</code> و <code>stackTrace</code> الأصليين.</li>
+</ul>
+<p>من خلال فهم هذه الأنواع، يمكنك بناء منطق معالجة أخطاء قوي وذكي في تطبيقك، مما يجعله أكثر مرونة وقدرة على التعافي من المشاكل الشبكية.</p>
+<h2 id="applicationx-www-form-urlencoded">استخدام تنسيق <code>application/x-www-form-urlencoded</code>: البيانات التقليدية بأسلوب حديث</h2>
+<p>بشكل افتراضي، يقوم Dio بتسلسل بيانات الطلب (باستثناء نوع <code>String</code>) إلى تنسيق <code>JSON</code>، وهو التنسيق الأكثر شيوعًا ومرونة في تطبيقات الويب الحديثة. ومع ذلك، قد تواجه أحيانًا أنظمة خلفية (Backend Systems) أو واجهات برمجة تطبيقات (APIs) قديمة تتوقع البيانات بتنسيق <code>application/x-www-form-urlencoded</code>، وهو التنسيق التقليدي المستخدم في نماذج HTML.</p>
+<p>لإرسال البيانات بهذا التنسيق بدلاً من <code>JSON</code>، يوفر Dio طرقًا سهلة لتحقيق ذلك:</p>
+<pre><code class="language-dart">// 1. ضبط Content-Type على مستوى مثيل Dio (Instance Level)
+// هذا سيجعل جميع طلبات POST/PUT/PATCH الصادرة من هذا المثيل تستخدم تنسيق form-urlencoded
+dio.options.contentType = Headers.formUrlEncodedContentType;
+
+// 2. أو ضبط Content-Type لطلب واحد فقط (Works Once)
+// هذه الطريقة مفيدة إذا كنت تحتاج إلى استخدام تنسيق form-urlencoded لطلب معين فقط
+// دون التأثير على الإعدادات الافتراضية للمثيل.
+dio.post(
+  '/info',
+  data: {'id': 5, 'name': 'John Doe'},
+  options: Options(contentType: Headers.formUrlEncodedContentType),
+);
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>Headers.formUrlEncodedContentType</code>:</strong> هذا ثابت (Constant) معرف في Dio يمثل قيمة <code>application/x-www-form-urlencoded</code>. عند تعيين <code>contentType</code> لهذا الثابت، ستقوم Dio تلقائيًا بتحويل كائن <code>data</code> (مثل <code>Map</code>) إلى سلسلة نصية بتنسيق <code>key1=value1&amp;key2=value2</code>.</li>
+<li><strong>على مستوى المثيل (<code>dio.options.contentType = ...</code>)</strong>: هذا التكوين سيُطبق على جميع الطلبات اللاحقة التي تُرسل عبر هذا المثيل من <code>Dio</code>. إنه مثالي إذا كان معظم أو كل طلباتك تتطلب هذا التنسيق.</li>
+<li><strong>على مستوى الطلب (<code>options: Options(contentType: ...)</code>):</strong> هذا التكوين يُطبق فقط على الطلب الحالي. إنه يتجاوز أي <code>contentType</code> افتراضي تم تعيينه في <code>dio.options</code> لهذا الطلب المحدد. هذا يوفر مرونة كبيرة للتعامل مع متطلبات API مختلفة داخل نفس التطبيق.</li>
+</ul>
+<h2 id="formdata_2">إرسال <code>FormData</code>: قوة النماذج المتعددة الأجزاء</h2>
+<p>عندما يتعلق الأمر بإرسال بيانات معقدة إلى الخادم، مثل مزيج من الحقول النصية والملفات (صور، مستندات، فيديوهات)، فإن <code>FormData</code> هو الحل الأمثل. يستخدم هذا التنسيق <code>multipart/form-data</code>، وهو المعيار الذهبي لرفع الملفات عبر HTTP. Dio يجعل التعامل مع <code>FormData</code> سهلاً وقوياً.</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+import 'dart:io'; // لاستخدام File و MultipartFile.fromFile
+
+// ... داخل دالة async ...
+final formData = FormData.fromMap({
+  'name': 'dio', // حقل نصي عادي
+  'date': DateTime.now().toIso8601String(), // حقل نصي آخر (تاريخ ووقت)
+  // إضافة ملف واحد: MultipartFile.fromFile ينشئ جزءًا من النموذج لملف
+  'file': await MultipartFile.fromFile('./text.txt', filename: 'upload.txt'),
+});
+
+// إرسال الـ FormData إلى الخادم باستخدام طلب POST
+final response = await dio.post('/info', data: formData);
+print('تم إرسال FormData بنجاح: ${response.data}');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>FormData.fromMap({...})</code>:</strong> هذه الدالة البناءة (Constructor) تُنشئ كائن <code>FormData</code> من <code>Map</code> عادي. المفاتيح هي أسماء الحقول، والقيم هي البيانات المراد إرسالها. ستقوم Dio تلقائيًا بتهيئة هذه البيانات لتنسيق <code>multipart/form-data</code>، مع إضافة الحدود (boundaries) اللازمة بين الأجزاء.</li>
+<li><strong><code>MultipartFile.fromFile(filePath, filename: fileName)</code>:</strong> هذه الدالة الثابتة (Static Method) تُنشئ كائن <code>MultipartFile</code> من ملف موجود على نظام الملفات. <code>filePath</code> هو المسار المطلق أو النسبي إلى الملف، و <code>filename</code> هو الاسم الذي سيظهر به الملف على الخادم. هذا الكائن يمثل جزءًا من النموذج الذي يحتوي على بيانات الملف.</li>
+<li><strong><code>dio.post('/info', data: formData)</code>:</strong> يتم تمرير كائن <code>formData</code> مباشرة إلى المعلمة <code>data</code> في طلب <code>POST</code>. ستقوم Dio بضبط <code>Content-Type</code> المناسب تلقائيًا إلى <code>multipart/form-data</code>.</li>
+</ul>
+<p>يمكنك أيضًا تحديد اسم حدود (boundary name) مخصص لـ <code>FormData</code>، والذي سيُستخدم لبناء الحدود لكل <code>FormData</code> مع بادئة ولاحقة إضافية. هذا قد يكون مفيدًا في بعض السيناريوهات التي تتطلب توافقًا مع خوادم معينة:</p>
+<pre><code class="language-dart">final formDataWithBoundaryName = FormData(
+  boundaryName: 'my-custom-boundary-name',
+);
+// ثم يمكنك إضافة الحقول والملفات إلى formDataWithBoundaryName
+</code></pre>
+<blockquote>
+<p><strong>ملاحظة هامة:</strong> يتم دعم <code>FormData</code> عادةً مع طريقة <code>POST</code>، على الرغم من أنه يمكن استخدامه مع <code>PUT</code> و <code>PATCH</code> في بعض الحالات.</p>
+</blockquote>
+<p>هناك مثال كامل يوضح استخدام <code>FormData</code> <a href="../example_dart/lib/formdata.dart">هنا</a>.</p>
+<h3 id="multiple-files-upload">رفع ملفات متعددة (Multiple files upload): إطلاق العنان لفيض البيانات</h3>
+<p>تُعد القدرة على رفع ملفات متعددة في طلب واحد ميزة قوية وضرورية في العديد من التطبيقات. يسهل Dio هذه العملية بشكل كبير، مما يتيح لك إرسال عدة ملفات مع بيانات نصية أخرى في نفس طلب <code>FormData</code>.</p>
+<p>هناك طريقتان رئيسيتان لإضافة ملفات متعددة إلى <code>FormData</code>، والفرق الرئيسي بينهما يكمن في كيفية تمثيل مفاتيح الرفع (upload keys) لأنواع المصفوفات (Arrays) على جانب الخادم:</p>
+<p><strong>الطريقة الأولى: استخدام <code>FormData.fromMap</code> مع قائمة من <code>MultipartFile</code></strong></p>
+<pre><code class="language-dart">final formData = FormData.fromMap({
+  'files': [
+    MultipartFile.fromFileSync('path/to/upload1.txt', filename: 'upload1.txt'),
+    MultipartFile.fromFileSync('path/to/upload2.txt', filename: 'upload2.txt'),
+  ],
+});
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li>في هذه الطريقة، يتم تمرير قائمة من كائنات <code>MultipartFile</code> إلى مفتاح واحد (هنا <code>files</code>).</li>
+<li><strong>ملاحظة هامة حول مفتاح الرفع:</strong> مفتاح الرفع في هذه الحالة سيصبح في النهاية <code>files[]</code> على جانب الخادم. هذا يحدث لأن العديد من خدمات الخلفية (Backend Services) تضيف أقواسًا مربعة إلى المفتاح عندما تتلقى مصفوفة من الملفات. هذا السلوك شائع في العديد من أطر العمل (Frameworks) مثل PHP و Node.js (مع <code>multer</code>).</li>
+</ul>
+<p><strong>الطريقة الثانية: استخدام <code>FormData</code> مباشرة مع <code>formData.files.addAll</code> (إذا كنت لا تريد الأقواس المربعة)</strong></p>
+<p>إذا كنت لا تريد أن يتم إضافة الأقواس المربعة (<code>[]</code>) إلى مفتاح الرفع على جانب الخادم، أو إذا كان الخادم الخاص بك يتوقع تنسيقًا مختلفًا، فيجب عليك إنشاء <code>FormData</code> مباشرة وإضافة الملفات باستخدام <code>formData.files.addAll</code>:</p>
+<pre><code class="language-dart">final formData = FormData(); // إنشاء كائن FormData فارغ
+formData.files.addAll([
+  MapEntry(
+   'files', // هنا يمكنك تحديد نفس المفتاح لكل ملف
+    MultipartFile.fromFileSync('./example/upload.txt',filename: 'upload.txt'),
+  ),
+  MapEntry(
+    'files', // الملف الثاني بنفس المفتاح
+    MultipartFile.fromFileSync('./example/upload.txt',filename: 'upload.txt'),
+  ),
+]);
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li>في هذه الطريقة، يتم إنشاء <code>FormData</code> فارغ، ثم يتم إضافة <code>MapEntry</code> لكل ملف. كل <code>MapEntry</code> يتكون من مفتاح (مثل <code>'files'</code>) وقيمة (كائن <code>MultipartFile</code>).</li>
+<li>هذه الطريقة تمنحك تحكمًا أكبر في كيفية تسمية مفاتيح الملفات، وتجنب إضافة <code>[]</code> تلقائيًا إذا كان الخادم لا يتوقع ذلك.</li>
+</ul>
+<h3 id="formdata-multipartfile">إعادة استخدام <code>FormData</code> و <code>MultipartFile</code>: حكمة الاستخدام الأمثل</h3>
+<p>في رحلتك مع Dio، ستصادف مواقف قد تحتاج فيها إلى إرسال نفس <code>FormData</code> أو <code>MultipartFile</code> عدة مرات. ولكن هنا تكمن الحكمة: <strong>يجب عليك إنشاء <code>FormData</code> أو <code>MultipartFile</code> جديد في كل مرة تقوم فيها بإجراء طلبات متكررة.</strong></p>
+<p><strong>لماذا؟</strong></p>
+<p>السلوك الخاطئ الشائع هو تعيين <code>FormData</code> كمتغير واستخدامه في كل طلب. هذا قد يؤدي بسهولة إلى استثناءات مثل "Cannot finalize" أو سلوك غير متوقع. السبب هو أن <code>FormData</code> و <code>MultipartFile</code> يستهلكان تدفقات البيانات (Streams) عند إرسالها. بمجرد قراءة التدفق، لا يمكن قراءته مرة أخرى. لذا، إذا حاولت إعادة استخدام نفس الكائن، فستكون تدفقات البيانات قد استُهلكت بالفعل، مما يؤدي إلى فشل الطلبات اللاحقة.</p>
+<p>لتجنب هذه المشاكل، اتبع هذا النمط الحكيم في كتابة طلباتك:</p>
+<pre><code class="language-dart">Future&lt;void&gt; _repeatedlyRequest() async {
+  // دالة مساعدة لإنشاء FormData جديد في كل مرة
+  Future&lt;FormData&gt; createFormData() async {
+    return FormData.fromMap({
+      'name': 'dio',
+      'date': DateTime.now().toIso8601String(),
+      'file': await MultipartFile.fromFile('./text.txt',filename: 'upload.txt'),
+    });
+  }
+
+  // إجراء الطلب الأول بـ FormData جديد
+  await dio.post('some-url', data: await createFormData());
+
+  // إجراء الطلب الثاني بـ FormData جديد آخر
+  await dio.post('another-url', data: await createFormData());
+
+  // وهكذا...
+}
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li>يتم تعريف دالة <code>createFormData()</code> التي تُرجع <code>Future&lt;FormData&gt;</code>. في كل مرة يتم استدعاء هذه الدالة، يتم إنشاء كائن <code>FormData</code> جديد تمامًا، بما في ذلك كائنات <code>MultipartFile</code> الجديدة.</li>
+<li>عند إجراء كل طلب <code>dio.post</code>، يتم استدعاء <code>createFormData()</code> لإنشاء <code>FormData</code> جديد، مما يضمن أن كل طلب يستخدم تدفقات بيانات جديدة وغير مستهلكة. هذا يضمن استقرار وموثوقية تطبيقك عند التعامل مع رفع الملفات المتكرر.</li>
+</ul>
+<h2 id="transformer">المحول (Transformer): سحرة البيانات</h2>
+<p>في رحلة البيانات بين تطبيقك والخادم، قد تحتاج إلى تحويل هذه البيانات لتناسب احتياجات كل طرف. هنا يأتي دور <code>Transformer</code>، وهو ساحر البيانات الذي يسمح بإجراء تغييرات على بيانات الطلب/الاستجابة قبل إرسالها إلى الخادم أو بعد استقبالها منه.</p>
+<p>يُقدم Dio افتراضيًا <code>BackgroundTransformer</code>، وهو محول ذكي يقوم باستدعاء <code>jsonDecode</code> في "عزلة" (Isolate) منفصلة إذا كانت الاستجابة أكبر من 50 كيلوبايت. هذا يضمن أن عملية تحليل JSON الكبيرة لا تُعيق واجهة المستخدم الرئيسية لتطبيقك، مما يحافظ على سلاسة التجربة.</p>
+<p>إذا كنت ترغب في تخصيص عملية تحويل بيانات الطلب/الاستجابة، يمكنك توفير <code>Transformer</code> خاص بك واستبدال <code>BackgroundTransformer</code> الافتراضي عن طريق تعيينه لـ <code>dio.transformer</code>.</p>
+<pre><code class="language-dart">// مثال على تعيين محول مخصص
+dio.transformer = MyCustomTransformer();
+</code></pre>
+<blockquote>
+<p><strong>نقاط هامة حول المحولات:</strong>
+*   <strong><code>Transformer.transformRequest</code>:</strong> يعمل هذا الجزء من المحول فقط عندما يتم إرسال الطلب باستخدام طرق <code>PUT</code>/<code>POST</code>/<code>PATCH</code>، وهي الطرق التي يمكن أن تحتوي على جسم الطلب (Request Body).
+*   <strong><code>Transformer.transformResponse</code>:</strong> على النقيض، يمكن تطبيق هذا الجزء من المحول على جميع أنواع الاستجابات، بغض النظر عن طريقة الطلب الأصلية.</p>
+</blockquote>
+<h3 id="transformer-example">مثال على المحول (Transformer example): تخصيص التحويل</h3>
+<p>هناك مثال كامل يوضح كيفية تخصيص المحول <a href="../example_dart/lib/transformer.dart">هنا</a>. هذا المثال سيوضح لك كيف يمكنك بناء منطق تحويل خاص بك، سواء لتشفير البيانات قبل الإرسال، أو لفك تشفيرها بعد الاستقبال، أو لأي معالجة أخرى للبيانات.</p>
+<h2 id="http-httpclientadapter-http">محول عميل HTTP (HttpClientAdapter): الجسر إلى عالم HTTP</h2>
+<p><code>HttpClientAdapter</code> هو بمثابة الجسر الحيوي الذي يربط بين <code>Dio</code> وعالم HTTP الحقيقي. <code>Dio</code>، بحد ذاتها، توفر واجهات برمجة تطبيقات (APIs) قياسية وسهلة الاستخدام للمطورين. ولكن في العمق، هناك كائن <code>HttpClient</code> هو الذي يقوم فعليًا بإجراء طلبات HTTP الحقيقية عبر الشبكة.</p>
+<p>الفكرة هنا هي أننا لسنا مقيدين باستخدام <code>HttpClient</code> الافتراضي من مكتبة <code>dart:io</code>. يمكننا استخدام أي <code>HttpClient</code> آخر، أو حتى مكتبات HTTP مخصصة، طالما أننا نوفر <code>HttpClientAdapter</code> مناسبًا يعمل كـ "مترجم" بين Dio وهذا العميل. هذا يمنح Dio مرونة هائلة للتكيف مع بيئات مختلفة أو لدمج ميزات شبكات متقدمة.</p>
+<p>المحول الافتراضي لـ Dio هو <code>IOHttpClientAdapter</code> على المنصات الأصلية (مثل Android و iOS)، و <code>BrowserHttpClientAdapter</code> على منصة الويب. يمكن تهيئة هذه المحولات ببساطة عن طريق استدعاء <code>HttpClientAdapter()</code>:</p>
+<pre><code class="language-dart">dio.httpClientAdapter = HttpClientAdapter(); // يستخدم المحول الافتراضي للمنصة الحالية
+</code></pre>
+<p>إذا كنت ترغب في استخدام محولات المنصة صراحة، يمكنك القيام بذلك كما يلي:</p>
+<ul>
+<li>
+<p><strong>لمنصة الويب:</strong></p>
+<p><code>dart
+import 'package:dio/browser.dart';
+// ...
+dio.httpClientAdapter = BrowserHttpClientAdapter();</code></p>
+</li>
+<li>
+<p><strong>للمنصات الأصلية (Native Platforms):</strong></p>
+<p><code>dart
+import 'package:dio/io.dart';
+// ...
+dio.httpClientAdapter = IOHttpClientAdapter();</code></p>
+</li>
+</ul>
+<p><a href="../example_dart/lib/adapter.dart">هنا</a> مثال بسيط يوضح كيفية تخصيص المحول، مما يفتح لك الباب لاستكشاف إمكانيات أعمق في التحكم بالاتصالات الشبكية.</p>
+<h3 id="proxy">استخدام البروكسي (Proxy): نافذتك إلى الشبكة</h3>
+<p>في بعض السيناريوهات، قد تحتاج إلى توجيه طلبات HTTP عبر خادم وكيل (Proxy Server)، سواء لأغراض الأمان، أو تجاوز القيود الجغرافية، أو تصحيح الأخطاء. يوفر <code>IOHttpClientAdapter</code> (للمنصات الأصلية) دالة رد اتصال <code>createHttpClient</code> تسمح لك بضبط إعدادات البروكسي لـ <code>dart:io:HttpClient</code>.</p>
+<pre><code class="language-dart">import 'package:dio/io.dart';
+import 'dart:io'; // لاستخدام HttpClient
+
+void initAdapter() {
+  dio.httpClientAdapter = IOHttpClientAdapter(
+    createHttpClient: () {
+      final client = HttpClient();
+      // هنا يمكنك تهيئة عميل HTTP (HttpClient) الخاص بك
+      client.findProxy = (uri) {
+        // توجيه جميع الطلبات إلى البروكسي 
+</code></pre>
+<pre><code>    // 'localhost:8888'.
+    // انتبه، يجب أن يمر البروكسي عبر جهازك الذي يعمل عليه التطبيق،
+    // وليس منصة الاستضافة (Host Platform).
+    return 'PROXY localhost:8888';
+  };
+  // يمكنك أيضًا إنشاء HttpClient جديد لـ Dio بدلاً من إرجاع العميل الافتراضي،
+  // ولكن يجب إرجاع عميل هنا.
+  return client;
+},
+</code></pre>
+<p>);
+}</p>
+<pre><code>
+هناك مثال كامل يوضح كيفية استخدام البروكسي [هنا](../example_dart/lib/proxy.dart).
+
+&gt; **ملاحظة هامة:** منصة الويب (Web) لا تدعم تعيين البروكسي بهذه الطريقة.
+
+### التحقق من شهادة HTTPS: حصن الأمان الرقمي
+
+يُشير التحقق من شهادة HTTPS (أو تثبيت المفتاح العام - Public Key Pinning) إلى عملية التأكد من أن الشهادات التي تحمي اتصال TLS بالخادم هي بالضبط تلك التي تتوقعها. الهدف من ذلك هو تقليل فرصة هجمات الوسيط (Man-in-the-Middle Attack). تم تغطية النظرية بالتفصيل بواسطة [OWASP](https://owasp.org/www-community/controls/Certificate_and_Public_Key_Pinning).
+
+#### شهادة استجابة الخادم (Server Response Certificate)
+
+على عكس الطرق الأخرى، تعمل هذه الطريقة مع شهادة الخادم نفسها مباشرةً.
+
+```dart
+import 'package:dio/io.dart';
+import 'dart:io'; // لاستخدام HttpClient و SecurityContext
+import 'package:crypto/crypto.dart'; // لتوليد SHA256
+
+void initAdapter() {
+  // البصمة المتوقعة لشهادة الخادم (SHA256 Fingerprint)
+  const String fingerprint = 'ee5ce1dfa7a53657c545c62b65802e4272878dabd65c0aadcf85783ebb0b4d5c';
+  dio.httpClientAdapter = IOHttpClientAdapter(
+    createHttpClient: () {
+      // لا تثق بأي شهادة لمجرد أن شهادتها الجذرية موثوقة.
+      // نقوم بإنشاء HttpClient مع SecurityContext لا يثق بأي جذور موثوقة افتراضياً.
+      final HttpClient client = HttpClient(context: SecurityContext(withTrustedRoots: false));
+      // يمكنك اختبار الشهادة الوسيطة / الجذرية هنا. نحن نتجاهلها فقط في هذا المثال.
+      // هذا يعني أننا نقبل أي شهادة سيئة مبدئياً، ولكننا سنتحقق منها لاحقاً في validateCertificate.
+      client.badCertificateCallback = (cert, host, port) =&gt; true;
+      return client;
+    },
+    validateCertificate: (cert, host, port) {
+      // التحقق من أن بصمة الشهادة تتطابق مع البصمة التي نتوقعها.
+      // نحن بالتأكيد نطلب وجود شهادة ما.
+      if (cert == null) {
+        return false;
+      }
+      // تحقق منها بأي طريقة تريدها. هنا نتحقق فقط من أن
+      // البصمة تتطابق مع SHA256 من OpenSSL.
+      return fingerprint == sha256.convert(cert.der).toString();
+    },
+  );
+}
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>fingerprint</code></strong>: هذا هو المفتاح السحري! إنه بصمة SHA256 لشهادة الخادم التي تتوقعها. يجب أن تحصل على هذه البصمة من مصدر موثوق به (مثل مسؤول الخادم أو من خلال فحص الشهادة يدوياً).</li>
+<li><strong><code>SecurityContext(withTrustedRoots: false)</code></strong>: عند إنشاء <code>HttpClient</code>، نحدد <code>withTrustedRoots: false</code>، مما يعني أن العميل لن يثق تلقائياً بأي شهادات جذرية (Root Certificates) مثبتة في النظام. هذا يزيد من الأمان.</li>
+<li><strong><code>client.badCertificateCallback = (cert, host, port) =&gt; true;</code></strong>: هذه الدالة تُستدعى عندما يواجه العميل شهادة غير صالحة. في هذا المثال، نُرجع <code>true</code> مؤقتاً، مما يعني أننا نقبل الشهادة "السيئة" في هذه المرحلة، ولكننا سنقوم بالتحقق الفعلي في <code>validateCertificate</code>.</li>
+<li><strong><code>validateCertificate: (cert, host, port) { ... }</code></strong>: هذه هي الدالة الأساسية للتحقق. هنا، نتحقق من أن الشهادة ليست <code>null</code>، ثم نقوم بحساب بصمة SHA256 للشهادة المستلمة (<code>cert.der</code>) ومقارنتها بالبصمة المتوقعة (<code>fingerprint</code>). إذا تطابقتا، فإن الشهادة موثوقة.</li>
+</ul>
+<p>يمكنك استخدام <code>openssl</code> لقراءة قيمة SHA256 لشهادة:</p>
+<pre><code class="language-sh">openssl s_client -servername pinning-test.badssl.com -connect pinning-test.badssl.com:443 &lt; /dev/null 2&gt;/dev/null \
+  | openssl x509 -noout -fingerprint -sha256
+
+# SHA256 Fingerprint=EE:5C:E1:DF:A7:A5:36:57:C5:45:C6:2B:65:80:2E:42:72:87:8D:AB:D6:5C:0A:AD:CF:85:78:3E:BB:0B:4D:5C
+# (قم بإزالة التنسيق، واحتفظ فقط بأحرف سداسية عشرية صغيرة لتتطابق مع sha256 أعلاه)
+</code></pre>
+<h4 id="certificate-authority-verification">التحقق من سلطة الشهادة (Certificate Authority Verification)</h4>
+<p>تعمل هذه الطرق بشكل جيد عندما يكون لدى الخادم شهادة موقعة ذاتيًا (Self-Signed Certificate)، ولكنها لا تعمل مع الشهادات الصادرة عن طرف ثالث مثل AWS أو Let's Encrypt.</p>
+<p>هناك طريقتان للتحقق من جذر سلسلة شهادات HTTPS التي يوفرها الخادم. بافتراض أن تنسيق الشهادة هو PEM، يكون الكود كالتالي:</p>
+<pre><code class="language-dart">import 'package:dio/io.dart';
+import 'dart:io'; // لاستخدام HttpClient و X509Certificate
+
+void initAdapter() {
+  String PEM = 'XXXXX'; // محتوى الشهادة الجذرية (root certificate content)
+  dio.httpClientAdapter = IOHttpClientAdapter(
+    createHttpClient: () {
+      final client = HttpClient();
+      client.badCertificateCallback = (X509Certificate cert, String host, int port) {
+        return cert.pem == PEM; // التحقق من الشهادة.
+      };
+      return client;
+    },
+  );
+}
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li>في هذه الطريقة، نقوم بتوفير محتوى الشهادة الجذرية (Root Certificate) بتنسيق PEM كسلسلة نصية (<code>PEM</code>).</li>
+<li>داخل <code>badCertificateCallback</code>، نقوم بمقارنة محتوى PEM للشهادة المستلمة (<code>cert.pem</code>) مع محتوى PEM المتوقع. إذا تطابقا، فإننا نعتبر الشهادة صالحة.</li>
+</ul>
+<p>طريقة أخرى هي إنشاء <code>SecurityContext</code> عند إنشاء <code>HttpClient</code>:</p>
+<pre><code class="language-dart">import 'package:dio/io.dart';
+import 'dart:io'; // لاستخدام HttpClient و SecurityContext و File
+
+void initAdapter() {
+  String PEM = 'XXXXX'; // محتوى الشهادة الجذرية (root certificate content)
+  dio.httpClientAdapter = IOHttpClientAdapter(
+    onHttpClientCreate: (_) {
+      final SecurityContext sc = SecurityContext();
+      // إضافة الشهادة الموثوقة من ملف.
+      sc.setTrustedCertificates(File(pathToTheCertificate));
+      final HttpClient client = HttpClient(context: sc);
+      return client;
+    },
+  );
+}
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li>هنا، نقوم بإنشاء <code>SecurityContext</code> جديد.</li>
+<li>نستخدم <code>sc.setTrustedCertificates(File(pathToTheCertificate))</code> لإضافة شهادة جذر موثوقة من ملف محلي. هذا يعني أن أي شهادة يقدمها الخادم والتي يمكن التحقق منها بواسطة هذه الشهادة الجذرية الموثوقة ستُعتبر صالحة.</li>
+<li>ثم نُنشئ <code>HttpClient</code> باستخدام هذا <code>SecurityContext</code> المخصص.</li>
+</ul>
+<blockquote>
+<p><strong>ملاحظة هامة:</strong> بهذه الطريقة، يجب أن يكون تنسيق <code>setTrustedCertificates()</code> إما PEM أو PKCS12. يتطلب PKCS12 كلمة مرور للاستخدام، مما سيعرض كلمة المرور في الكود، لذلك لا يُنصح باستخدامه في الحالات الشائعة.</p>
+</blockquote>
+<h2 id="http2">دعم HTTP/2: سرعة وكفاءة الجيل الجديد</h2>
+<p>HTTP/2 هو بروتوكول شبكة يوفر تحسينات كبيرة في الأداء مقارنة بـ HTTP/1.1، مثل تعدد الإرسال (Multiplexing) والضغط على العناوين (Header Compression). إذا كنت ترغب في الاستفادة من هذه الميزات مع Dio، يمكنك استخدام محول <code>dio_http2_adapter</code>.</p>
+<p><code>[dio_http2_adapter](../plugins/http2_adapter)</code> هو محول <code>HttpClientAdapter</code> لـ Dio يدعم HTTP/2. لاستخدامه، ستحتاج إلى إضافته كاعتمادية (Dependency) في ملف <code>pubspec.yaml</code> الخاص بمشروعك، ثم تهيئته كـ <code>httpClientAdapter</code> لـ Dio.</p>
+<h2 id="cancellation">الإلغاء (Cancellation): التحكم في تدفق الطلبات</h2>
+<p>في بعض الأحيان، قد تحتاج إلى إلغاء طلب HTTP قيد التقدم، على سبيل المثال، عندما يغادر المستخدم شاشة معينة قبل اكتمال الطلب، أو عندما يصبح الطلب غير ذي صلة. يوفر Dio آلية قوية لإلغاء الطلبات باستخدام <code>CancelToken</code>.</p>
+<p>يمكنك إلغاء طلب باستخدام <code>CancelToken</code>. يمكن مشاركة رمز واحد مع طلبات متعددة. عندما يتم استدعاء <code>cancel()</code> لرمز، سيتم إلغاء جميع الطلبات التي تستخدم هذا الرمز.</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+
+final cancelToken = CancelToken(); // إنشاء رمز إلغاء جديد
+
+// إجراء طلب GET وتمرير رمز الإلغاء
+dio.get(url, cancelToken: cancelToken).catchError((DioException error) {
+  // التحقق مما إذا كان الخطأ ناتجًا عن الإلغاء
+  if (CancelToken.isCancel(error)) {
+    print('تم إلغاء الطلب: ${error.message}');
+  } else {
+    // التعامل مع الأخطاء الأخرى.
+    print('حدث خطأ آخر: ${error.message}');
+  }
+});
+
+// بعد فترة، أو بناءً على حدث معين، قم بإلغاء الطلبات المرتبطة بهذا الرمز.
+token.cancel('تم الإلغاء بواسطة المستخدم'); // إلغاء الطلبات برسالة مخصصة
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>final cancelToken = CancelToken();</code></strong>: نقوم بإنشاء مثيل جديد من <code>CancelToken</code>. هذا الكائن هو المفتاح للتحكم في إلغاء الطلبات.</li>
+<li><strong><code>dio.get(url, cancelToken: cancelToken)</code></strong>: عند إجراء الطلب (سواء <code>get</code>, <code>post</code>, <code>put</code>, إلخ)، نمرر <code>cancelToken</code> إلى المعلمة <code>cancelToken</code>.</li>
+<li><strong><code>.catchError((DioException error) { ... })</code></strong>: من المهم جداً استخدام <code>catchError</code> للتعامل مع الاستثناءات. عندما يتم إلغاء طلب، يقوم Dio بإلقاء <code>DioException</code> من نوع <code>DioExceptionType.cancel</code>.</li>
+<li><strong><code>if (CancelToken.isCancel(error))</code></strong>: هذه الدالة المساعدة (Helper Function) تُستخدم للتحقق بسهولة مما إذا كان <code>DioException</code> المستلم هو نتيجة للإلغاء. إذا كان كذلك، يمكنك التعامل مع حالة الإلغاء بشكل خاص.</li>
+<li><strong><code>token.cancel('تم الإلغاء بواسطة المستخدم');</code></strong>: عندما ترغب في إلغاء الطلب (أو الطلبات) المرتبطة بهذا الرمز، ما عليك سوى استدعاء دالة <code>cancel()</code> على كائن <code>cancelToken</code>. يمكنك تمرير رسالة اختيارية توضح سبب الإلغاء.</li>
+</ul>
+<p>هناك مثال كامل يوضح كيفية إلغاء الطلبات <a href="../example_dart/lib/cancel_request.dart">هنا</a>.</p>
+<h2 id="dio-extends-dio-class">توسيع فئة Dio (Extends Dio class): بناء عميلك الخاص</h2>
+<p><code>Dio</code> هي فئة مجردة (Abstract Class) مع دالة بناء مصنعية (Factory Constructor)، لذلك لا نقوم بتوسيع فئة <code>Dio</code> مباشرة. بدلاً من ذلك، يمكننا توسيع <code>DioForNative</code> أو <code>DioForBrowser</code>، على سبيل المثال:</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
+// إذا كنت في المتصفح، قم باستيراد 'package:dio/browser.dart'.
+
+class Http extends DioForNative {
+  Http([BaseOptions? options]) : super(options) {
+    // قم ببعض التهيئة الإضافية هنا إذا لزم الأمر
+    // على سبيل المثال، إضافة مراقبين افتراضيين أو ضبط خيارات مخصصة.
+  }
+}
+
+// مثال على كيفية استخدام عميل Http المخصص:
+// final myHttpClient = Http(BaseOptions(baseUrl: 'https://api.example.com'));
+// final response = await myHttpClient.get('/data');
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>Dio</code> كفئة مجردة</strong>: هذا يعني أنك لا تستطيع إنشاء مثيل مباشر من <code>Dio</code> باستخدام <code>new Dio()</code>. بدلاً من ذلك، تعتمد على دالة البناء المصنعية التي تُرجع المثيل المناسب للمنصة.</li>
+<li><strong><code>DioForNative</code> و <code>DioForBrowser</code></strong>: هذه هي الفئات الملموسة (Concrete Classes) التي تُقدمها Dio للمنصات الأصلية (مثل Flutter على iOS/Android) ومنصات الويب على التوالي. عند توسيع إحداها، فإنك تحصل على جميع وظائف Dio الأساسية مع القدرة على إضافة منطقك الخاص.</li>
+<li><strong><code>Http([BaseOptions? options]) : super(options)</code></strong>: هذا هو دالة البناء لفئتك المخصصة. نقوم بتمرير <code>options</code> إلى دالة البناء الخاصة بالفئة الأم (<code>super(options)</code>) لتهيئة Dio بالخيارات الأساسية.</li>
+<li><strong><code>// do something</code></strong>: هنا يمكنك إضافة أي منطق تهيئة خاص بعميل HTTP الخاص بك، مثل إضافة مراقبين افتراضيين (Default Interceptors) أو ضبط خيارات مخصصة أخرى.</li>
+</ul>
+<p>يمكننا أيضًا تنفيذ عميل <code>Dio</code> مخصص بالكامل باستخدام <code>DioMixin</code>:</p>
+<pre><code class="language-dart">import 'package:dio/dio.dart';
+
+class MyDio with DioMixin implements Dio {
+  // يجب عليك هنا توفير تنفيذ لجميع الأعضاء المجردة (abstract members) في Dio.
+  // هذا يمنحك تحكماً كاملاً في كيفية عمل Dio، ولكنه يتطلب المزيد من العمل.
+  // عادةً ما يكون توسيع DioForNative أو DioForBrowser كافياً لمعظم الحالات.
+}
+</code></pre>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong><code>class MyDio with DioMixin implements Dio</code></strong>: هنا، نحن لا نوسع <code>Dio</code> مباشرة، بل نستخدم <code>DioMixin</code> الذي يوفر تطبيقًا لمعظم وظائف <code>Dio</code>، ثم نقوم بتنفيذ الواجهة <code>Dio</code>. هذا يمنحك مرونة أكبر في بناء عميل Dio الخاص بك من الصفر تقريباً، ولكنه يتطلب منك توفير تنفيذ لجميع الأعضاء المجردة في الواجهة <code>Dio</code>.</li>
+</ul>
+<h2 id="cors">مشاركة الموارد عبر الأصول على الويب (CORS): حل تحديات المتصفح</h2>
+<p>عند العمل مع تطبيقات الويب، قد تواجه تحديات تتعلق بسياسة أمان المتصفح المعروفة باسم "مشاركة الموارد عبر الأصول" (Cross-Origin Resource Sharing - CORS). هذه السياسة تمنع صفحات الويب من إجراء طلبات HTTP إلى نطاق (Domain) مختلف عن النطاق الذي تم تحميل الصفحة منه، وذلك لأسباب أمنية.</p>
+<p>إذا لم يكن الطلب <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests">طلبًا بسيطًا (simple request)</a>، فسيقوم متصفح الويب بإرسال <a href="https://developer.mozilla.org/en-US/docs/Glossary/Preflight_request">طلب CORS تمهيدي (CORS preflight request)</a> يتحقق مما إذا كان بروتوكول CORS مفهومًا وأن الخادم على دراية باستخدام طرق وعناوين محددة.</p>
+<p><strong>شرح مفصل:</strong></p>
+<ul>
+<li><strong>الطلبات البسيطة (Simple Requests)</strong>: هي طلبات HTTP التي تفي بشروط معينة (مثل استخدام طرق <code>GET</code>, <code>HEAD</code>, <code>POST</code> فقط، وعناوين معينة). هذه الطلبات لا تتطلب طلبًا تمهيديًا (Preflight Request).</li>
+<li><strong>الطلبات غير البسيطة (Non-Simple Requests)</strong>: هي أي طلب لا يفي بشروط الطلب البسيط (مثل استخدام طرق <code>PUT</code>, <code>DELETE</code>، أو عناوين مخصصة). قبل إرسال الطلب الفعلي، يرسل المتصفح طلب <code>OPTIONS</code> تمهيدي إلى الخادم للتحقق مما إذا كان الخادم يسمح بالطلب الفعلي.</li>
+</ul>
+<p>يمكنك تعديل طلباتك لتتوافق مع تعريف الطلب البسيط، أو إضافة وسيط CORS (CORS middleware) لخدمتك للتعامل مع طلبات CORS.</p>
+<p><strong>الحلول المقترحة:</strong></p>
+<ol>
+<li><strong>تعديل الطلب ليكون بسيطًا</strong>: إذا أمكن، قم بتعديل طلبك ليقع ضمن فئة الطلبات البسيطة. هذا يتضمن عادةً استخدام طرق HTTP المسموح بها وعدم استخدام عناوين مخصصة.</li>
+<li><strong>إضافة وسيط CORS إلى الخادم</strong>: هذا هو الحل الأكثر شيوعًا وفعالية. يتضمن ذلك تكوين الخادم الخاص بك (الواجهة الخلفية - Backend) لقبول طلبات CORS من النطاقات المحددة. عادةً ما يتم ذلك عن طريق إضافة عناوين HTTP معينة (مثل <code>Access-Control-Allow-Origin</code>) إلى استجابات الخادم.</li>
+</ol>
+<hr />
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  عد إلى الأعلى
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["navigation.tabs", "navigation.sections", "navigation.top", "search.highlight", "content.code.copy", "content.action.edit"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "\u062a\u0645 \u0627\u0644\u0646\u0633\u062e \u0627\u0644\u0649 \u0627\u0644\u062d\u0627\u0641\u0638\u0629", "clipboard.copy": "\u0646\u0633\u062e \u0625\u0644\u0649 \u0627\u0644\u062d\u0627\u0641\u0638\u0629", "search.result.more.one": "\u0623\u0643\u062b\u0631 \u0645\u0646 1 \u0641\u064a \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629", "search.result.more.other": "\u0623\u0643\u062b\u0631 \u0645\u0646 # \u0641\u064a \u0647\u0630\u0647 \u0627\u0644\u0635\u0641\u062d\u0629", "search.result.none": "\u0644\u0627 \u062a\u0648\u062c\u062f \u0646\u062a\u0627\u0626\u062c", "search.result.one": "\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0628\u062d\u062b \u0645\u0633\u062a\u0646\u062f \u0648\u0627\u062d\u062f", "search.result.other": "\u0646\u062a\u0627\u0626\u062c \u0627\u0644\u0628\u062d\u062b # \u0645\u0633\u062a\u0646\u062f\u0627\u062a", "search.result.placeholder": "\u0627\u0643\u062a\u0628 \u0644\u0628\u062f\u0621 \u0627\u0644\u0628\u062d\u062b", "search.result.term.missing": "\u0645\u0641\u0642\u0648\u062f", "select.version": "\u0625\u062e\u062a\u0631 \u0627\u0644\u0625\u0635\u062f\u0627\u0631"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      
+    
+  </body>
+</html>
