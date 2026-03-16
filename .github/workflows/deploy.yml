@@ -1,37 +1,19 @@
-name: Deploy Arabic Docs
-
+name: deploy
 on:
   push:
     branches:
       - main
-
 permissions:
   contents: write
-
+  pages: write
+  id-token: write
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          fetch-depth: 0 # مهم جداً لجلب تاريخ التعديلات (Last Updated)
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.10"
-          cache: 'pip'
-
-      - name: Install dependencies
-        run: |
-          pip install mkdocs-material
-
-      - name: Build and Deploy
-        run: |
-          # التأكد من وجود الملف قبل البدء
-          if [ -f "mkdocs.yml" ]; then
-            mkdocs gh-deploy --force
-          else
-            echo "Error: mkdocs.yml not found in root directory!"
-            exit 1
-          fi
+          python-version: 3.x
+      - run: pip install mkdocs-material
+      - run: mkdocs gh-deploy --force
