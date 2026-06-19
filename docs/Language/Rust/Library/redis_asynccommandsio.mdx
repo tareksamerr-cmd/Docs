@@ -1,0 +1,416 @@
+---
+title: دليل أوامر Redis (AsyncCommands)
+description: شرح شامل لـ 273 أمراً من أوامر Redis المتوفرة في مكتبة Rust (AsyncCommands) باللغة العربية.
+author: Manus AI
+---
+
+# دليل أوامر Redis (AsyncCommands)
+
+يحتوي هذا الملف على شرح لـ **273 أمراً** من أوامر Redis المتوفرة في مكتبة Rust (`AsyncCommands`)، تم استخراجها من ملف PDF وتنظيمها في مجموعات منطقية باللغة العربية لتسهيل الوصول إليها وفهمها.
+
+## محتويات الدليل
+
+- [Strings (النصوص)](#strings)
+- [Keys (المفاتيح)](#keys)
+- [Hashes (الجداول المجزأة)](#hashes)
+- [Lists (القوائم)](#lists)
+- [Sets (المجموعات)](#sets)
+- [Sorted Sets (المجموعات المرتبة)](#sorted)
+- [HyperLogLog](#hyperloglog)
+- [Geo (المواقع الجغرافية)](#geo)
+- [Streams (التدفقات)](#streams)
+- [Bitmaps (خرائط البت)](#bitmaps)
+- [Scripting & Transactions (البرمجة والمعاملات)](#scripting)
+- [Server & Connection (الخادم والاتصال)](#server)
+- [أوامر أخرى](#other-commands)
+
+<h2 id="strings">Strings (النصوص)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `get` | G e t  t h e  v a l u e  o f  a  k e y .  I f  k e y  i s  a  v e c  t h i s  b e c o m e s  a n  M G E T  ( i f  u s i n g  T y p e d C o m m a n d s  ,  y o u  s h o u l d  s p e c i f i c a l l y  u s e  m g e t  t o  g e t  t h e  c o r r e c t  r e t u r n  t y p e . |
+| `set` | S e t  t h e  s t r i n g  v a l u e  o f  a  k e y . |
+| `set_options` | S e t  t h e  s t r i n g  v a l u e  o f  a  k e y  w i t h  o p t i o n s . |
+| `mget` | G e t  v a l u e s  o f  k e y s |
+| `mset` | S e t s  m u l t i p l e  k e y s  t o  t h e i r  v a l u e s . |
+| `set_ex` | S e t  t h e  v a l u e  a n d  e x p i r a t i o n  o f  a  k e y . |
+| `pset_ex` | S e t  t h e  v a l u e  a n d  e x p i r a t i o n  i n  m i l l i s e c o n d s  o f  a  k e y . |
+| `set_nx` | S e t  t h e  v a l u e  o f  a  k e y ,  o n l y  i f  t h e  k e y  d o e s  n o t  e x i s t |
+| `mset_nx` | S e t s  m u l t i p l e  k e y s  t o  t h e i r  v a l u e s  f a i l i n g  i f  a t  l e a s t  o n e  a l r e a d y  e x i s t s . |
+| `mset_ex` | S e t s  t h e  g i v e n  k e y s  t o  t h e i r  r e s p e c t i v e  v a l u e s .  T h i s  c o m m a n d  i s  a n  e x t e n s i o n  o f  t h e  M S E T N X  t h a t  a d d s  e x p i r a t i o n  a n d  X X  o p t i o n s . |
+| `getset` | S e t  t h e  s t r i n g  v a l u e  o f  a  k e y  a n d  r e t u r n  i t s  o l d  v a l u e . |
+| `getrange` | G e t  a  r a n g e  o f  b y t e s / s u b s t r i n g  f r o m  t h e  v a l u e  o f  a  k e y .  N e g a t i v e  v a l u e s  p r o v i d e  a n  o f f s e t  f r o m  t h e  e n d  o f  t h e  v a l u e .  R e d i s  r e t u r n s  a n  e m p t y  s t r i n g  i f  t h e  k e y  d o e s n ’ t  e x i s t ,  n o t  N i l |
+| `setrange` | O v e r w r i t e  t h e  p a r t  o f  t h e  v a l u e  s t o r e d  i n  k e y  a t  t h e  s p e c i f i e d  o f f s e t . |
+| `append` | A p p e n d  a  v a l u e  t o  a  k e y .  R e t u r n s  l e n g t h  o f  s t r i n g  a f t e r  o p e r a t i o n . |
+| `incr` | I n c r e m e n t  t h e  n u m e r i c  v a l u e  o f  a  k e y  b y  t h e  g i v e n  a m o u n t .  T h i s  i s s u e s  a  I N C R B Y  o r  I N C R B Y F L O A T  d e p e n d i n g  o n  t h e  t y p e .  I f  t h e  k e y  d o e s  n o t  e x i s t ,  i t  i s  s e t  t o  0  b e f o r e  p e r f o r m i n g  t h e  o p e r a t i o n . |
+| `decr` | D e c r e m e n t  t h e  n u m e r i c  v a l u e  o f  a  k e y  b y  t h e  g i v e n  a m o u n t .  I f  t h e  k e y  d o e s  n o t  e x i s t ,  i t  i s  s e t  t o  0  b e f o r e  p e r f o r m i n g  t h e  o p e r a t i o n . |
+| `strlen` | G e t  t h e  l e n g t h  o f  t h e  v a l u e  s t o r e d  i n  a  k e y .  0  i f  k e y  d o e s  n o t  e x i s t . |
+| `get_ex` | G e t  t h e  v a l u e  o f  a  k e y  a n d  s e t  e x p i r a t i o n |
+| `get_del` | G e t  t h e  v a l u e  o f  a  k e y  a n d  d e l e t e  i t |
+
+</div>
+
+<h2 id="keys">Keys (المفاتيح)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `del` | D e l e t e  o n e  o r  m o r e  k e y s .  R e t u r n s  t h e  n u m b e r  o f  k e y s  d e l e t e d . |
+| `del_ex` | C o n d i t i o n a l l y  r e m o v e s  t h e  s p e c i f i e d  k e y .  A  k e y  i s  i g n o r e d  i f  i t  d o e s  n o t  e x i s t .  I F E Q  m a t c h - v a l u e  D e l e t e  t h e  k e y  o n l y  i f  i t s  v a l u e  i s  e q u a l  t o  m a t c h - v a l u e  I F N E  m a t c h - v a l u e  -  D e l e t e  t h e  k e y  o n l y  i f  i t s  v a l u e  i s  n o t  e q u a l  t o  m a t c h - v a l u e  I F D E Q  m a t c h - d i g e s t  -  D e l e t e  t h e  k e y  o n l y  i f  t h e  d i g e s t  o f  i t s  v a l u e  i s  e q u a l  t o  m a t c h - d i g e s t  I F D N E  m a t c h - d i g e s t  -  D e l e t e  t h e  k e y  o n l y  i f  t h e  d i g e s t  o f  i t s  v a l u e  i s  n o t  e q u a l  t o  m a t c h - d i g e s t |
+| `digest` | G e t  t h e  h e x  s i g n a t u r e  o f  t h e  v a l u e  s t o r e d  i n  t h e  s p e c i f i e d  k e y .  F o r  t h e  d i g e s t ,  R e d i s  w i l l  u s e  X X H 3 |
+| `exists` | D e t e r m i n e  i f  a  k e y  e x i s t s . |
+| `key_type` | D e t e r m i n e  t h e  t y p e  o f  k e y . |
+| `expire` | S e t  a  k e y ’ s  t i m e  t o  l i v e  i n  s e c o n d s .  R e t u r n s  w h e t h e r  e x p i r a t i o n  w a s  s e t . |
+| `expire_at` | S e t  t h e  e x p i r a t i o n  f o r  a  k e y  a s  a  U N I X  t i m e s t a m p .  R e t u r n s  w h e t h e r  e x p i r a t i o n  w a s  s e t . |
+| `pexpire` | S e t  a  k e y ’ s  t i m e  t o  l i v e  i n  m i l l i s e c o n d s .  R e t u r n s  w h e t h e r  e x p i r a t i o n  w a s  s e t . |
+| `pexpire_at` | S e t  t h e  e x p i r a t i o n  f o r  a  k e y  a s  a  U N I X  t i m e s t a m p  i n  m i l l i s e c o n d s .  R e t u r n s  w h e t h e r  e x p i r a t i o n  w a s  s e t . |
+| `expire_time` | G e t  t h e  a b s o l u t e  U n i x  e x p i r a t i o n  t i m e s t a m p  i n  s e c o n d s .  R e t u r n s  E x i s t s B u t N o t R e l e v a n t  i f  k e y  e x i s t s  b u t  h a s  n o  e x p i r a t i o n  t i m e . |
+| `pexpire_time` | G e t  t h e  a b s o l u t e  U n i x  e x p i r a t i o n  t i m e s t a m p  i n  m i l l i s e c o n d s .  R e t u r n s  E x i s t s B u t N o t R e l e v a n t  i f  k e y  e x i s t s  b u t  h a s  n o  e x p i r a t i o n  t i m e . |
+| `persist` | R e m o v e  t h e  e x p i r a t i o n  f r o m  a  k e y .  R e t u r n s  w h e t h e r  a  t i m e o u t  w a s  r e m o v e d . |
+| `ttl` | G e t  t h e  t i m e  t o  l i v e  f o r  a  k e y  i n  s e c o n d s .  R e t u r n s  E x i s t s B u t N o t R e l e v a n t  i f  k e y  e x i s t s  b u t  h a s  n o  e x p i r a t i o n  t i m e . |
+| `pttl` | G e t  t h e  t i m e  t o  l i v e  f o r  a  k e y  i n  m i l l i s e c o n d s .  R e t u r n s  E x i s t s B u t N o t R e l e v a n t  i f  k e y  e x i s t s  b u t  h a s  n o  e x p i r a t i o n  t i m e . |
+| `copy` | C o p y  t h e  v a l u e  f r o m  o n e  k e y  t o  a n o t h e r ,  r e t u r n i n g  w h e t h e r  t h e  c o p y  w a s  s u c c e s s f u l . |
+| `rename` | R e n a m e  a  k e y .  E r r o r s  i f  k e y  d o e s  n o t  e x i s t . |
+| `rename_nx` | R e n a m e  a  k e y ,  o n l y  i f  t h e  n e w  k e y  d o e s  n o t  e x i s t .  E r r o r s  i f  k e y  d o e s  n o t  e x i s t .  R e t u r n s  w h e t h e r  t h e  k e y  w a s  r e n a m e d ,  o r  f a l s e  i f  t h e  n e w  k e y  a l r e a d y  e x i s t s . |
+| `unlink` | U n l i n k  o n e  o r  m o r e  k e y s .  T h i s  i s  a  n o n - b l o c k i n g  v e r s i o n  o f  D E L  .  R e t u r n s  n u m b e r  o f  k e y s  u n l i n k e d . |
+| `scan` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  t h e  k e y s  s p a c e . |
+
+</div>
+
+<h2 id="hashes">Hashes (الجداول المجزأة)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `hset` | S e t s  a  s i n g l e  f i e l d  i n  a  h a s h .  R e t u r n s  n u m b e r  o f  f i e l d s  a d d e d . |
+| `hset_nx` | S e t s  a  s i n g l e  f i e l d  i n  a  h a s h  i f  i t  d o e s  n o t  e x i s t .  R e t u r n s  w h e t h e r  t h e  f i e l d  w a s  a d d e d . |
+| `hget` | G e t s  a  s i n g l e  ( o r  m u l t i p l e )  f i e l d s  f r o m  a  h a s h . |
+| `hdel` | D e l e t e s  a  s i n g l e  ( o r  m u l t i p l e )  f i e l d s  f r o m  a  h a s h .  R e t u r n s  n u m b e r  o f  f i e l d s  d e l e t e d . |
+| `hexists` | C h e c k s  i f  a  f i e l d  i n  a  h a s h  e x i s t s . |
+| `hgetall` | G e t s  a l l  t h e  f i e l d s  a n d  v a l u e s  i n  a  h a s h . |
+| `hkeys` | G e t s  a l l  t h e  k e y s  i n  a  h a s h . |
+| `hlen` | G e t s  t h e  l e n g t h  o f  a  h a s h .  R e t u r n s  0  i f  k e y  d o e s  n o t  e x i s t . |
+| `hmget` | G e t s  m u l t i p l e  f i e l d s  f r o m  a  h a s h . |
+| `hvals` | G e t s  a l l  t h e  v a l u e s  i n  a  h a s h . |
+| `hscan` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  h a s h  f i e l d s  a n d  a s s o c i a t e d  v a l u e s . |
+
+</div>
+
+<h2 id="lists">Lists (القوائم)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `lpush` | I n s e r t  a l l  t h e  s p e c i f i e d  v a l u e s  a t  t h e  h e a d  o f  t h e  l i s t  s t o r e d  a t  k e y . |
+| `lpush_exists` | I n s e r t s  a  v a l u e  a t  t h e  h e a d  o f  t h e  l i s t  s t o r e d  a t  k e y ,  o n l y  i f  k e y  a l r e a d y  e x i s t s  a n d  h o l d s  a  l i s t .  R e d i s  D o c s |
+| `rpush` | I n s e r t  a l l  t h e  s p e c i f i e d  v a l u e s  a t  t h e  t a i l  o f  t h e  l i s t  s t o r e d  a t  k e y . |
+| `rpush_exists` | I n s e r t s  v a l u e  a t  t h e  t a i l  o f  t h e  l i s t  s t o r e d  a t  k e y ,  o n l y  i f  k e y  a l r e a d y  e x i s t s  a n d  h o l d s  a  l i s t . |
+| `lpop` | R e m o v e s  a n d  r e t u r n s  t h e  u p  t o  c o u n t  f i r s t  e l e m e n t s  o f  t h e  l i s t  s t o r e d  a t  k e y .  I f  c o u n t  i s  n o t  s p e c i f i e d ,  t h e n  d e f a u l t s  t o  f i r s t  e l e m e n t . |
+| `rpop` | R e m o v e s  a n d  r e t u r n s  t h e  u p  t o  c o u n t  l a s t  e l e m e n t s  o f  t h e  l i s t  s t o r e d  a t  k e y  I f  c o u n t  i s  n o t  s p e c i f i e d ,  t h e n  d e f a u l t s  t o  l a s t  e l e m e n t . |
+| `llen` | R e t u r n s  t h e  l e n g t h  o f  t h e  l i s t  s t o r e d  a t  k e y . |
+| `lrange` | R e t u r n s  t h e  s p e c i f i e d  e l e m e n t s  o f  t h e  l i s t  s t o r e d  a t  k e y . |
+| `lrem` | R e m o v e s  t h e  f i r s t  c o u n t  o c c u r r e n c e s  o f  e l e m e n t s  e q u a l  t o  v a l u e  f r o m  t h e  l i s t  s t o r e d  a t  k e y .  R e d i s  D o c s |
+| `lset` | S e t s  t h e  l i s t  e l e m e n t  a t  i n d e x  t o  v a l u e |
+| `ltrim` | T r i m  a n  e x i s t i n g  l i s t  s o  t h a t  i t  w i l l  c o n t a i n  o n l y  t h e  s p e c i f i e d  r a n g e  o f  e l e m e n t s  s p e c i f i e d . |
+| `lindex` | G e t  a n  e l e m e n t  f r o m  a  l i s t  b y  i t s  i n d e x . |
+| `rpoplpush` | P o p  a  v a l u e  f r o m  a  l i s t ,  p u s h  i t  t o  a n o t h e r  l i s t  a n d  r e t u r n  i t . |
+| `blpop` | R e m o v e  a n d  g e t  t h e  f i r s t  e l e m e n t  i n  a  l i s t ,  o r  b l o c k  u n t i l  o n e  i s  a v a i l a b l e . |
+| `brpop` | R e m o v e  a n d  g e t  t h e  l a s t  e l e m e n t  i n  a  l i s t ,  o r  b l o c k  u n t i l  o n e  i s  a v a i l a b l e . |
+| `brpoplpush` | P o p  a  v a l u e  f r o m  a  l i s t ,  p u s h  i t  t o  a n o t h e r  l i s t  a n d  r e t u r n  i t ;  o r  b l o c k  u n t i l  o n e  i s  a v a i l a b l e . |
+| `lmove` | P o p  a n  e l e m e n t  a  l i s t ,  p u s h  i t  t o  a n o t h e r  l i s t  a n d  r e t u r n  i t |
+| `blmove` | P o p  a n  e l e m e n t  f r o m  a  l i s t ,  p u s h  i t  t o  a n o t h e r  l i s t  a n d  r e t u r n  i t ;  o r  b l o c k  u n t i l  o n e  i s  a v a i l a b l e  R e d i s  D o c s |
+| `lpos` | R e t u r n s  t h e  i n d e x  o f  t h e  f i r s t  m a t c h i n g  v a l u e  o f  t h e  l i s t  s t o r e d  a t  k e y . |
+
+</div>
+
+<h2 id="sets">Sets (المجموعات)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `sadd` | A d d  o n e  o r  m o r e  m e m b e r s  t o  a  s e t . |
+| `scard` | G e t  t h e  n u m b e r  o f  m e m b e r s  i n  a  s e t . |
+| `sdiff` | S u b t r a c t  m u l t i p l e  s e t s . |
+| `sdiffstore` | S u b t r a c t  m u l t i p l e  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s e t  i n  a  k e y . |
+| `sinter` | I n t e r s e c t  m u l t i p l e  s e t s . |
+| `sinterstore` | I n t e r s e c t  m u l t i p l e  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s e t  i n  a  k e y . |
+| `sismember` | D e t e r m i n e  i f  a  g i v e n  v a l u e  i s  a  m e m b e r  o f  a  s e t . |
+| `smembers` | G e t  a l l  t h e  m e m b e r s  i n  a  s e t . |
+| `smismember` | D e t e r m i n e  i f  g i v e n  v a l u e s  a r e  m e m b e r s  o f  a  s e t . |
+| `smove` | M o v e  a  m e m b e r  f r o m  o n e  s e t  t o  a n o t h e r . |
+| `spop` | R e m o v e  a n d  r e t u r n  a  r a n d o m  m e m b e r  f r o m  a  s e t . |
+| `srandmember` | G e t  o n e  r a n d o m  m e m b e r  f r o m  a  s e t . |
+| `srem` | R e m o v e  o n e  o r  m o r e  m e m b e r s  f r o m  a  s e t . |
+| `sunion` | A d d  m u l t i p l e  s e t s . |
+| `sunionstore` | A d d  m u l t i p l e  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s e t  i n  a  k e y . |
+| `sscan` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  s e t  e l e m e n t s . |
+
+</div>
+
+<h2 id="sorted">Sorted Sets (المجموعات المرتبة)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `zadd` | A d d  o n e  m e m b e r  t o  a  s o r t e d  s e t ,  o r  u p d a t e  i t s  s c o r e  i f  i t  a l r e a d y  e x i s t s . |
+| `zcard` | G e t  t h e  n u m b e r  o f  m e m b e r s  i n  a  s o r t e d  s e t . |
+| `zcount` | C o u n t  t h e  m e m b e r s  i n  a  s o r t e d  s e t  w i t h  s c o r e s  w i t h i n  t h e  g i v e n  v a l u e s . |
+| `zrange` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  i n d e x |
+| `zrangebyscore` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  s c o r e . |
+| `zrangebyscore_limit` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  s c o r e  w i t h  l i m i t . |
+| `zrank` | D e t e r m i n e  t h e  i n d e x  o f  a  m e m b e r  i n  a  s o r t e d  s e t . |
+| `zrem` | R e m o v e  o n e  o r  m o r e  m e m b e r s  f r o m  a  s o r t e d  s e t . |
+| `zremrangebyrank` | R e m o v e  a l l  m e m b e r s  i n  a  s o r t e d  s e t  w i t h i n  t h e  g i v e n  i n d e x e s . |
+| `zrevrange` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  i n d e x ,  o r d e r e d  f r o m  h i g h  t o  l o w . |
+| `zrevrangebyscore` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  s c o r e . |
+| `zrevrangebyscore_limit` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  s c o r e  w i t h  l i m i t . |
+| `zrevrank` | D e t e r m i n e  t h e  i n d e x  o f  a  m e m b e r  i n  a  s o r t e d  s e t ,  w i t h  s c o r e s  o r d e r e d  f r o m  h i g h  t o  l o w . |
+| `zscore` | G e t  t h e  s c o r e  a s s o c i a t e d  w i t h  t h e  g i v e n  m e m b e r  i n  a  s o r t e d  s e t . |
+| `zunionstore` | U n i o n s  m u l t i p l e  s o r t e d  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s o r t e d  s e t  i n  a  n e w  k e y  u s i n g  S U M  a s  a g g r e g a t i o n  f u n c t i o n . |
+| `zinterstore` | I n t e r s e c t  m u l t i p l e  s o r t e d  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s o r t e d  s e t  i n  a  n e w  k e y  u s i n g  S U M  a s  a g g r e g a t i o n  f u n c t i o n . |
+| `zscan` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  s o r t e d  s e t  e l e m e n t s . |
+| `zpopmin` | R e m o v e s  a n d  r e t u r n s  u p  t o  c o u n t  m e m b e r s  w i t h  t h e  l o w e s t  s c o r e s  i n  a  s o r t e d  s e t |
+| `zpopmax` | R e m o v e s  a n d  r e t u r n s  u p  t o  c o u n t  m e m b e r s  w i t h  t h e  h i g h e s t  s c o r e s  i n  a  s o r t e d  s e t |
+| `bzpopmin` | R e m o v e s  a n d  r e t u r n s  t h e  m e m b e r  w i t h  t h e  l o w e s t  s c o r e  i n  a  s o r t e d  s e t .  B l o c k s  u n t i l  a  m e m b e r  i s  a v a i l a b l e  o t h e r w i s e . |
+| `bzpopmax` | R e m o v e s  a n d  r e t u r n s  t h e  m e m b e r  w i t h  t h e  h i g h e s t  s c o r e  i n  a  s o r t e d  s e t .  B l o c k s  u n t i l  a  m e m b e r  i s  a v a i l a b l e  o t h e r w i s e . |
+| `zrandmember` | R e t u r n  u p  t o  c o u n t  r a n d o m  m e m b e r s  i n  a  s o r t e d  s e t  ( o r  1  i f  c o u n t  = =  N o n e  ) |
+
+</div>
+
+<h2 id="hyperloglog">HyperLogLog</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `pfadd` | A d d s  t h e  s p e c i f i e d  e l e m e n t s  t o  t h e  s p e c i f i e d  H y p e r L o g L o g . |
+| `pfcount` | R e t u r n  t h e  a p p r o x i m a t e d  c a r d i n a l i t y  o f  t h e  s e t ( s )  o b s e r v e d  b y  t h e  H y p e r L o g L o g  a t  k e y ( s ) . |
+| `pfmerge` | M e r g e  N  d i f f e r e n t  H y p e r L o g L o g s  i n t o  a  s i n g l e  o n e . |
+
+</div>
+
+<h2 id="geo">Geo (المواقع الجغرافية)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+
+</div>
+
+<h2 id="streams">Streams (التدفقات)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `xadd` | �  A d d  a  s t r e a m  m e s s a g e  b y  k e y  .  U s e  *  a s  t h e  i d  f o r  t h e  c u r r e n t  t i m e s t a m p .  X A D D  k e y  < I D  o r  * >  [ f i e l d  v a l u e ]  [ f i e l d  v a l u e ]  . . . |
+| `xread` | �  R e a d  a  l i s t  o f  i d  s  f o r  e a c h  s t r e a m  k e y  .  T h i s  i s  t h e  b a s i c  f o r m  o f  r e a d i n g  s t r e a m s .  F o r  m o r e  a d v a n c e d  c o n t r o l ,  l i k e  b l o c k i n g ,  l i m i t i n g ,  o r  r e a d i n g  b y  c o n s u m e r  g r o u p  ,  s e e  x r e a d _ o p t i o n s  .  X R E A D  S T R E A M S  k e y _ 1  k e y _ 2  . . .  k e y _ N  I D _ 1  I D _ 2  . . .  I D _ N |
+| `xrange` | �  R e t u r n s  a  r a n g e  o f  m e s s a g e s  i n  a  g i v e n  s t r e a m  k e y  .  S e t  s t a r t  t o  -  t o  b e g i n  a t  t h e  f i r s t  m e s s a g e .  S e t  e n d  t o  +  t o  e n d  t h e  m o s t  r e c e n t  m e s s a g e .  Y o u  c a n  p a s s  m e s s a g e  i d  t o  b o t h  s t a r t  a n d  e n d  .  T a k e  n o t e  o f  t h e  S t r e a m R a n g e R e p l y  r e t u r n  t y p e .  X R A N G E  k e y  s t a r t  e n d |
+| `xrevrange` | �  T h i s  i s  t h e  r e v e r s e  v e r s i o n  o f  x r a n g e  .  T h e  s a m e  r u l e s  a p p l y  f o r  s t a r t  a n d  e n d  h e r e .  X R E V R A N G E  k e y  e n d  s t a r t |
+| `xlen` | �  R e t u r n s  t h e  n u m b e r  o f  m e s s a g e s  f o r  a  g i v e n  s t r e a m  k e y  .  X L E N  < k e y > |
+| `xgroup_create` | �  T h i s  c o m m a n d  i s  u s e d  f o r  c r e a t i n g  a  c o n s u m e r  g r o u p  .  I t  e x p e c t s  t h e  s t r e a m  k e y  t o  a l r e a d y  e x i s t .  O t h e r w i s e ,  u s e  x g r o u p _ c r e a t e _ m k s t r e a m  i f  i t  d o e s n ’ t .  T h e  i d  i s  t h e  s t a r t i n g  m e s s a g e  i d  a l l  c o n s u m e r s  s h o u l d  r e a d  f r o m .  U s e  $  I f  y o u  w a n t  a l l  c o n s u m e r s  t o  r e a d  f r o m  t h e  l a s t  m e s s a g e  a d d e d  t o  s t r e a m .  X G R O U P  C R E A T E  < k e y >  < g r o u p n a m e >  < i d  o r  $ > |
+| `xgroup_destroy` | �  D e s t r o y  a n  e x i s t i n g  c o n s u m e r  g r o u p  f o r  a  g i v e n  s t r e a m  k e y  X G R O U P  S E T I D  < k e y >  < g r o u p n a m e >  < i d  o r  $ > |
+| `xgroup_setid` | �  A l t e r  w h i c h  i d  y o u  w a n t  c o n s u m e r s  t o  b e g i n  r e a d i n g  f r o m  a n  e x i s t i n g  c o n s u m e r  g r o u p  .  X G R O U P  S E T I D  < k e y >  < g r o u p n a m e >  < i d  o r  $ > |
+| `xack` | �  A c k  p e n d i n g  s t r e a m  m e s s a g e s  c h e c k e d  o u t  b y  a  c o n s u m e r .  X A C K  < k e y >  < g r o u p >  < i d >  < i d >  . . .  < i d > |
+| `xclaim` | �  C l a i m  p e n d i n g ,  u n a c k e d  m e s s a g e s ,  a f t e r  s o m e  p e r i o d  o f  t i m e ,  c u r r e n t l y  c h e c k e d  o u t  b y  a n o t h e r  c o n s u m e r .  T h i s  m e t h o d  o n l y  a c c e p t s  t h e  m u s t - h a v e  a r g u m e n t s  f o r  c l a i m i n g  m e s s a g e s .  I f  o p t i o n a l  a r g u m e n t s  a r e  r e q u i r e d ,  s e e  x c l a i m _ o p t i o n s  b e l o w .  X C L A I M  < k e y >  < g r o u p >  < c o n s u m e r >  < m i n - i d l e - t i m e >  [ < I D - 1 >  < I D - 2 > ] |
+| `xpending` | �  T h i s  i s  a  b a s i c  v e r s i o n  o f  m a k i n g  X P E N D I N G  c o m m a n d  c a l l s  w h i c h  o n l y  p a s s e s  a  s t r e a m  k e y  a n d  c o n s u m e r  g r o u p  a n d  i t  r e t u r n s  d e t a i l s  a b o u t  w h i c h  c o n s u m e r s  h a v e  p e n d i n g  m e s s a g e s  t h a t  h a v e n ’ t  b e e n  a c k e d .  Y o u  c a n  u s e  t h i s  m e t h o d  a l o n g  w i t h  x c l a i m  o r  x c l a i m _ o p t i o n s  f o r  d e t e r m i n i n g  w h i c h  m e s s a g e s  n e e d  t o  b e  r e t r i e d .  T a k e  n o t e  o f  t h e  S t r e a m P e n d i n g R e p l y  r e t u r n  t y p e .  X P E N D I N G  < k e y >  < g r o u p >  [ < s t a r t >  < s t o p >  < c o u n t >  [ < c o n s u m e r > ] ] |
+| `xinfo_stream` | �  R e t u r n s  i n f o  a b o u t  h i g h - l e v e l  s t r e a m  d e t a i l s  ( f i r s t  &  l a s t  m e s s a g e  i d  ,  l e n g t h ,  n u m b e r  o f  g r o u p s ,  e t c . )  T a k e  n o t e  o f  t h e  S t r e a m I n f o S t r e a m R e p l y  r e t u r n  t y p e .  I t ’ s  p o s s i b l e  t h i s  r e t u r n  v a l u e  m i g h t  n o t  c o n t a i n  n e w  f i e l d s  a d d e d  b y  R e d i s  i n  f u t u r e  v e r s i o n s ,  s u c h  a s  t h e  i d e m p o t e n c y  f i e l d s  i n t r o d u c e d  i n  R e d i s  8 . 6 .  F o r  I D M P  t r a c k i n g  s t a t i s t i c s ,  u s e  x i n f o _ s t r e a m _ w i t h _ i d e m p o t e n c y  .  X I N F O  S T R E A M  < k e y > |
+| `xinfo_groups` | �  R e t u r n s  a l l  c o n s u m e r  g r o u p  s  c r e a t e d  f o r  a  g i v e n  s t r e a m  k e y  .  T a k e  n o t e  o f  t h e  S t r e a m I n f o G r o u p s R e p l y  r e t u r n  t y p e .  I t ’ s  p o s s i b l e  t h i s  r e t u r n  v a l u e  m i g h t  n o t  c o n t a i n  n e w  f i e l d s  a d d e d  b y  R e d i s  i n  f u t u r e  v e r s i o n s .  X I N F O  G R O U P S  < k e y > |
+| `xinfo_consumers` | �  T h i s  r e t u r n s  a l l  i n f o  d e t a i l s  a b o u t  w h i c h  c o n s u m e r s  h a v e  r e a d  m e s s a g e s  f o r  g i v e n  c o n s u m e r  g r o u p  .  T a k e  n o t e  o f  t h e  S t r e a m I n f o C o n s u m e r s R e p l y  r e t u r n  t y p e .  I t ’ s  p o s s i b l e  t h i s  r e t u r n  v a l u e  m i g h t  n o t  c o n t a i n  n e w  f i e l d s  a d d e d  b y  R e d i s  i n  f u t u r e  v e r s i o n s .  X I N F O  C O N S U M E R S  < k e y >  < g r o u p > |
+| `xtrim` | �  T r i m  a  s t r e a m  k e y  t o  a  M A X L E N  c o u n t .  X T R I M  < k e y >  M A X L E N  [ ~ | = ]  < c o u n t >  ( S a m e  a s  X A D D  M A X L E N  o p t i o n ) |
+| `xdel` | �  D e l e t e s  a  l i s t  o f  i d  s  f o r  a  g i v e n  s t r e a m  k e y  .  X D E L  < k e y >  [ < I D 1 >  < I D 2 >  . . .  < I D N > ] |
+
+</div>
+
+<h2 id="bitmaps">Bitmaps (خرائط البت)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `setbit` | S e t s  o r  c l e a r s  t h e  b i t  a t  o f f s e t  i n  t h e  s t r i n g  v a l u e  s t o r e d  a t  k e y .  R e t u r n s  t h e  o r i g i n a l  b i t  v a l u e  s t o r e d  a t  o f f s e t . |
+| `getbit` | R e t u r n s  t h e  b i t  v a l u e  a t  o f f s e t  i n  t h e  s t r i n g  v a l u e  s t o r e d  a t  k e y . |
+| `bitcount` | C o u n t  s e t  b i t s  i n  a  s t r i n g .  R e t u r n s  0  i f  k e y  d o e s  n o t  e x i s t . |
+| `bitcount_range` | C o u n t  s e t  b i t s  i n  a  s t r i n g  i n  a  r a n g e .  R e t u r n s  0  i f  k e y  d o e s  n o t  e x i s t . |
+| `bit_and` | P e r f o r m  a  b i t w i s e  A N D  b e t w e e n  m u l t i p l e  k e y s  ( c o n t a i n i n g  s t r i n g  v a l u e s )  a n d  s t o r e  t h e  r e s u l t  i n  t h e  d e s t i n a t i o n  k e y .  R e t u r n s  s i z e  o f  d e s t i n a t i o n  s t r i n g  a f t e r  o p e r a t i o n . |
+| `bit_or` | P e r f o r m  a  b i t w i s e  O R  b e t w e e n  m u l t i p l e  k e y s  ( c o n t a i n i n g  s t r i n g  v a l u e s )  a n d  s t o r e  t h e  r e s u l t  i n  t h e  d e s t i n a t i o n  k e y .  R e t u r n s  s i z e  o f  d e s t i n a t i o n  s t r i n g  a f t e r  o p e r a t i o n . |
+| `bit_xor` | P e r f o r m  a  b i t w i s e  X O R  b e t w e e n  m u l t i p l e  k e y s  ( c o n t a i n i n g  s t r i n g  v a l u e s )  a n d  s t o r e  t h e  r e s u l t  i n  t h e  d e s t i n a t i o n  k e y .  R e t u r n s  s i z e  o f  d e s t i n a t i o n  s t r i n g  a f t e r  o p e r a t i o n . |
+| `bit_not` | P e r f o r m  a  b i t w i s e  N O T  o f  t h e  k e y  ( c o n t a i n i n g  s t r i n g  v a l u e s )  a n d  s t o r e  t h e  r e s u l t  i n  t h e  d e s t i n a t i o n  k e y .  R e t u r n s  s i z e  o f  d e s t i n a t i o n  s t r i n g  a f t e r  o p e r a t i o n . |
+| `bit_diff` | D I F F ( X ,  Y 1 ,  Y 2 ,  … )  P e r f o r m  a  s e t  d i f f e r e n c e  t o  e x t r a c t  t h e  m e m b e r s  o f  X  t h a t  a r e  n o t  m e m b e r s  o f  a n y  o f  Y 1 ,  Y 2 , … .  L o g i c a l  r e p r e s e n t a t i o n :  X  ∧  ¬ ( Y 1  ∨  Y 2  ∨  … ) |
+| `bit_diff1` | D I F F 1 ( X ,  Y 1 ,  Y 2 ,  … )  ( R e l a t i v e  c o m p l e m e n t  d i f f e r e n c e )  P e r f o r m  a  r e l a t i v e  c o m p l e m e n t  s e t  d i f f e r e n c e  t o  e x t r a c t  t h e  m e m b e r s  o f  o n e  o r  m o r e  o f  Y 1 ,  Y 2 , …  t h a t  a r e  n o t  m e m b e r s  o f  X .  L o g i c a l  r e p r e s e n t a t i o n :  ¬ X  ( Y 1  Y 2  … )  ∧  ∨  ∨ |
+| `bit_and_or` | A N D O R ( X ,  Y 1 ,  Y 2 ,  … )  P e r f o r m  a n  “ i n t e r s e c t i o n  o f  u n i o n ( s ) ”  o p e r a t i o n  t o  e x t r a c t  t h e  m e m b e r s  o f  X  t h a t  a r e  a l s o  m e m b e r s  o f  o n e  o r  m o r e  o f  Y 1 ,  Y 2 , … .  L o g i c a l  r e p r e s e n t a t i o n :  X  ( Y 1  Y 2  … )  ∧  ∨  ∨ |
+| `bit_one` | O N E ( X ,  Y 1 ,  Y 2 ,  … )  P e r f o r m  a n  “ e x c l u s i v e  m e m b e r s h i p ”  o p e r a t i o n  t o  e x t r a c t  t h e  m e m b e r s  o f  e x a c t l y  o n e  o f  X ,  Y 1 ,  Y 2 ,  … .  L o g i c a l  r e p r e s e n t a t i o n :  ( X  Y 1  Y 2  … )  ¬ ( ( X  Y 1 )  ( X  Y 2 )  ( Y 1  Y 2 )  ( Y 1  Y 3 )  … )  ∨  ∨  ∨  ∧  ∧  ∨  ∧  ∨  ∧  ∨  ∧  ∨ |
+
+</div>
+
+<h2 id="scripting">Scripting & Transactions (البرمجة والمعاملات)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+
+</div>
+
+<h2 id="server">Server & Connection (الخادم والاتصال)</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح بالعربية |
+| :--- | :--- |
+| `ping` | S e n d s  a  p i n g  t o  t h e  s e r v e r |
+| `flushdb` | D e l e t e s  a l l  t h e  k e y s  o f  t h e  c u r r e n t  d a t a b a s e  W h e t h e r  t h e  f l u s h i n g  h a p p e n s  a s y n c h r o n o u s l y  o r  s y n c h r o n o u s l y  d e p e n d s  o n  t h e  c o n f i g u r a t i o n  o f  y o u r  R e d i s  s e r v e r .  T o  e n f o r c e  a  f l u s h  m o d e ,  u s e  C o m m a n d s : : f l u s h d b _ o p t i o n s  .  F L U S H D B |
+| `flushall` | D e l e t e s  a l l  t h e  k e y s  o f  a l l  d a t a b a s e s  W h e t h e r  t h e  f l u s h i n g  h a p p e n s  a s y n c h r o n o u s l y  o r  s y n c h r o n o u s l y  d e p e n d s  o n  t h e  c o n f i g u r a t i o n  o f  y o u r  R e d i s  s e r v e r .  T o  e n f o r c e  a  f l u s h  m o d e ,  u s e  C o m m a n d s : : f l u s h a l l _ o p t i o n s  .  F L U S H A L L |
+| `client_getname` | R e t u r n s  t h e  n a m e  o f  t h e  c u r r e n t  c o n n e c t i o n  a s  s e t  b y  C L I E N T  S E T N A M E . |
+| `client_setname` | C o m m a n d  a s s i g n s  a  n a m e  t o  t h e  c u r r e n t  c o n n e c t i o n . |
+| `client_id` | R e t u r n s  t h e  I D  o f  t h e  c u r r e n t  c o n n e c t i o n . |
+
+</div>
+
+<h2 id="other-commands">أوامر أخرى</h2>
+
+<div dir="rtl">
+
+| الأمر | الشرح |
+| :--- | :--- |
+| `keys` | G e t s  a l l  k e y s  m a t c h i n g  p a t t e r n |
+| `hget_ex` | G e t  t h e  v a l u e  o f  o n e  o r  m o r e  f i e l d s  o f  a  g i v e n  h a s h  k e y ,  a n d  o p t i o n a l l y  s e t  t h e i r  e x p i r a t i o n |
+| `hget_del` | G e t  a n d  d e l e t e  t h e  v a l u e  o f  o n e  o r  m o r e  f i e l d s  o f  a  g i v e n  h a s h  k e y |
+| `hset_ex` | S e t  t h e  v a l u e  o f  o n e  o r  m o r e  f i e l d s  o f  a  g i v e n  h a s h  k e y ,  a n d  o p t i o n a l l y  s e t  t h e i r  e x p i r a t i o n |
+| `hset_multiple` | S e t s  m u l t i p l e  f i e l d s  i n  a  h a s h . |
+| `hincr` | I n c r e m e n t s  a  v a l u e .  R e t u r n s  t h e  n e w  v a l u e  o f  t h e  f i e l d  a f t e r  i n c r e m e n t a t i o n . |
+| `httl` | G e t  o n e  o r  m o r e  f i e l d s ’  T T L  i n  s e c o n d s . |
+| `hpttl` | G e t  o n e  o r  m o r e  f i e l d s ’  T T L  i n  m i l l i s e c o n d s . |
+| `hexpire` | S e t  o n e  o r  m o r e  f i e l d s ’  t i m e  t o  l i v e  i n  s e c o n d s .  R e t u r n s  a n  a r r a y  w h e r e  e a c h  e l e m e n t  c o r r e s p o n d s  t o  t h e  f i e l d  a t  t h e  s a m e  i n d e x  i n  t h e  f i e l d s  a r g u m e n t .  E a c h  e l e m e n t  o f  t h e  a r r a y  i s  e i t h e r :  0  i f  t h e  s p e c i f i e d  c o n d i t i o n  h a s  n o t  b e e n  m e t .  1  i f  t h e  e x p i r a t i o n  t i m e  w a s  u p d a t e d .  2  i f  c a l l e d  w i t h  0  s e c o n d s .  E r r o r s  i f  p r o v i d e d  k e y  e x i s t s  b u t  i s  n o t  a  h a s h . |
+| `hexpire_at` | S e t  t h e  e x p i r a t i o n  f o r  o n e  o r  m o r e  f i e l d s  a s  a  U N I X  t i m e s t a m p  i n  s e c o n d s .  R e t u r n s  a n  a r r a y  w h e r e  e a c h  e l e m e n t  c o r r e s p o n d s  t o  t h e  f i e l d  a t  t h e  s a m e  i n d e x  i n  t h e  f i e l d s  a r g u m e n t .  E a c h  e l e m e n t  o f  t h e  a r r a y  i s  e i t h e r :  0  i f  t h e  s p e c i f i e d  c o n d i t i o n  h a s  n o t  b e e n  m e t .  1  i f  t h e  e x p i r a t i o n  t i m e  w a s  u p d a t e d .  2  i f  c a l l e d  w i t h  a  t i m e  i n  t h e  p a s t .  E r r o r s  i f  p r o v i d e d  k e y  e x i s t s  b u t  i s  n o t  a  h a s h . |
+| `hexpire_time` | R e t u r n s  t h e  a b s o l u t e  U n i x  e x p i r a t i o n  t i m e s t a m p  i n  s e c o n d s . |
+| `hpersist` | R e m o v e  t h e  e x p i r a t i o n  f r o m  a  k e y .  R e t u r n s  1  i f  t h e  e x p i r a t i o n  w a s  r e m o v e d . |
+| `hpexpire` | S e t  o n e  o r  m o r e  f i e l d s ’  t i m e  t o  l i v e  i n  m i l l i s e c o n d s .  R e t u r n s  a n  a r r a y  w h e r e  e a c h  e l e m e n t  c o r r e s p o n d s  t o  t h e  f i e l d  a t  t h e  s a m e  i n d e x  i n  t h e  f i e l d s  a r g u m e n t .  E a c h  e l e m e n t  o f  t h e  a r r a y  i s  e i t h e r :  0  i f  t h e  s p e c i f i e d  c o n d i t i o n  h a s  n o t  b e e n  m e t .  1  i f  t h e  e x p i r a t i o n  t i m e  w a s  u p d a t e d .  2  i f  c a l l e d  w i t h  0  s e c o n d s .  E r r o r s  i f  p r o v i d e d  k e y  e x i s t s  b u t  i s  n o t  a  h a s h . |
+| `hpexpire_at` | S e t  t h e  e x p i r a t i o n  f o r  o n e  o r  m o r e  f i e l d s  a s  a  U N I X  t i m e s t a m p  i n  m i l l i s e c o n d s .  R e t u r n s  a n  a r r a y  w h e r e  e a c h  e l e m e n t  c o r r e s p o n d s  t o  t h e  f i e l d  a t  t h e  s a m e  i n d e x  i n  t h e  f i e l d s  a r g u m e n t .  E a c h  e l e m e n t  o f  t h e  a r r a y  i s  e i t h e r :  0  i f  t h e  s p e c i f i e d  c o n d i t i o n  h a s  n o t  b e e n  m e t .  1  i f  t h e  e x p i r a t i o n  t i m e  w a s  u p d a t e d .  2  i f  c a l l e d  w i t h  a  t i m e  i n  t h e  p a s t .  E r r o r s  i f  p r o v i d e d  k e y  e x i s t s  b u t  i s  n o t  a  h a s h . |
+| `hpexpire_time` | R e t u r n s  t h e  a b s o l u t e  U n i x  e x p i r a t i o n  t i m e s t a m p  i n  s e c o n d s . |
+| `blmpop` | P o p s  c o u n t  e l e m e n t s  f r o m  t h e  f i r s t  n o n - e m p t y  l i s t  k e y  f r o m  t h e  l i s t  o f  p r o v i d e d  k e y  n a m e s ;  o r  b l o c k s  u n t i l  o n e  i s  a v a i l a b l e . |
+| `linsert_before` | I n s e r t  a n  e l e m e n t  b e f o r e  a n o t h e r  e l e m e n t  i n  a  l i s t . |
+| `linsert_after` | I n s e r t  a n  e l e m e n t  a f t e r  a n o t h e r  e l e m e n t  i n  a  l i s t . |
+| `lmpop` | P o p s  c o u n t  e l e m e n t s  f r o m  t h e  f i r s t  n o n - e m p t y  l i s t  k e y  f r o m  t h e  l i s t  o f  p r o v i d e d  k e y  n a m e s .  R e d i s  D o c s |
+| `ping_message` | S e n d s  a  p i n g  w i t h  a  m e s s a g e  t o  t h e  s e r v e r |
+| `srandmember_multiple` | G e t  m u l t i p l e  r a n d o m  m e m b e r s  f r o m  a  s e t . |
+| `zadd_multiple` | A d d  m u l t i p l e  m e m b e r s  t o  a  s o r t e d  s e t ,  o r  u p d a t e  i t s  s c o r e  i f  i t  a l r e a d y  e x i s t s . |
+| `zadd_options` | A d d  o n e  m e m b e r  t o  a  s o r t e d  s e t ,  o r  u p d a t e  i t s  s c o r e  i f  i t  a l r e a d y  e x i s t s . |
+| `zadd_multiple_options` | A d d  m u l t i p l e  m e m b e r s  t o  a  s o r t e d  s e t ,  o r  u p d a t e  i t s  s c o r e  i f  i t  a l r e a d y  e x i s t s . |
+| `zincr` | I n c r e m e n t s  t h e  m e m b e r  i n  a  s o r t e d  s e t  a t  k e y  b y  d e l t a .  I f  t h e  m e m b e r  d o e s  n o t  e x i s t ,  i t  i s  a d d e d  w i t h  d e l t a  a s  i t s  s c o r e . |
+| `zinterstore_min` | I n t e r s e c t  m u l t i p l e  s o r t e d  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s o r t e d  s e t  i n  a  n e w  k e y  u s i n g  M I N  a s  a g g r e g a t i o n  f u n c t i o n . |
+| `zinterstore_max` | I n t e r s e c t  m u l t i p l e  s o r t e d  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s o r t e d  s e t  i n  a  n e w  k e y  u s i n g  M A X  a s  a g g r e g a t i o n  f u n c t i o n . |
+| `zinterstore_weights` | C o m m a n d s : : z i n t e r s t o r e  ,  b u t  w i t h  t h e  a b i l i t y  t o  s p e c i f y  a  m u l t i p l i c a t i o n  f a c t o r  f o r  e a c h  s o r t e d  s e t  b y  p a i r i n g  o n e  w i t h  e a c h  k e y  i n  a  t u p l e . |
+| `zinterstore_min_weights` | C o m m a n d s : : z i n t e r s t o r e _ m i n  ,  b u t  w i t h  t h e  a b i l i t y  t o  s p e c i f y  a  m u l t i p l i c a t i o n  f a c t o r  f o r  e a c h  s o r t e d  s e t  b y  p a i r i n g  o n e  w i t h  e a c h  k e y  i n  a  t u p l e . |
+| `zinterstore_max_weights` | C o m m a n d s : : z i n t e r s t o r e _ m a x  ,  b u t  w i t h  t h e  a b i l i t y  t o  s p e c i f y  a  m u l t i p l i c a t i o n  f a c t o r  f o r  e a c h  s o r t e d  s e t  b y  p a i r i n g  o n e  w i t h  e a c h  k e y  i n  a  t u p l e . |
+| `zlexcount` | C o u n t  t h e  n u m b e r  o f  m e m b e r s  i n  a  s o r t e d  s e t  b e t w e e n  a  g i v e n  l e x i c o g r a p h i c a l  r a n g e . |
+| `bzmpop_max` | R e m o v e s  a n d  r e t u r n s  u p  t o  c o u n t  m e m b e r s  w i t h  t h e  h i g h e s t  s c o r e s ,  f r o m  t h e  f i r s t  n o n - e m p t y  s o r t e d  s e t  i n  t h e  p r o v i d e d  l i s t  o f  k e y  n a m e s .  B l o c k s  u n t i l  a  m e m b e r  i s  a v a i l a b l e  o t h e r w i s e . |
+| `zmpop_max` | R e m o v e s  a n d  r e t u r n s  u p  t o  c o u n t  m e m b e r s  w i t h  t h e  h i g h e s t  s c o r e s ,  f r o m  t h e  f i r s t  n o n - e m p t y  s o r t e d  s e t  i n  t h e  p r o v i d e d  l i s t  o f  k e y  n a m e s . |
+| `bzmpop_min` | R e m o v e s  a n d  r e t u r n s  u p  t o  c o u n t  m e m b e r s  w i t h  t h e  l o w e s t  s c o r e s ,  f r o m  t h e  f i r s t  n o n - e m p t y  s o r t e d  s e t  i n  t h e  p r o v i d e d  l i s t  o f  k e y  n a m e s .  B l o c k s  u n t i l  a  m e m b e r  i s  a v a i l a b l e  o t h e r w i s e . |
+| `zmpop_min` | R e m o v e s  a n d  r e t u r n s  u p  t o  c o u n t  m e m b e r s  w i t h  t h e  l o w e s t  s c o r e s ,  f r o m  t h e  f i r s t  n o n - e m p t y  s o r t e d  s e t  i n  t h e  p r o v i d e d  l i s t  o f  k e y  n a m e s . |
+| `zrandmember_withscores` | R e t u r n  u p  t o  c o u n t  r a n d o m  m e m b e r s  i n  a  s o r t e d  s e t  w i t h  s c o r e s |
+| `zrange_withscores` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  i n d e x  w i t h  s c o r e s . |
+| `zrangebylex` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  l e x i c o g r a p h i c a l  r a n g e . |
+| `zrangebylex_limit` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  l e x i c o g r a p h i c a l  r a n g e  w i t h  o f f s e t  a n d  l i m i t . |
+| `zrevrangebylex` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  l e x i c o g r a p h i c a l  r a n g e . |
+| `zrevrangebylex_limit` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  l e x i c o g r a p h i c a l  r a n g e  w i t h  o f f s e t  a n d  l i m i t . |
+| `zrangebyscore_withscores` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  s c o r e  w i t h  s c o r e s . |
+| `zrangebyscore_limit_withscores` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  s c o r e  w i t h  l i m i t  w i t h  s c o r e s . |
+| `zrembylex` | R e m o v e  a l l  m e m b e r s  i n  a  s o r t e d  s e t  b e t w e e n  t h e  g i v e n  l e x i c o g r a p h i c a l  r a n g e . |
+| `zrembyscore` | R e m o v e  a l l  m e m b e r s  i n  a  s o r t e d  s e t  w i t h i n  t h e  g i v e n  s c o r e s . |
+| `zrevrange_withscores` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  i n d e x ,  w i t h  s c o r e s  o r d e r e d  f r o m  h i g h  t o  l o w .  R e d i s  D o c s |
+| `zrevrangebyscore_withscores` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  s c o r e  w i t h  s c o r e s . |
+| `zrevrangebyscore_limit_withscores` | R e t u r n  a  r a n g e  o f  m e m b e r s  i n  a  s o r t e d  s e t ,  b y  s c o r e  w i t h  l i m i t  w i t h  s c o r e s . |
+| `zscore_multiple` | G e t  t h e  s c o r e s  a s s o c i a t e d  w i t h  m u l t i p l e  m e m b e r s  i n  a  s o r t e d  s e t . |
+| `zunionstore_min` | U n i o n s  m u l t i p l e  s o r t e d  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s o r t e d  s e t  i n  a  n e w  k e y  u s i n g  M I N  a s  a g g r e g a t i o n  f u n c t i o n . |
+| `zunionstore_max` | U n i o n s  m u l t i p l e  s o r t e d  s e t s  a n d  s t o r e  t h e  r e s u l t i n g  s o r t e d  s e t  i n  a  n e w  k e y  u s i n g  M A X  a s  a g g r e g a t i o n  f u n c t i o n . |
+| `zunionstore_weights` | C o m m a n d s : : z u n i o n s t o r e  ,  b u t  w i t h  t h e  a b i l i t y  t o  s p e c i f y  a  m u l t i p l i c a t i o n  f a c t o r  f o r  e a c h  s o r t e d  s e t  b y  p a i r i n g  o n e  w i t h  e a c h  k e y  i n  a  t u p l e . |
+| `zunionstore_min_weights` | C o m m a n d s : : z u n i o n s t o r e _ m i n  ,  b u t  w i t h  t h e  a b i l i t y  t o  s p e c i f y  a  m u l t i p l i c a t i o n  f a c t o r  f o r  e a c h  s o r t e d  s e t  b y  p a i r i n g  o n e  w i t h  e a c h  k e y  i n  a  t u p l e . |
+| `zunionstore_max_weights` | C o m m a n d s : : z u n i o n s t o r e _ m a x  ,  b u t  w i t h  t h e  a b i l i t y  t o  s p e c i f y  a  m u l t i p l i c a t i o n  f a c t o r  f o r  e a c h  s o r t e d  s e t  b y  p a i r i n g  o n e  w i t h  e a c h  k e y  i n  a  t u p l e . |
+| `vadd` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  A d d  a  n e w  e l e m e n t  i n t o  t h e  v e c t o r  s e t  s p e c i f i e d  b y  k e y . |
+| `vadd_options` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  A d d  a  n e w  e l e m e n t  i n t o  t h e  v e c t o r  s e t  s p e c i f i e d  b y  k e y  w i t h  o p t i o n a l  p a r a m e t e r s  f o r  f i n e - t u n i n g  t h e  i n s e r t i o n  p r o c e s s . |
+| `vcard` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  G e t  t h e  n u m b e r  o f  m e m b e r s  i n  a  v e c t o r  s e t . |
+| `vdim` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  t h e  n u m b e r  o f  d i m e n s i o n s  o f  t h e  v e c t o r s  i n  t h e  s p e c i f i e d  v e c t o r  s e t . |
+| `vemb` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  t h e  a p p r o x i m a t e  v e c t o r  a s s o c i a t e d  w i t h  a  g i v e n  e l e m e n t  i n  t h e  v e c t o r  s e t . |
+| `vemb_options` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  t h e  r a w  i n t e r n a l  r e p r e s e n t a t i o n  o f  t h e  a p p r o x i m a t e  v e c t o r  a s s o c i a t e d  w i t h  a  g i v e n  e l e m e n t  i n  t h e  v e c t o r  s e t .  V e c t o r  s e t s  n o r m a l i z e  a n d  m a y  q u a n t i z e  v e c t o r s  o n  i n s e r t i o n .  V E M B  r e v e r s e s  t h i s  p r o c e s s  t o  a p p r o x i m a t e  t h e  o r i g i n a l  v e c t o r  b y  d e - n o r m a l i z i n g  a n d  d e - q u a n t i z i n g  i t . |
+| `vrem` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e m o v e  a n  e l e m e n t  f r o m  a  v e c t o r  s e t . |
+| `vsetattr` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  A s s o c i a t e  a  J S O N  o b j e c t  w i t h  a n  e l e m e n t  i n  a  v e c t o r  s e t .  U s e  t h i s  c o m m a n d  t o  s t o r e  a t t r i b u t e s  t h a t  c a n  b e  u s e d  i n  f i l t e r e d  s i m i l a r i t y  s e a r c h e s  w i t h  V S I M . |
+| `vdelattr` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  D e l e t e  t h e  J S O N  a t t r i b u t e s  a s s o c i a t e d  w i t h  a n  e l e m e n t  i n  a  v e c t o r  s e t .  T h i s  i s  a n  u t i l i t y  f u n c t i o n  t h a t  u s e s  V S E T A T T R  w i t h  a n  e m p t y  s t r i n g . |
+| `vgetattr` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  t h e  J S O N  a t t r i b u t e s  a s s o c i a t e d  w i t h  a n  e l e m e n t  i n  a  v e c t o r  s e t . |
+| `vinfo` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  m e t a d a t a  a n d  i n t e r n a l  d e t a i l s  a b o u t  a  v e c t o r  s e t ,  i n c l u d i n g  s i z e ,  d i m e n s i o n s ,  q u a n t i z a t i o n  t y p e ,  a n d  g r a p h  s t r u c t u r e . |
+| `vlinks` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  t h e  n e i g h b o r s  o f  a  s p e c i f i e d  e l e m e n t  i n  a  v e c t o r  s e t .  T h e  c o m m a n d  s h o w s  t h e  c o n n e c t i o n s  f o r  e a c h  l a y e r  o f  t h e  H N S W  g r a p h . |
+| `vlinks_with_scores` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  t h e  n e i g h b o r s  o f  a  s p e c i f i e d  e l e m e n t  i n  a  v e c t o r  s e t .  T h e  c o m m a n d  s h o w s  t h e  c o n n e c t i o n s  f o r  e a c h  l a y e r  o f  t h e  H N S W  g r a p h  a n d  i n c l u d e s  s i m i l a r i t y  s c o r e s  f o r  e a c h  n e i g h b o r .  ] |
+| `vrandmember` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  o n e  r a n d o m  e l e m e n t s  f r o m  a  v e c t o r  s e t . |
+| `vrandmember_multiple` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  R e t u r n  m u l t i p l e  r a n d o m  e l e m e n t s  f r o m  a  v e c t o r  s e t . |
+| `vsim` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  P e r f o r m  v e c t o r  s i m i l a r i t y  s e a r c h . |
+| `vsim_options` | A v a i l a b l e  o n  c r a t e  f e a t u r e  v e c t o r - s e t s  o n l y .  �  P e r f o r m s  a  v e c t o r  s i m i l a r i t y  s e a r c h  w i t h  o p t i o n a l  p a r a m e t e r s  f o r  c u s t o m i z a t i o n . |
+| `publish` | P o s t s  a  m e s s a g e  t o  t h e  g i v e n  c h a n n e l . |
+| `spublish` | P o s t s  a  m e s s a g e  t o  t h e  g i v e n  s h a r d e d  c h a n n e l . |
+| `object_encoding` | R e t u r n s  t h e  e n c o d i n g  o f  a  k e y . |
+| `object_idletime` | R e t u r n s  t h e  t i m e  i n  s e c o n d s  s i n c e  t h e  l a s t  a c c e s s  o f  a  k e y . |
+| `object_freq` | R e t u r n s  t h e  l o g a r i t h m i c  a c c e s s  f r e q u e n c y  c o u n t e r  o f  a  k e y . |
+| `object_refcount` | R e t u r n s  t h e  r e f e r e n c e  c o u n t  o f  a  k e y . |
+| `acl_load` | �  W h e n  R e d i s  i s  c o n f i g u r e d  t o  u s e  a n  A C L  f i l e  ( w i t h  t h e  a c l f i l e  c o n f i g u r a t i o n  o p t i o n ) ,  t h i s  c o m m a n d  w i l l  r e l o a d  t h e  A C L s  f r o m  t h e  f i l e ,  r e p l a c i n g  a l l  t h e  c u r r e n t  A C L  r u l e s  w i t h  t h e  o n e s  d e f i n e d  i n  t h e  f i l e . |
+| `acl_save` | �  W h e n  R e d i s  i s  c o n f i g u r e d  t o  u s e  a n  A C L  f i l e  ( w i t h  t h e  a c l f i l e  c o n f i g u r a t i o n  o p t i o n ) ,  t h i s  c o m m a n d  w i l l  s a v e  t h e  c u r r e n t l y  d e f i n e d  A C L s  f r o m  t h e  s e r v e r  m e m o r y  t o  t h e  A C L  f i l e . |
+| `acl_list` | �  S h o w s  t h e  c u r r e n t l y  a c t i v e  A C L  r u l e s  i n  t h e  R e d i s  s e r v e r . |
+| `acl_users` | �  S h o w s  a  l i s t  o f  a l l  t h e  u s e r n a m e s  o f  t h e  c u r r e n t l y  c o n f i g u r e d  u s e r s  i n  t h e  R e d i s  A C L  s y s t e m .  R e d i s  D o c s |
+| `acl_getuser` | �  R e t u r n s  a l l  t h e  r u l e s  d e f i n e d  f o r  a n  e x i s t i n g  A C L  u s e r . |
+| `acl_setuser` | �  C r e a t e s  a n  A C L  u s e r  w i t h o u t  a n y  p r i v i l e g e . |
+| `acl_setuser_rules` | �  C r e a t e s  a n  A C L  u s e r  w i t h  t h e  s p e c i f i e d  r u l e s  o r  m o d i f y  t h e  r u l e s  o f  a n  e x i s t i n g  u s e r . |
+| `acl_deluser` | �  D e l e t e  a l l  t h e  s p e c i f i e d  A C L  u s e r s  a n d  t e r m i n a t e  a l l  t h e  c o n n e c t i o n s  t h a t  a r e  a u t h e n t i c a t e d  w i t h  s u c h  u s e r s . |
+| `acl_dryrun` | �  S i m u l a t e  t h e  e x e c u t i o n  o f  a  g i v e n  c o m m a n d  b y  a  g i v e n  u s e r . |
+| `acl_cat` | �  S h o w s  t h e  a v a i l a b l e  A C L  c a t e g o r i e s . |
+| `acl_cat_categoryname` | �  S h o w s  a l l  t h e  R e d i s  c o m m a n d s  i n  t h e  s p e c i f i e d  c a t e g o r y . |
+| `acl_genpass` | �  G e n e r a t e s  a  2 5 6 - b i t s  p a s s w o r d  s t a r t i n g  f r o m  / d e v / u r a n d o m  i f  a v a i l a b l e . |
+| `acl_genpass_bits` | �  G e n e r a t e s  a  1 - t o - 1 0 2 4 - b i t s  p a s s w o r d  s t a r t i n g  f r o m  / d e v / u r a n d o m  i f  a v a i l a b l e . |
+| `acl_whoami` | �  R e t u r n s  t h e  u s e r n a m e  t h e  c u r r e n t  c o n n e c t i o n  i s  a u t h e n t i c a t e d  w i t h . |
+| `acl_log` | �  S h o w s  a  l i s t  o f  r e c e n t  A C L  s e c u r i t y  e v e n t s |
+| `acl_log_reset` | �  C l e a r s  t h e  A C L  l o g . |
+| `acl_help` | �  R e t u r n s  a  h e l p f u l  t e x t  d e s c r i b i n g  t h e  d i f f e r e n t  s u b c o m m a n d s . |
+| `geo_add` | �  A d d s  t h e  s p e c i f i e d  g e o s p a t i a l  i t e m s  t o  t h e  s p e c i f i e d  k e y .  E v e r y  m e m b e r  h a s  t o  b e  w r i t t e n  a s  a  t u p l e  o f  ( l o n g i t u d e ,  l a t i t u d e ,  m e m b e r _ n a m e )  .  I t  c a n  b e  a  s i n g l e  t u p l e ,  o r  a  v e c t o r  o f  t u p l e s .  l o n g i t u d e ,  l a t i t u d e  c a n  b e  s e t  u s i n g  r e d i s : : g e o : : C o o r d  .  R e t u r n s  t h e  n u m b e r  o f  e l e m e n t s  a d d e d  t o  t h e  s o r t e d  s e t ,  n o t  i n c l u d i n g  e l e m e n t s  a l r e a d y  e x i s t i n g  f o r  w h i c h  t h e  s c o r e  w a s  u p d a t e d .  E x a m p l e  u s e  r e d i s : : { C o m m a n d s ,  C o n n e c t i o n ,  R e d i s R e s u l t } ;  u s e  r e d i s : : g e o : : C o o r d ;  f n  a d d _ p o i n t ( c o n :  & m u t  C o n n e c t i o n )  - >  ( R e d i s R e s u l t < i s i z e > )  {  c o n . g e o _ a d d ( " m y _ g i s " ,  ( C o o r d : : l o n _ l a t ( 1 3 . 3 6 1 3 8 9 ,  3 8 . 1 1 5 5 5 6 ) ,  " P a l e r m o  }  f n  a d d _ p o i n t _ w i t h _ t u p l e s ( c o n :  & m u t  C o n n e c t i o n )  - >  ( R e d i s R e s u l t < i s i z e > )  {  c o n . g e o _ a d d ( " m y _ g i s " ,  ( " 1 3 . 3 6 1 3 8 9 " ,  " 3 8 . 1 1 5 5 5 6 " ,  " P a l e r m o " ) )  }  f n  a d d _ m a n y _ p o i n t s ( c o n :  & m u t  C o n n e c t i o n )  - >  ( R e d i s R e s u l t < i s i z e > )  {  c o n . g e o _ a d d ( " m y _ g i s " ,  & [  ( " 1 3 . 3 6 1 3 8 9 " ,  " 3 8 . 1 1 5 5 5 6 " ,  " P a l e r m o " ) ,  ( " 1 5 . 0 8 7 2 6 9 " ,  " 3 7 . 5 0 2 6 6 9 " ,  " C a t a n i a " )  ] )  } |
+| `geo_dist` | �  R e t u r n  t h e  d i s t a n c e  b e t w e e n  t w o  m e m b e r s  i n  t h e  g e o s p a t i a l  i n d e x  r e p r e s e n t e d  b y  t h e  s o r t e d  s e t .  I f  o n e  o r  b o t h  t h e  m e m b e r s  a r e  m i s s i n g ,  t h e  c o m m a n d  r e t u r n s  N U L L ,  s o  i t  m a y  b e  c o n v e n i e n t  t o  p a r s e  i t s  r e s p o n s e  a s  e i t h e r  O p t i o n < f 6 4 >  o r  O p t i o n < S t r i n g >  .  E x a m p l e  u s e  r e d i s : : { C o m m a n d s ,  R e d i s R e s u l t } ;  u s e  r e d i s : : g e o : : U n i t ;  f n  g e t _ d i s t s ( c o n :  & m u t  r e d i s : : C o n n e c t i o n )  {  l e t  x :  R e d i s R e s u l t < f 6 4 >  =  c o n . g e o _ d i s t (  " m y _ g i s " ,  " P a l e r m o " ,  " C a t a n i a " ,  U n i t : : K i l o m e t e r s  ) ;  / /  x  i s  O k ( 1 6 6 . 2 7 4 2 )  l e t  x :  R e d i s R e s u l t < O p t i o n < f 6 4 > >  =  c o n . g e o _ d i s t (  " m y _ g i s " ,  " P a l e r m o " ,  " A t l a n t i s " ,  U n i t : : M e t e r s  ) ;  / /  x  i s  O k ( N o n e )  } |
+| `geo_hash` | �  R e t u r n  v a l i d  G e o h a s h  s t r i n g s  r e p r e s e n t i n g  t h e  p o s i t i o n  o f  o n e  o r  m o r e  m e m b e r s  o f  t h e  g e o s p a t i a l  i n d e x  r e p r e s e n t e d  b y  t h e  s o r t e d  s e t  a t  k e y .  E x a m p l e  u s e  r e d i s : : { C o m m a n d s ,  R e d i s R e s u l t } ;  f n  g e t _ h a s h ( c o n :  & m u t  r e d i s : : C o n n e c t i o n )  {  l e t  x :  R e d i s R e s u l t < V e c < S t r i n g > >  =  c o n . g e o _ h a s h ( " m y _ g i s " ,  " P a l e r m o " ) ;  / /  x  i s  v e c ! [ " s q c 8 b 4 9 r n y 0 " ]  l e t  x :  R e d i s R e s u l t < V e c < S t r i n g > >  =  c o n . g e o _ h a s h ( " m y _ g i s " ,  & [ " P a l e r m o " ,  / /  x  i s  v e c ! [ " s q c 8 b 4 9 r n y 0 " ,  " s q d t r 7 4 h y u 0 " ]  } |
+| `geo_pos` | �  R e t u r n  t h e  p o s i t i o n s  o f  a l l  t h e  s p e c i f i e d  m e m b e r s  o f  t h e  g e o s p a t i a l  i n d e x  r e p r e s e n t e d  b y  t h e  s o r t e d  s e t  a t  k e y .  E v e r y  p o s i t i o n  i s  a  p a i r  o f  ( l o n g i t u d e ,  l a t i t u d e )  .  r e d i s : : g e o : : C o o r d  c a n  b e  u s e d  t o  c o n v e r t  t h e s e  v a l u e  i n  a  s t r u c t .  E x a m p l e  u s e  r e d i s : : { C o m m a n d s ,  R e d i s R e s u l t } ;  u s e  r e d i s : : g e o : : C o o r d ;  f n  g e t _ p o s i t i o n ( c o n :  & m u t  r e d i s : : C o n n e c t i o n )  {  l e t  x :  R e d i s R e s u l t < V e c < V e c < f 6 4 > > >  =  c o n . g e o _ p o s ( " m y _ g i s " ,  & [ " P a l e r m o "  / /  x  i s  [  [  1 3 . 3 6 1 3 8 9 ,  3 8 . 1 1 5 5 5 6  ] ,  [  1 5 . 0 8 7 2 6 9 ,  3 7 . 5 0 2 6 6 9  ]  ] ;  l e t  x :  V e c < C o o r d < f 6 4 > >  =  c o n . g e o _ p o s ( " m y _ g i s " ,  " P a l e r m o " ) . u n w r a p ( ) ;  / /  x [ 0 ] . l o n g i t u d e  i s  1 3 . 3 6 1 3 8 9  / /  x [ 0 ] . l a t i t u d e  i s  3 8 . 1 1 5 5 5 6  } |
+| `geo_radius` | �  R e t u r n  t h e  m e m b e r s  o f  a  s o r t e d  s e t  p o p u l a t e d  w i t h  g e o s p a t i a l  i n f o r m a t i o n  u s i n g  g e o _ a d d  ,  w h i c h  a r e  w i t h i n  t h e  b o r d e r s  o f  t h e  a r e a  s p e c i f i e d  w i t h  t h e  c e n t e r  l o c a t i o n  a n d  t h e  m a x i m u m  d i s t a n c e  f r o m  t h e  c e n t e r  ( t h e  r a d i u s ) .  E v e r y  i t e m  i n  t h e  r e s u l t  c a n  b e  r e a d  w i t h  r e d i s : : g e o : : R a d i u s S e a r c h R e s u l t  ,  w h i c h  s u p p o r t  t h e  m u l t i p l e  f o r m a t s  r e t u r n e d  b y  G E O R A D I U S  .  u s e  r e d i s : : { C o m m a n d s ,  R e d i s R e s u l t } ;  u s e  r e d i s : : g e o : : { R a d i u s O p t i o n s ,  R a d i u s S e a r c h R e s u l t ,  R a d i u s O r d e r ,  U n i t } ;  f n  r a d i u s ( c o n :  & m u t  r e d i s : : C o n n e c t i o n )  - >  ( V e c < R a d i u s S e a r c h R e s u l t > )  {  l e t  o p t s  =  R a d i u s O p t i o n s : : d e f a u l t ( ) . w i t h _ d i s t ( ) . o r d e r ( R a d i u s O r d e r : : A s c  c o n . g e o _ r a d i u s ( " m y _ g i s " ,  1 5 . 9 0 ,  3 7 . 2 1 ,  5 1 . 3 9 ,  U n i t : : K i l o m e t e r s ,  o p t s )  } |
+| `geo_radius_by_member` | �  R e t r i e v e  m e m b e r s  s e l e c t e d  b y  d i s t a n c e  w i t h  t h e  c e n t e r  o f  m e m b e r  .  T h e  m e m b e r  i t s e l f  i s  a l w a y s  c o n t a i n e d  i n  t h e  r e s u l t s . |
+| `xadd_map` | �  B T r e e M a p  v a r i a n t  f o r  a d d i n g  a  s t r e a m  m e s s a g e  b y  k e y  .  U s e  *  a s  t h e  i d  f o r  t h e  c u r r e n t  t i m e s t a m p .  X A D D  k e y  < I D  o r  * >  [ r u s t  B T r e e M a p ]  . . . |
+| `xadd_options` | �  A d d  a  s t r e a m  m e s s a g e  w i t h  o p t i o n s .  I t e m s  c a n  b e  a n y  l i s t  t y p e ,  e . g .  / /  s t a t i c  i t e m s  l e t  i t e m s  =  & [ ( " k e y " ,  " v a l " ) ,  ( " k e y 2 " ,  " v a l 2 " ) ] ;  / /  A  m a p  ( C a n  b e  B T r e e M a p ,  H a s h M a p ,  e t c )  l e t  m u t  m a p :  B T r e e M a p < & s t r ,  & s t r >  =  B T r e e M a p : : n e w ( ) ;  m a p . i n s e r t ( " a b " ,  " c d " ) ;  m a p . i n s e r t ( " e f " ,  " g h " ) ;  m a p . i n s e r t ( " i j " ,  " k l " ) ;  S u p p o r t s  i d e m p o t e n t  m e s s a g e  p r o d u c t i o n  f o r  p r e v e n t i n g  d u p l i c a t e  e n t r i e s .  I d e m p o t e n c y  D o c s  S e e  s t r e a m s : : S t r e a m A d d O p t i o n s : : i d m p  a n d  s t r e a m s : : S t r e a m A d d O p t i o n s : : i d m p a u t o  f o r  m o r e  d e t a i l s .  X A D D  k e y  [ N O M K S T R E A M ]  [ K E E P R E F  |  D E L R E F  |  A C K E D ]  [ I D M P A U T O  p i d  |  I D M P  p i d |
+| `xadd_maxlen` | �  A d d  a  s t r e a m  m e s s a g e  w h i l e  c a p p i n g  t h e  s t r e a m  a t  a  m a x l e n g t h .  X A D D  k e y  [ M A X L E N  [ ~ | = ]  < c o u n t > ]  < I D  o r  * >  [ f i e l d  v a l u e ]  [ f i e l d  v a l u e ]  . . . |
+| `xadd_maxlen_map` | �  B T r e e M a p  v a r i a n t  f o r  a d d i n g  a  s t r e a m  m e s s a g e  w h i l e  c a p p i n g  t h e  s t r e a m  a t  a  m a x l e n g t h .  X A D D  k e y  [ M A X L E N  [ ~ | = ]  < c o u n t > ]  < I D  o r  * >  [ r u s t  B T r e e M a p ]  . . . |
+| `xautoclaim_options` | �  P e r f o r m  a  c o m b i n e d  x p e n d i n g  a n d  x c l a i m  f l o w .  u s e  r e d i s : : { C o n n e c t i o n , C o m m a n d s , R e d i s R e s u l t } ;  u s e  r e d i s : : s t r e a m s : : { S t r e a m A u t o C l a i m O p t i o n s ,  S t r e a m A u t o C l a i m R e p l y } ;  l e t  c l i e n t  =  r e d i s : : C l i e n t : : o p e n ( " r e d i s : / / 1 2 7 . 0 . 0 . 1 / 0 " ) . u n w r a p ( ) ;  l e t  m u t  c o n  =  c l i e n t . g e t _ c o n n e c t i o n ( ) . u n w r a p ( ) ;  l e t  o p t s  =  S t r e a m A u t o C l a i m O p t i o n s : : d e f a u l t ( ) ;  l e t  r e s u l t s  :  R e d i s R e s u l t < S t r e a m A u t o C l a i m R e p l y >  =  c o n . x a u t o c l a i m _ o p t i o n s (  X A U T O C L A I M  < k e y >  < g r o u p >  < c o n s u m e r >  < m i n - i d l e - t i m e >  < s t a r t >  [ C O U N T  < c o u n t |
+| `xclaim_options` | �  T h i s  i s  t h e  o p t i o n a l  a r g u m e n t s  v e r s i o n  f o r  c l a i m i n g  u n a c k e d ,  p e n d i n g  m e s s a g e s  c u r r e n t l y  c h e c k e d  o u t  b y  a n o t h e r  c o n s u m e r .  u s e  r e d i s : : { C o n n e c t i o n , C o m m a n d s , R e d i s R e s u l t } ;  u s e  r e d i s : : s t r e a m s : : { S t r e a m C l a i m O p t i o n s , S t r e a m C l a i m R e p l y } ;  l e t  c l i e n t  =  r e d i s : : C l i e n t : : o p e n ( " r e d i s : / / 1 2 7 . 0 . 0 . 1 / 0 " ) . u n w r a p ( ) ;  l e t  m u t  c o n  =  c l i e n t . g e t _ c o n n e c t i o n ( ) . u n w r a p ( ) ;  / /  C l a i m  a l l  p e n d i n g  m e s s a g e s  f o r  k e y  " k 1 " ,  / /  f r o m  g r o u p  " g 1 " ,  c h e c k e d  o u t  b y  c o n s u m e r  " c 1 "  / /  f o r  1 0 m s  w i t h  R E T R Y C O U N T  2  a n d  F O R C E  l e t  o p t s  =  S t r e a m C l a i m O p t i o n s : : d e f a u l t ( )  . w i t h _ f o r c e ( )  . r e t r y ( 2 ) ;  l e t  r e s u l t s :  R e d i s R e s u l t < S t r e a m C l a i m R e p l y >  =  c o n . x c l a i m _ o p t i o n s ( " k 1 " ,  " g 1 " ,  " c 1 " ,  1 0 ,  & [ " 0 " ] ,  o p t s ) ;  / /  A l l  o p t i o n a l  a r g u m e n t s  r e t u r n  a  ` R e s u l t < S t r e a m C l a i m R e p l y > `  w i t h  o n e  e x c  / /  P a s s i n g  J U S T I D  r e t u r n s  o n l y  t h e  m e s s a g e  ` i d `  a n d  o m i t s  t h e  H a s h M a p  f o r  l e t  o p t s  =  S t r e a m C l a i m O p t i o n s : : d e f a u l t ( )  . w i t h _ j u s t i d ( ) ;  l e t  r e s u l t s :  R e d i s R e s u l t < V e c < S t r i n g > >  =  c o n . x c l a i m _ o p t i o n s ( " k 1 " ,  " g 1 " ,  " c 1 " ,  1 0 ,  & [ " 0 " ] ,  o p t s ) ;  X C L A I M  < k e y >  < g r o u p >  < c o n s u m e r >  < m i n - i d l e - t i m e >  < I D - 1 >  < I D - 2 >  [ I D L E  < m i l l i s e c o n d s > ]  [ T I M E  < m s t i m e > ]  [ R E T R Y C O U N T  < c o u n t > ]  [ F O R C E ]  [ J U S T I D ]  [ L A S T I D  < l a s t i d > ] |
+| `xdel_ex` | �  A n  e x t e n s i o n  o f  t h e  S t r e a m s  X D E L  c o m m a n d  t h a t  p r o v i d e s  f i n e r  c o n t r o l  o v e r  h o w  m e s s a g e  e n t r i e s  a r e  d e l e t e d  w i t h  r e s p e c t  t o  c o n s u m e r  g r o u p s . |
+| `xack_del` | �  A  c o m b i n a t i o n  o f  X A C K  a n d  X D E L  t h a t  a c k n o w l e d g e s  a n d  a t t e m p t s  t o  d e l e t e  a  l i s t  o f  i d s  f o r  a  g i v e n  s t r e a m  k e y  a n d  c o n s u m e r  g r o u p  . |
+| `xgroup_createconsumer` | �  T h i s  c r e a t e s  a  c o n s u m e r  e x p l i c i t l y  ( v s  i m p l i c i t  v i a  X R E A D G R O U P )  f o r  g i v e n  s t r e a m  ` k e y .  T h e  r e t u r n  v a l u e  i s  e i t h e r  a  0  o r  a  1  f o r  t h e  n u m b e r  o f  c o n s u m e r s  c r e a t e d  0  m e a n s  t h e  c o n s u m e r  a l r e a d y  e x i s t s  X G R O U P  C R E A T E C O N S U M E R  < k e y >  < g r o u p n a m e >  < c o n s u m e r n a m e > |
+| `xgroup_create_mkstream` | �  T h i s  i s  t h e  a l t e r n a t e  v e r s i o n  f o r  c r e a t i n g  a  c o n s u m e r  g r o u p  w h i c h  m a k e s  t h e  s t r e a m  i f  i t  d o e s n ’ t  e x i s t .  X G R O U P  C R E A T E  < k e y >  < g r o u p n a m e >  < i d  o r  $ >  [ M K S T R E A M ] |
+| `xgroup_delconsumer` | �  T h i s  d e l e t e s  a  c o n s u m e r  f r o m  a n  e x i s t i n g  c o n s u m e r  g r o u p  f o r  g i v e n  s t r e a m  ` k e y .  X G R O U P  D E L C O N S U M E R  < k e y >  < g r o u p n a m e >  < c o n s u m e r n a m e > |
+| `xinfo_stream_with_idempotency` | �  R e t u r n s  s t r e a m  i n f o  w i t h  i d e m p o t e n c y  t r a c k i n g  s t a t i s t i c s  ( R e d i s  8 . 6 + ) .  T h i s  c o m m a n d  r e t u r n s  S t r e a m I n f o S t r e a m R e p l y W i t h I d e m p o t e n c y  w h i c h  c o m p o s e s  S t r e a m I n f o S t r e a m R e p l y  ( a c c e s s i b l e  v i a  t h e  b a s e  f i e l d )  a n d  a d d s  I D M P  ( I d e m p o t e n t  M e s s a g e  P r o c e s s i n g )  t r a c k i n g  f i e l d s .  X I N F O  S T R E A M  < k e y > |
+| `xpending_count` | �  T h i s  X P E N D I N G  v e r s i o n  r e t u r n s  a  l i s t  o f  a l l  m e s s a g e s  o v e r  t h e  r a n g e .  Y o u  c a n  u s e  t h i s  f o r  p a g i n a t i n g  p e n d i n g  m e s s a g e s  ( b u t  w i t h o u t  t h e  m e s s a g e  H a s h M a p ) .  S t a r t  a n d  e n d  f o l l o w  t h e  s a m e  r u l e s  x r a n g e  a r g s .  S e t  s t a r t  t o  -  a n d  e n d  t o  +  f o r  t h e  e n t i r e  s t r e a m .  T a k e  n o t e  o f  t h e  S t r e a m P e n d i n g C o u n t R e p l y  r e t u r n  t y p e .  X P E N D I N G  < k e y >  < g r o u p >  < s t a r t >  < s t o p >  < c o u n t > |
+| `xpending_consumer_count` | �  A n  a l t e r n a t e  v e r s i o n  o f  x p e n d i n g _ c o u n t  w h i c h  f i l t e r s  b y  c o n s u m e r  n a m e .  S t a r t  a n d  e n d  f o l l o w  t h e  s a m e  r u l e s  x r a n g e  a r g s .  S e t  s t a r t  t o  -  a n d  e n d  t o  +  f o r  t h e  e n t i r e  s t r e a m .  T a k e  n o t e  o f  t h e  S t r e a m P e n d i n g C o u n t R e p l y  r e t u r n  t y p e .  X P E N D I N G  < k e y >  < g r o u p >  < s t a r t >  < s t o p >  < c o u n t >  < c o n s u m e r > |
+| `xrange_all` | �  A  h e l p e r  m e t h o d  f o r  a u t o m a t i c a l l y  r e t u r n i n g  a l l  m e s s a g e s  i n  a  s t r e a m  b y  k e y  .  U s e  w i t h  c a u t i o n !  X R A N G E  k e y  -  + |
+| `xrange_count` | �  A  m e t h o d  f o r  p a g i n a t i n g  a  s t r e a m  b y  k e y  .  X R A N G E  k e y  s t a r t  e n d  [ C O U N T  < n > ] |
+| `xread_options` | �  T h i s  m e t h o d  h a n d l e s  s e t t i n g  o p t i o n a l  a r g u m e n t s  f o r  X R E A D  o r  X R E A D G R O U P  R e d i s  c o m m a n d s .  u s e  r e d i s : : { C o n n e c t i o n , R e d i s R e s u l t , C o m m a n d s } ;  u s e  r e d i s : : s t r e a m s : : { S t r e a m R e a d O p t i o n s , S t r e a m R e a d R e p l y } ;  l e t  c l i e n t  =  r e d i s : : C l i e n t : : o p e n ( " r e d i s : / / 1 2 7 . 0 . 0 . 1 / 0 " ) . u n w r a p ( ) ;  l e t  m u t  c o n  =  c l i e n t . g e t _ c o n n e c t i o n ( ) . u n w r a p ( ) ;  / /  R e a d  1 0  m e s s a g e s  f r o m  t h e  s t a r t  o f  t h e  s t r e a m ,  / /  w i t h o u t  r e g i s t e r i n g  a s  a  c o n s u m e r  g r o u p .  l e t  o p t s  =  S t r e a m R e a d O p t i o n s : : d e f a u l t ( )  . c o u n t ( 1 0 ) ;  l e t  r e s u l t s :  R e d i s R e s u l t < S t r e a m R e a d R e p l y >  =  c o n . x r e a d _ o p t i o n s ( & [ " k 1 " ] ,  & [ " 0 " ] ,  & o p t s ) ;  / /  R e a d  a l l  u n d e l i v e r e d  m e s s a g e s  f o r  a  g i v e n  / /  c o n s u m e r  g r o u p .  B e  a d v i s e d :  t h e  c o n s u m e r  g r o u p  m u s t  a l r e a d y  / /  e x i s t  b e f o r e  m a k i n g  t h i s  c a l l .  A l s o  n o t e :  w e ' r e  p a s s i n g  / /  ' > '  a s  t h e  i d  h e r e ,  w h i c h  m e a n s  a l l  u n d e l i v e r e d  m e s s a g e s .  l e t  o p t s  =  S t r e a m R e a d O p t i o n s : : d e f a u l t ( )  . g r o u p ( " g r o u p - 1 " ,  " c o n s u m e r - 1 " ) ;  l e t  r e s u l t s :  R e d i s R e s u l t < S t r e a m R e a d R e p l y >  =  c o n . x r e a d _ o p t i o n s ( & [ " k 1 " ] ,  & [ " > " ] ,  & o p t s ) ;  X R E A D  [ B L O C K  < m i l l i s e c o n d s > ]  [ C O U N T  < c o u n t > ]  S T R E A M S  k e y _ 1  k e y _ 2  . . .  k e y _ N  I D _ 1  I D _ 2  . . .  I D _ N  X R E A D G R O U P  [ G R O U P  g r o u p - n a m e  c o n s u m e r - n a m e ]  [ B L O C K  < m i l l i s e c o n d s > ]  [ C O U N T  S T R E A M S  k e y _ 1  k e y _ 2  . . .  k e y _ N  I D _ 1  I D _ 2  . . .  I D _ N |
+| `xrevrange_all` | �  T h i s  i s  t h e  r e v e r s e  v e r s i o n  o f  x r a n g e _ a l l  .  T h e  s a m e  r u l e s  a p p l y  f o r  s t a r t  a n d  e n d  h e r e .  X R E V R A N G E  k e y  + |
+| `xrevrange_count` | �  T h i s  i s  t h e  r e v e r s e  v e r s i o n  o f  x r a n g e _ c o u n t  .  T h e  s a m e  r u l e s  a p p l y  f o r  s t a r t  a n d  e n d  h e r e .  X R E V R A N G E  k e y  e n d  s t a r t  [ C O U N T  < n > ] |
+| `xtrim_options` | �  T r i m  a  s t r e a m  k e y  w i t h  f u l l  o p t i o n s  X T R I M  < k e y >  < M A X L E N | M I N I D >  [ ~ | = ]  < t h r e s h o l d >  [ L I M I T  < c o u n t > ] |
+| `xcfgset` | �  C o n f i g u r e  i d e m p o t e n c y  p a r a m e t e r s  f o r  a  s t r e a m  S e t s  t h e  I D M P  c o n f i g u r a t i o n  p a r a m e t e r s  f o r  a  s t r e a m .  T h i s  c o m m a n d  c o n f i g u r e s  h o w  l o n g  i d e m p o t e n t  I D s  a r e  r e t a i n e d  a n d  t h e  m a x i m u m  n u m b e r  o f  i d e m p o t e n t  I D s  t r a c k e d  p e r  p r o d u c e r .  N o t e :  C a l l i n g  X C F G S E T  c l e a r s  a l l  e x i s t i n g  p r o d u c e r  I D M P  m a p s  f o r  t h e  s t r e a m .  X C F G S E T  k e y  [ I D M P - D U R A T I O N  i d m p - d u r a t i o n ]  [ I D M P - M A X S I Z E  i d m p - m a x s i z e ]  E x a m p l e  u s e  r e d i s : : { C o m m a n d s ,  s t r e a m s : : S t r e a m C o n f i g O p t i o n s } ;  / /  C o n f i g u r e  s t r e a m  w i t h  5  m i n u t e  d u r a t i o n  a n d  m a x  1 0 0 0  I D s  p e r  p r o d u c e r  / /  V a l i d  r a n g e s :  I D M P - D U R A T I O N  ( 1 - 8 6 4 0 0 ) ,  I D M P - M A X S I Z E  ( 1 - 1 0 0 0 0 )  l e t  o p t s  =  S t r e a m C o n f i g O p t i o n s : : w i t h _ i d e m p o t e n c y _ s e c o n d s ( 3 0 0 )  . u n w r a p ( )  . i d e m p o t e n c y _ m a x s i z e ( 1 0 0 0 )  . u n w r a p ( ) ;  l e t  r e s u l t :  S t r i n g  =  c o n . x c f g s e t ( " k e y " ,  & o p t s ) . u n w r a p ( ) ;  a s s e r t _ e q ! ( r e s u l t ,  " O K " ) ; |
+| `load_script` | �  L o a d  a  s c r i p t .  S e e  i n v o k e _ s c r i p t  t o  a c t u a l l y  r u n  t h e  s c r i p t s .  E x a m p l e s :  l e t  s c r i p t  =  r e d i s : : S c r i p t : : n e w ( r "  r e t u r n  t o n u m b e r ( A R G V [ 1 ] )  +  t o n u m b e r ( A R G V [ 2 ] ) ;  " ) ;  l e t  ( l o a d _ r e s ,  i n v o k _ r e s ) :  ( S t r i n g ,  i s i z e )  =  r e d i s : : p i p e ( )  . l o a d _ s c r i p t ( & s c r i p t )  . i n v o k e _ s c r i p t ( s c r i p t . a r g ( 1 ) . a r g ( 2 ) )  . q u e r y ( & m u t  c o n ) ? ;  a s s e r t _ e q ! ( l o a d _ r e s ,  " 1 c a 8 0 f 2 3 6 6 c 1 2 5 a 7 c 4 3 5 1 9 c e 2 4 1 d 5 c 2 4 c 2 b 6 4 0 2 3 " ) ;  a s s e r t _ e q ! ( i n v o k _ r e s ,  3 ) ; |
+| `invoke_script` | �  I n v o k e  a  p r e p a r e d  s c r i p t .  N o t e :  U n l i k e  S c r i p t I n v o c a t i o n : : i n v o k e  ,  t h i s  f u n c t i o n  d o e s  n o t  a u t o m a t i c a l l y  l o a d  t h e  s c r i p t .  I f  t h e  i n v o k e d  s c r i p t  d i d  n o t  g e t  l o a d e d  b e f o r e h a n d ,  y o u  n e e d  t o  m a n u a l l y  l o a d  i t  ( e . g . :  u s i n g  l o a d _ s c r i p t  o r  S c r i p t I n v o c a t i o n : : l o a d  ) .  O t h e r w i s e  t h i s  c o m m a n d  w i l l  f a i l .  E x a m p l e s :  l e t  s c r i p t  =  r e d i s : : S c r i p t : : n e w ( r "  r e t u r n  t o n u m b e r ( A R G V [ 1 ] )  +  t o n u m b e r ( A R G V [ 2 ] ) ;  " ) ;  l e t  ( l o a d _ r e s ,  i n v o k _ 1 _ r e s ,  i n v o k _ 2 _ r e s ) :  ( S t r i n g ,  i s i z e ,  i s i z e )  =  r e d i s :  . l o a d _ s c r i p t ( & s c r i p t )  . i n v o k e _ s c r i p t ( s c r i p t . a r g ( 1 ) . a r g ( 2 ) )  . i n v o k e _ s c r i p t ( s c r i p t . a r g ( 2 ) . a r g ( 3 ) )  . q u e r y ( & m u t  c o n ) ? ;  a s s e r t _ e q ! ( l o a d _ r e s ,  " 1 c a 8 0 f 2 3 6 6 c 1 2 5 a 7 c 4 3 5 1 9 c e 2 4 1 d 5 c 2 4 c 2 b 6 4 0 2 3 " ) ;  a s s e r t _ e q ! ( i n v o k _ 1 _ r e s ,  3 ) ;  a s s e r t _ e q ! ( i n v o k _ 2 _ r e s ,  5 ) ; |
+| `flushall_options` | D e l e t e s  a l l  t h e  k e y s  o f  a l l  d a t a b a s e s  w i t h  o p t i o n s  F L U S H A L L  [ A S Y N C | S Y N C ] |
+| `flushdb_options` | D e l e t e s  a l l  t h e  k e y s  o f  t h e  c u r r e n t  d a t a b a s e  w i t h  o p t i o n s  F L U S H D B  [ A S Y N C | S Y N C ] |
+| `scan_options` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  t h e  k e y s  s p a c e  w i t h  o p t i o n s . |
+| `scan_match` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  t h e  k e y s  s p a c e  f o r  k e y s  m a t c h i n g  a  p a t t e r n . |
+| `hscan_match` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  h a s h  f i e l d s  a n d  a s s o c i a t e d  v a l u e s  f o r  f i e l d  n a m e s  m a t c h i n g  a  p a t t e r n . |
+| `sscan_match` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  s e t  e l e m e n t s  f o r  e l e m e n t s  m a t c h i n g  a  p a t t e r n . |
+| `zscan_match` | < ' _ ,  A s y n c I t e r < ' _ ,  R V > >  I n c r e m e n t a l l y  i t e r a t e  s o r t e d  s e t  e l e m e n t s  f o r  e l e m e n t s  m a t c h i n g  a  p a t t e r n .  D y n  C o m p a t i b i l i t y  T h i s  t r a i t  i s  n o t  d y n  c o m p a t i b l e .  I n  o l d e r  v e r s i o n s  o f  R u s t ,  d y n  c o m p a t i b i l i t y  w a s  c a l l e d  " o b j e c t  s a f e t y " .  I m p l e m e n t o r s  i m p l < T >  A s y n c C o m m a n d s  f o r  T  w h e r e  T :  C o n n e c t i o n L i k e  +  S e n d  +  S y n c  +  S i z e d , |
+
+</div>
+
